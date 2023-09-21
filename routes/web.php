@@ -21,13 +21,13 @@ Route::get('/about', function(){
     return view('about');
 })->name('about');
 Route::get('/products', function(){
-    return view('index');
+    return view('products');
 })->name('products');
 Route::get('/contact', function(){
-    return view('index');
+    return view('contact');
 })->name('contact');
 Route::get('/cart', function(){
-    return view('index');
+    return view('cart');
 })->name('cart');
 
 Route::get('/dashboard', function () {
