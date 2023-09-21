@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js', 'resources/js/homeSlider.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js'])
             <!-- The font-awesome CDN link -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     </head>
@@ -23,27 +23,27 @@
         </div>
         <div class="mobile-menu-navigation-bar bg-[#68A4FE] absolute top-[3.9rem] right-0  z-50 h-screen">
           <a
-          href="index.html"
+          href="{{route('home')}}"
           class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
           >Home</a
         >
         <a
-          href="about.html"
+          href="{{route('about')}}"
           class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
           >About</a
         >
         <a
-          href="products.html"
+          href="{{route('products')}}"
           class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
           >Products</a
         >
         <a
-          href="contact.html"
+          href="{{route('contact')}}"
           class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
           >contact</a
         >
         <a
-          href="cart.html"
+          href="{{route('cart')}}"
           class="cart-link  flex items-center text-white capitalize ease-in-ou gap-8 px-6 mt-4"
           >cart<span class="cart-btn"
             ><i class="fa-solid fa-cart-shopping"></i
@@ -53,27 +53,27 @@
         </div>
         <nav class="primary-navigation-bar flex items-center justify-between">
           <a
-            href="index.html"
+            href="{{route('home')}}"
             class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
             >Home</a
           >
           <a
-            href="about.html"
+            href="{{route('about')}}"
             class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
             >About</a
           >
           <a
-            href="products.html"
+            href="{{route('products')}}"
             class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
             >Products</a
           >
           <a
-            href="contact.html"
+            href="{{route('contact')}}"
             class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
             >contact</a
           >
           <a
-            href="cart.html"
+            href="{{route('cart')}}"
             class="cart-link flex items-center px-3 text-white capitalize ease-in-ou"
             >cart<span class="cart-btn"
               ><i class="fa-solid fa-cart-shopping"></i
@@ -219,6 +219,30 @@
       </div>
     </footer>
     <script src="js/script.js"></script>
-    <script src="js/homeSlider.js"></script>
+    <script>
+        // Working of the home slider container
+
+            const homeSlides = document.querySelectorAll('.slide');
+
+            let slideIndex = 0;
+
+            function next(){
+            // Remove the display active class from the current slide
+            homeSlides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex + 1) % homeSlides.length;
+            homeSlides[slideIndex].classList.add('active');
+            }
+
+            function prev(){
+            // Remove the display active class from the current slide
+            homeSlides[slideIndex].classList.remove('active');
+            slideIndex = (slideIndex - 1 + homeSlides.length) % homeSlides.length;
+            homeSlides[slideIndex].classList.add('active');
+            }
+
+
+            // call the next function after 6 seconds
+            setInterval(next, 5000);
+    </script>
     </body>
 </html>
