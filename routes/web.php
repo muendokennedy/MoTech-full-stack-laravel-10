@@ -29,6 +29,15 @@ Route::get('/contact', function(){
 Route::get('/cart', function(){
     return view('cart');
 })->name('cart');
+Route::get('/productpage', function(){
+    return view('productpage');
+})->name('product.page');
+Route::get('/login/customer', function(){
+    return view('login');
+})->name('customer.login');
+Route::get('/signup/customer', function(){
+    return view('signup');
+})->name('customer.signup');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

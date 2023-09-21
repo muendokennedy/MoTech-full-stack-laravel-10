@@ -288,12 +288,11 @@
                   $13000
                 </div>
               </div>
-              <button
-                type="submit"
+              <a  href="{{route('customer.login')}}"
                 class="self-end px-4 py-2 bg-[#ffcf10] rounded-md text-white text-center"
               >
                 Proceed to checkout
-              </button>
+              </a>
             </div>
           </div>
         </div>

@@ -109,7 +109,7 @@
         <div class="top-sales-container grid mx-auto w-[95%]">
           <div class="product-box text-center my-2 sm:my-4">
             <div class="flex justify-center items-center">
-              <a href="productpage.html" class="product-image">
+              <a href="{{route('product.page')}}" class="product-image">
                 <img src="images/redmi note 12.png" alt="A mobile phone"/>
               </a>
             </div>
