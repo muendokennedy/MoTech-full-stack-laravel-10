@@ -39,7 +39,7 @@
               <span class="text-xs sm:text-xl capitalize">facebook</span>
             </div>
           </div>
-          <p class="have-account capitalize text-sm sm:text-base py-4 text-[#384857]"><span>don't have an account yet?</span><a href="{{route('cus')}}" class="text-[#68a4fe] ml-4 hover:underline transition-all duration-300 ease-in-out">signup here</a></p>
+          <p class="have-account capitalize text-sm sm:text-base py-4 text-[#384857]"><span>don't have an account yet?</span><a href="{{route('customer.signup')}}" class="text-[#68a4fe] ml-4 hover:underline transition-all duration-300 ease-in-out">signup here</a></p>
         </div>
       </form>
       </section>
