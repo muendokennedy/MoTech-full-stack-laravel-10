@@ -213,7 +213,7 @@
   }
 }
 /* The mobile navigaation bar media query */
-@media only screen and (max-width: 730px){
+@media only screen and (max-width: 880px){
   .mobile-menu-navigation-bar{
     display: block;
     width: 25rem;
@@ -222,7 +222,7 @@
     display: none;
   }
 }
-@media only screen and (min-width: 730px){
+@media only screen and (min-width: 880px){
   .mobile-menu-navigation-bar{
     display: none;
     right: -100%;

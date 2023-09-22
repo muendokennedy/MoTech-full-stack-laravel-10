@@ -18,7 +18,7 @@
         class="flex justify-between items-center px-[4%] mx-auto lg:max-w-[1500px] outline-1 outline-black"
       >
         <div class="text-2xl font-semibold sm:font-extrabold text-white">MoTech</div>
-        <div class="text-xs sm:text-base ml-4 text-white">Welcome back Kennedy</div>
+        <div class="text-xs sm:text-sm ml-4 text-white">Welcome back Kennedy</div>
         <div>
           <button id="humbuger-btn" class="humbuger-btn text-white font-bold cursor-pointer text-3xl p-4 fa-solid fa-bars"></button>
         </div>
@@ -185,6 +185,11 @@
           </div>
         </div>
         <div class="footer-box flex flex-col">
+         <div
+            class="box-heading text-white py-6 text-xl font-semibold capitalize"
+          >
+          account
+          </div>
           <a href="signup.html" class="text-[#8DAFCF] py-1 text-sm hover:text-[#68A4FE]"
             >Signup</a
           >
