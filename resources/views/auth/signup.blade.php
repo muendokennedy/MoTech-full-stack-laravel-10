@@ -14,18 +14,18 @@
               <input type="text" name="name" id="name" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
             </div>
             <div class="input-box my-4 w-full sm:basis-[48%]">
-              <label for="username" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter username:</label>
-              <input type="text" name="username" id="username" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
-            </div>
-          </div>
-          <div class="input-row flex flex-col sm:flex-row w-full justify-between">
-            <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="email" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter email:</label>
               <input type="text" name="email" id="email" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
             </div>
+        </div>
+        <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="phone" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter Phone number:</label>
               <input type="tel" name="phone" id="phone" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+            </div>
+            <div class="input-box my-4 w-full sm:basis-[48%]">
+                <label for="address" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter Location address & town:</label>
+                <input type="text" name="address" id="address" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
             </div>
           </div>
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
