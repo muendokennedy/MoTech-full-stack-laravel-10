@@ -18,6 +18,7 @@
         class="flex justify-between items-center px-[4%] mx-auto lg:max-w-[1500px] outline-1 outline-black"
       >
         <div class="text-2xl font-semibold sm:font-extrabold text-white">MoTech</div>
+        <div class="text-xs sm:text-base ml-4 text-white">Welcome back Kennedy</div>
         <div>
           <button id="humbuger-btn" class="humbuger-btn text-white font-bold cursor-pointer text-3xl p-4 fa-solid fa-bars"></button>
         </div>
@@ -50,6 +51,11 @@
             ><span class="count">0</span></span
           ></a
         >
+        <a
+          href="{{route('contact')}}"
+          class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
+          >logout</a
+        >
         </div>
         <nav class="primary-navigation-bar flex items-center justify-between">
           <a
@@ -73,8 +79,13 @@
             >contact</a
           >
           <a
+          href="{{route('contact')}}"
+          class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
+          >logout</a
+        >
+          <a
             href="{{route('cart')}}"
-            class="cart-link flex items-center px-3 text-white capitalize ease-in-ou"
+            class="cart-link flex items-center px-3 text-white capitalize ease-in-out"
             >cart<span class="cart-btn"
               ><i class="fa-solid fa-cart-shopping"></i
               ><span class="count">0</span></span
@@ -174,16 +185,14 @@
           </div>
         </div>
         <div class="footer-box flex flex-col">
-          <div
-            class="box-heading text-white py-6 text-xl font-semibold capitalize"
-          >
-            Account
-          </div>
           <a href="signup.html" class="text-[#8DAFCF] py-1 text-sm hover:text-[#68A4FE]"
             >Signup</a
           >
           <a href="login.html" class="text-[#8DAFCF] py-1 text-sm hover:text-[#68A4FE]"
             >Login</a
+          >
+          <a href="cart.html" class="text-[#8DAFCF] py-1 text-sm hover:text-[#68A4FE]"
+            >Log Out</a
           >
           <a href="cart.html" class="text-[#8DAFCF] py-1 text-sm hover:text-[#68A4FE]"
             >Wishlist</a

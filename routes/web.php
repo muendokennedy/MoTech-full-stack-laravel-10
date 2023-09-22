@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,24 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
-    return view('index');
-})->name('home');
-Route::get('/about', function(){
-    return view('about');
-})->name('about');
-Route::get('/products', function(){
-    return view('products');
-})->name('products');
-Route::get('/contact', function(){
-    return view('contact');
-})->name('contact');
-Route::get('/cart', function(){
-    return view('cart');
-})->name('cart');
-Route::get('/productpage', function(){
-    return view('productpage');
-})->name('product.page');
+Route::get('/', [CustomerController::class, 'index'])->name('home');
+Route::get('/about', [CustomerController::class, 'about'])->name('about');
+Route::get('/products', [CustomerController::class, 'products'])->name('products');
+Route::get('/contact', [CustomerController::class, 'contact'])->name('contact');
+Route::get('/cart', [CustomerController::class, 'cart'])->name('cart');
+Route::get('/productpage', [CustomerController::class, 'productPage'])->name('product.page');
+
 Route::get('/login/customer', function(){
     return view('login');
 })->name('customer.login');
