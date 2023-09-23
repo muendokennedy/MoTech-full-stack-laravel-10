@@ -12,7 +12,10 @@
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="name" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter name:</label>
-              <input type="text" name="name" id="name" placeholder="John Doe" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+              <input type="text" name="name" id="name" placeholder="John Doe" class="@error('name') border-red-600 @enderror sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              @error('name')
+              <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
+              @enderror
             </div>
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="email" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter email:</label>
