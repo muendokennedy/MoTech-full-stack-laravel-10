@@ -5,37 +5,38 @@
       >
         create<span class="text-[#68A4FE] px-2"> account</span>
       </div>
-      <form action="#">
+      <form action="{{route('customer.store')}}" method="POST">
+      @csrf
         <div class="signup-box h-auto w-full sm:w-11/12 md:w-4/5 mx-auto border-2 p-6 rounded-xl mt-10 sm:mt-16 shadow-[5px_5px_15px_8px_rgba(56,72,87,0.2)]">
           <h2 class="title text-base sm:text-2xl font-semibold text-center py-4 border-b-2 text-[#384857]">Sign up</h2>
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="name" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter name:</label>
-              <input type="text" name="name" id="name" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+              <input type="text" name="name" id="name" placeholder="John Doe" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
             </div>
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="email" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter email:</label>
-              <input type="text" name="email" id="email" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+              <input type="text" name="email" id="email" placeholder="johndoe@example.com" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
             </div>
         </div>
         <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="phone" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter Phone number:</label>
-              <input type="tel" name="phone" id="phone" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+              <input type="tel" name="phone" id="phone" placeholder="07140234008" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
             </div>
             <div class="input-box my-4 w-full sm:basis-[48%]">
                 <label for="address" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter Location address & town:</label>
-                <input type="text" name="address" id="address" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+                <input type="text" name="address" id="address" placeholder="P.O BOX 45-5766, NAIROBI" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
             </div>
           </div>
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="password" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter password:</label>
-              <input type="password" name="password" id="password" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+              <input type="password" name="password" id="password" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
             </div>
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="password_confirmation" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Confirm your password:</label>
-              <input type="password" name="password_confirmation" id="password_confirmation" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+              <input type="password" name="password_confirmation" id="password_confirmation" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
             </div>
           </div>
           <div class="input-box input-responsive my-4">

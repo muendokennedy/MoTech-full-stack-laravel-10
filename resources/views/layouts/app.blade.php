@@ -1,3 +1,9 @@
+@php
+if(Auth::guard('web')->user()){
+    $extractedName = explode(' ', Auth::guard('web')->user()->name);
+    $firstName = $extractedName[0];
+}
+@endphp
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -18,7 +24,9 @@
         class="flex justify-between items-center px-[4%] mx-auto lg:max-w-[1500px] outline-1 outline-black"
       >
         <div class="text-2xl font-semibold sm:font-extrabold text-white">MoTech</div>
-        <div class="text-xs sm:text-sm ml-4 text-white">Welcome back Kennedy</div>
+        @if (Auth::guard('web')->user())
+                <div class="text-xs sm:text-sm ml-4 text-white">Welcome back {{$firstName}}</div>
+        @endif
         <div>
           <button id="humbuger-btn" class="humbuger-btn text-white font-bold cursor-pointer text-3xl p-4 fa-solid fa-bars"></button>
         </div>
@@ -51,11 +59,14 @@
             ><span class="count">0</span></span
           ></a
         >
-        <a
-          href="{{route('contact')}}"
-          class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
-          >logout</a
-        >
+        @if (Auth::guard('web')->user())
+          <form action="{{route('logout')}}" method="POST">
+          @csrf
+          <button type="submit"
+            class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
+            >logout</button>
+        </form>
+        @endif
         </div>
         <nav class="primary-navigation-bar flex items-center justify-between">
           <a
@@ -78,11 +89,14 @@
             class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
             >contact</a
           >
-          <a
-          href="{{route('contact')}}"
-          class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
-          >logout</a
-        >
+          @if (Auth::guard('web')->user())
+          <form action="{{route('logout')}}" method="POST">
+          @csrf
+          <button type="submit"
+            class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
+            >logout</button>
+        </form>
+        @endif
           <a
             href="{{route('cart')}}"
             class="cart-link flex items-center px-3 text-white capitalize ease-in-out"

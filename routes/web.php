@@ -22,12 +22,4 @@ Route::get('/contact', [CustomerController::class, 'contact'])->name('contact');
 Route::get('/cart', [CustomerController::class, 'cart'])->name('cart');
 Route::get('/productpage', [CustomerController::class, 'productPage'])->name('product.page');
 
-Route::get('/login/customer', function(){
-    return view('login');
-})->name('customer.login');
-Route::get('/signup/customer', function(){
-    return view('signup');
-})->name('customer.signup');
-
-
 require __DIR__.'/auth.php';
