@@ -10,7 +10,7 @@ class AdminController extends Controller
     //
     public function dashboard()
     {
-        return view('admi');
+        return view('admin.index');
     }
 
     public function analytics()

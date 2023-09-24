@@ -27,4 +27,5 @@ require __DIR__.'/auth.php';
 
 Route::prefix('admin')->group(function(){
     Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/analytics', [AdminController::class, 'analytics'])->name('admin.analytics');
 });
