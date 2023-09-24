@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,7 @@ Route::get('/cart', [CustomerController::class, 'cart'])->name('cart');
 Route::get('/productpage', [CustomerController::class, 'productPage'])->name('product.page');
 
 require __DIR__.'/auth.php';
+
+Route::prefix('admin')->group(function(){
+    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+});
