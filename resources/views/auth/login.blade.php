@@ -12,14 +12,20 @@
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full">
               <label for="email" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter your email:</label>
-              <input type="text" name="email" id="email" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+              <input type="text" name="email" id="email" class="@error('email') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              @error('email')
+              <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
+              @enderror
               <input type="checkbox" name="remember" id="remember" checked class="hidden">
             </div>
           </div>
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full">
               <label for="password" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter password:</label>
-              <input type="password" name="password" id="password" class="text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out" autofocus>
+              <input type="password" name="password" id="password" class="@error('password') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              @error('password')
+              <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
+              @enderror
             </div>
           </div>
           <p class="text-[#68a4fe] capitalize text-sm sm:text-base py-2"><a href="{{route('password.request')}}" class="hover:underline transition-all duration-300 ease-in-out">forgot password?</a></p>
