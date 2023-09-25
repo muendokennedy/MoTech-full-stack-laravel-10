@@ -25,4 +25,8 @@ class AdminController extends Controller
     {
         return view('admin.orders');
     }
+    public function stock()
+    {
+        return view('admin.stock');
+    }
 }
