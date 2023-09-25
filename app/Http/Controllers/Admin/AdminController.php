@@ -33,4 +33,8 @@ class AdminController extends Controller
     {
         return view('admin.clientinfo');
     }
+    public function settings()
+    {
+        return view('admin.settings');
+    }
 }

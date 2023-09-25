@@ -32,4 +32,5 @@ Route::prefix('admin')->group(function(){
     Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
     Route::get('/stock', [AdminController::class, 'stock'])->name('admin.stock');
     Route::get('/clientinfo', [AdminController::class, 'clientinfo'])->name('admin.client');
+    Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
 });

@@ -26,7 +26,7 @@
           <li><a href="{{route('admin.orders')}}"><i class="fa-solid fa-list px-4 py-2 text-xl"></i><span>orders</span></a></li>
           <li><a href="{{route('admin.stock')}}"><i class="fa-solid fa-database px-4 py-2 text-xl"></i><span>stock</span></a></li>
           <li><a href="{{route('admin.client')}}"><i class="fa-solid fa-user px-4 py-2 text-xl"></i><span>client info</span></a></li>
-          <li><a href="settings.html"><i class="fa-solid fa-gear px-4 py-2 text-xl"></i><span>settings</span></a></li>
+          <li><a href="{{route('admin.settings')}}"><i class="fa-solid fa-gear px-4 py-2 text-xl"></i><span>settings</span></a></li>
         </ul>
       </div>
       <div class="side-bar-bottom my-4 text-white px-4 space-y-2 capitalize">
