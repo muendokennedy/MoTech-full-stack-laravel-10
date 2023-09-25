@@ -9,8 +9,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
         <!-- Scripts -->
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <!-- The CKEditor loader CDN link -->
+        <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
         <!-- The custom css link -->
-        @vite(['resources/css/admin.css', 'resources/js/admin/sidebarToggle.js', 'resources/js/admin/chartData.js'])
+        @vite(['resources/css/admin.css', 'resources/js/admin/sidebarToggle.js', 'resources/js/admin/chartData.js', 'resources/js/admin/imageBrowser.js', 'resources/js/admin/productEditMoodle.js'])
     </head>
     <body>
       <input type="checkbox" id="menu-bar" class="hidden">
@@ -20,7 +22,7 @@
         <ul class="my-8 text-white px-4 space-y-2 capitalize">
           <li><a href="{{route('admin.dashboard')}}"><i class="fa-solid fa-house px-4 py-2 text-xl"></i><span>dashboard</span></a></li>
           <li><a href="{{route('admin.analytics')}}"><i class="fa-solid fa-chart-simple px-4 py-2 text-xl"></i><span>analytics</span></a></li>
-          <li><a href="products.html"><i class="fa-solid fa-box px-4 py-2 text-xl"></i><span>products</span></a></li>
+          <li><a href="{{route('admin.products')}}"><i class="fa-solid fa-box px-4 py-2 text-xl"></i><span>products</span></a></li>
           <li><a href="orders.html"><i class="fa-solid fa-list px-4 py-2 text-xl"></i><span>orders</span></a></li>
           <li><a href="stock.html"><i class="fa-solid fa-database px-4 py-2 text-xl"></i><span>stock</span></a></li>
           <li><a href="clientinfo.html"><i class="fa-solid fa-user px-4 py-2 text-xl"></i><span>client info</span></a></li>
@@ -56,5 +58,29 @@
 
       </main>
     </section>
+    <script>
+        const editForm = document.querySelector(".edit-product"),
+        closeButton = document.querySelector(".close i"),
+        editButtons = document.querySelectorAll(".edit-button"),
+        newproductForm = document.querySelector(".new-product");
+
+        editButtons.forEach((button) => {
+        button.onclick = () => {
+            window.scrollTo(0,0);
+            editForm.classList.toggle("active");
+            sidebar.classList.toggle("active");
+            mainContent.classList.toggle("active");
+            newproductForm.style.display = "none";
+        }
+        });
+
+        closeButton.onclick = () => {
+        editButtons.forEach((button) => {
+            button.click();
+            newproductForm.style.display = "block";
+        })
+        }
+
+    </script>
   </body>
 </html>
