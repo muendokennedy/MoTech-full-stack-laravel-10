@@ -29,4 +29,8 @@ class AdminController extends Controller
     {
         return view('admin.stock');
     }
+    public function clientinfo()
+    {
+        return view('admin.clientinfo');
+    }
 }
