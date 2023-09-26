@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +27,8 @@ Route::get('/productpage', [CustomerController::class, 'productPage'])->name('pr
 require __DIR__.'/auth.php';
 
 Route::prefix('admin')->group(function(){
-    Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('admin.login');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/analytics', [AdminController::class, 'analytics'])->name('admin.analytics');
     Route::get('/products', [AdminController::class, 'products'])->name('admin.products');
     Route::get('/orders', [AdminController::class, 'orders'])->name('admin.orders');
