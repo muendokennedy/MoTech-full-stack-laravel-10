@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
         <!-- Scripts -->
         <!-- The custom css link -->
-        @vite(['resources/css/admin.css', 'resources/js/admin/sidebarToggle.js', 'resources/js/admin/chartData.js', 'resources/js/admin/imageBrowser.js', 'resources/js/admin/productEditMoodle.js'])
+        @vite(['resources/css/admin.css', 'resources/js/admin/adminImageBrowser.js'])
     </head>
   <body>
     <section class="min-h-screen">

@@ -38,6 +38,12 @@ class RegisteredAdminController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        // Store the profile image
+
+        $profileExtension = $request->file('adminProfile')->extension();
+
+        dd($profileExtension);
+
         $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,

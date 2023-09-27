@@ -1,6 +1,7 @@
 <x-adminguest-layout>
     <div class="sigup-box bg-white p-4 px-8 rounded-md w-[30rem] mx-auto">
           <form action="{{route('admin.store')}}" method="POST" enctype="multipart/form-data">
+          @csrf
             <h2 class="text-center text-xl text-[#042EFF] font-semibold capitalize py-4 border-b-2">signup as an admin</h2>
             <div class="input-box">
               <label for="name" class="capitalize block py-3">Enter name:</label>
