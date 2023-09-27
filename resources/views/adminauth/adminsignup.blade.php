@@ -7,6 +7,9 @@
               <label for="name" class="capitalize block py-3">Enter name:</label>
               <input type="text" name="name" id="name" class="p-2 rounded-md border-2 outline-none w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
             </div>
+            @error('name', 'email', 'adminProfile', 'password')
+            <p class="text-red-500">{{$message}}</p>
+            @enderror
             <div class="input-box mb-4">
               <label for="email" class="capitalize block py-3">Enter email:</label>
               <input type="text" name="email" id="email" class="p-2 rounded-md border-2 outline-none w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>

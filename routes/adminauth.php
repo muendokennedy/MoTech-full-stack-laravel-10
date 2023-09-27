@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
         Route::get('/', [RegisteredAdminController::class, 'create'])
                     ->name('admin.signup');
 
-        Route::post('/signup/admin', [RegisteredAdminController::class, 'store'])
+        Route::post('/signup/admin', [RegisteredAdminController::class, 'storeAdmin'])
                     ->name('admin.store');
 
         Route::get('/adminlogin', [AuthenticatedSessionController::class, 'create'])

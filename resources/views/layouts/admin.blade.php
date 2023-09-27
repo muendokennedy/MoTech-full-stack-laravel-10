@@ -47,7 +47,7 @@
         </div>
         <div class="profile-section sm:ml-auto lg:ml-0 border-2 flex items-center rounded-md w-36 sm:w-64 justify-between">
           <div class="profile-pic h-[48px] w-[70px] p-1">
-            <img src="/images/man4.jpeg" alt="profile image" class="w-full h-full object-cover rounded-l-md">
+            <img src='{{"/storage/{$admin->avatar}" }}' alt="profile image" class="w-full h-full object-cover rounded-l-md">
           </div>
           <span class="sm:pr-2 text-xs sm:text-base">Kennedy Munyao</span>
         </div>

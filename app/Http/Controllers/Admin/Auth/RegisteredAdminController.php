@@ -11,6 +11,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -29,24 +31,30 @@ class RegisteredAdminController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function storeAdmin(Request $request, Admin $admin): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:'.Admin::class],
-            'adminProfile' => ['required', 'string', 'max:255'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => ['required','string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['required', 'confirmed'],
         ]);
 
         // Store the profile image
 
         $profileExtension = $request->file('adminProfile')->extension();
 
-        dd($profileExtension);
+        $content = file_get_contents($request->file('adminProfile'));
+
+        $profileName = Str::random(25);
+
+        $path = "profileavatars/$profileName.$profileExtension";
+
+        Storage::disk('public')->put($path, $content);
 
         $admin = Admin::create([
             'name' => $request->name,
             'email' => $request->email,
+            'avatar' => $path,
             'password' => Hash::make($request->password),
         ]);
 
