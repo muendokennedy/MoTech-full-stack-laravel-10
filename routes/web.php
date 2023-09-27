@@ -25,9 +25,9 @@ Route::get('/cart', [CustomerController::class, 'cart'])->name('cart');
 Route::get('/productpage', [CustomerController::class, 'productPage'])->name('product.page');
 
 require __DIR__.'/auth.php';
+require __DIR__.'/adminauth.php';
 
 Route::prefix('admin')->group(function(){
-    Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('admin.login');
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/analytics', [AdminController::class, 'analytics'])->name('admin.analytics');
     Route::get('/products', [AdminController::class, 'products'])->name('admin.products');
