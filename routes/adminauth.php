@@ -39,7 +39,6 @@ use Illuminate\Support\Facades\Route;
                     ->name('password.store');
     });
 
-Route::middleware('auth')->group(function () {
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
                 ->middleware(['signed', 'throttle:6,1'])
@@ -56,6 +55,5 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
-});
+    Route::post('adminlogout', [AuthenticatedSessionController::class, 'destroy'])
+                ->name('admin.logout');

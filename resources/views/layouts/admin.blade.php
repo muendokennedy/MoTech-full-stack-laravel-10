@@ -31,7 +31,11 @@
       </div>
       <div class="side-bar-bottom my-4 text-white px-4 space-y-2 capitalize">
         <ul>
-          <li><a href="logout.html"><i class="fa-solid fa-right-from-bracket px-4 py-2 text-xl"></i><span>log out</span></a></li>
+          <li>
+          <form action="{{route('admin.logout')}}" method="POST">
+          @csrf
+          <button type="submit"><i class="fa-solid fa-right-from-bracket px-4 py-2 text-xl"></i><span>log out</span></button></li>
+        </form>
         </ul>
       </div>
     </div>

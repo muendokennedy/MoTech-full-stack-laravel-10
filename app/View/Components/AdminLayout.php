@@ -17,7 +17,7 @@ class AdminLayout extends Component
     public function __construct()
     {
         //
-        $this->admin = Admin::find(2);
+        $this->admin = Admin::find(4);
     }
 
     /**
