@@ -11,33 +11,35 @@ use App\Http\Controllers\Customer\Auth\RegisteredUserController;
 use App\Http\Controllers\Customer\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
-
-    Route::prefix('admin')->group(function(){
-
+    Route::group(['prefix' => 'admin', 'middleware' => 'guest:admin'], function(){
         Route::get('/', [RegisteredAdminController::class, 'create'])
-                    ->name('admin.signup');
+                ->name('admin.signup');
 
         Route::post('/signup/admin', [RegisteredAdminController::class, 'storeAdmin'])
-                    ->name('admin.store');
+                ->name('admin.store');
 
         Route::get('/adminlogin', [AuthenticatedSessionController::class, 'create'])
-                    ->name('admin.login');
+                ->name('admin.login');
 
         Route::post('/login/admin', [AuthenticatedSessionController::class, 'store'])
-                    ->name('admin.authenticate');
+                ->name('admin.authenticate');
 
         Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
-                    ->name('password.request');
+                ->name('password.request');
 
         Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-                    ->name('password.email');
+                ->name('password.email');
 
         Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-                    ->name('password.reset');
+                ->name('password.reset');
 
         Route::post('reset-password', [NewPasswordController::class, 'store'])
-                    ->name('password.store');
+                ->name('password.store');
     });
+    // Route::prefix('admin')->group(function(){
+
+
+    // });
 
 
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
