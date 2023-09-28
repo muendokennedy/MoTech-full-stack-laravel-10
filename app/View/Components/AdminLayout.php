@@ -12,19 +12,12 @@ class AdminLayout extends Component
     /**
      * Create a new component instance.
      */
-    public $admin = '';
-
-    public function __construct()
-    {
-        //
-        $this->admin = Admin::find(4);
-    }
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('layouts.admin', $this->admin);
+        return view('layouts.admin');
     }
 }

@@ -51,9 +51,9 @@
         </div>
         <div class="profile-section sm:ml-auto lg:ml-0 border-2 flex items-center rounded-md w-36 sm:w-64 justify-between">
           <div class="profile-pic h-[48px] w-[70px] p-1">
-            <img src='{{"/storage/{$admin->avatar}" }}' alt="profile image" class="w-full h-full object-cover rounded-l-md">
+            <img src="{{ asset('/storage/'. auth('admin')->user()->avatar)}}" alt="profile image" class="w-full h-full object-cover rounded-l-md">
           </div>
-          <span class="sm:pr-2 text-xs sm:text-base">Kennedy Munyao</span>
+          <span class="sm:pr-2 text-xs sm:text-base">{{auth('admin')->user()->name}}</span>
         </div>
       </header>
       <main class="bg-[#E4E7F3] pt-20 px-[3%] pb-4">

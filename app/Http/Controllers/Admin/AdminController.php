@@ -11,7 +11,7 @@ class AdminController extends Controller
     //
     public function dashboard()
     {
-        $admin = Admin::where('id', 2)->first();
+        $admin = auth('admin')->user();
 
         return view('admin.index', ['admin' => $admin]);
     }
