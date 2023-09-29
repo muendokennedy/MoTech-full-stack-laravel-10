@@ -17,23 +17,23 @@ class ProductController extends Controller
     {
         $productData = $request->validated();
 
-        $firstPath = $this->storeProductImage($productData->file('firstImage'));
-        $secondPath = $this->storeProductImage($productData->file('secondImage'));
-        $thirdPath = $this->storeProductImage($productData->file('thirdImage'));
-        $fourthPath = $this->storeProductImage($productData->file('fourthImage'));
+        $firstPath = $this->storeProductImage($productData['firstImage']);
+        $secondPath = $this->storeProductImage($productData['secondImage']);
+        $thirdPath = $this->storeProductImage($productData['thirdImage']);
+        $fourthPath = $this->storeProductImage($productData['fourthImage']);
 
         $product = Product::create([
-            'category' => $productData->category,
-            'name' => $productData->productName,
-            'initialPrice' => $productData->initialPrice,
-            'discountPrice' => $productData->discountPrice,
+            'category' => $productData['category'],
+            'name' => $productData['productName'],
+            'initialPrice' => $productData['initialPrice'],
+            'discountPrice' => $productData['discountPrice'],
             'firstImage' => $firstPath,
             'secondImage' => $secondPath,
             'thirdImage' => $thirdPath,
             'fourthImage' => $fourthPath,
-            'specifications' => $productData->specifications,
-            'brandName' => $productData->brandName,
-            'productDescription' => $productData->productDescription
+            'specifications' => $productData['specifications'],
+            'brandName' => $productData['brandName'],
+            'productDescription' => $productData['productDescription']
         ]);
 
         return redirect()->route('admin.products')->with('productSuccess', 'The product has been added successfully');
