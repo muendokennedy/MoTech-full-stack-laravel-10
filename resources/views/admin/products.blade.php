@@ -153,6 +153,11 @@
         @php
             $productCategory = ['Phone', 'Laptop', 'Smartwatch', 'Television'];
         @endphp
+        @if (session('productSuccess'))
+            <div class="success-message fixed top-10 px-4 py-2 rounded-md bg-green-600 text-white text-base">
+                {{ session('productSuccess') }}
+            </div>
+        @endif
         <div class="new-product bg-white p-4 rounded-md my-4">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-4 capitalize">add new product</h2>
           <div class="new-product-form">
