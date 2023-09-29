@@ -13,7 +13,7 @@ class Product extends Model
         'category',
         'name',
         'initialPrice',
-        'discountedPrice',
+        'discountPrice',
         'firstImage',
         'secondImage',
         'thirdImage',

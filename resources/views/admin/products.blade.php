@@ -172,64 +172,64 @@
               </div>
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
-                  <label for="specs" class="block py-3">Enter product specifications (CSV):</label>
-                  <input type="text" name="specs" id="specs" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                    <label for="initialPrice" class="block py-3">Enter the initial price:</label>
+                    <input type="number" name="initialPrice" id="initialPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
                 <div class="input-box md:basis-[48%]">
-                  <label for="initialPrice" class="block py-3">Enter the initial price:</label>
-                  <input type="number" name="initialPrice" id="initialPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <label for="discountPrice" class="block py-3">Enter the discounted price:</label>
+                  <input type="number" name="discountPrice" id="discountPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
               </div>
               <div class="form-row w-full flex flex-col md:flex-row gap-2 justify-between my-4">
                 <div class="input-box1 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info1 flex items-center justify-center flex-col">
                     <div class="icon pt-4">
-                      <label for="productImage1" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                      <label for="firstImage" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
                     </div>
                     <div class="initial-info">
-                      <label for="productImage1" class="block py-2">Browse image:</label>
+                      <label for="firstImage" class="block py-2">Browse image:</label>
                     </div>
                   </div>
                 </div>
-                  <input type="file" name="productImage1" id="productImage1" class="file1" hidden>
+                  <input type="file" name="firstImage" id="firstImage" class="file1" hidden>
                 <div class="input-box2 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info2 flex items-center justify-center flex-col">
                     <div class="icon pt-4">
-                      <label for="productImage2" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                      <label for="secondImage" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
                     </div>
                     <div class="initial-info">
-                      <label for="productImage2" class="block py-2">Browse image:</label>
+                      <label for="secondImage" class="block py-2">Browse image:</label>
                     </div>
                   </div>
                 </div>
-                  <input type="file" name="productImage2" id="productImage2" class="file2" hidden>
+                  <input type="file" name="secondImage" id="secondImage" class="file2" hidden>
                 <div class="input-box3 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info3 flex items-center justify-center flex-col">
                     <div class="icon pt-4">
-                      <label for="productImage3" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                      <label for="thirdImage" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
                     </div>
                     <div class="initial-info">
-                      <label for="productImage3" class="block py-2">Browse image:</label>
+                      <label for="thirdImage" class="block py-2">Browse image:</label>
                     </div>
                   </div>
                 </div>
-                  <input type="file" name="productImage3" id="productImage3" class="file3" hidden>
+                  <input type="file" name="thirdImage" id="thirdImage" class="file3" hidden>
                 <div class="input-box4 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info4 flex items-center justify-center flex-col">
                     <div class="icon pt-4">
-                      <label for="productImage4" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
+                      <label for="fourthImage" class="fa-solid fa-cloud-upload-alt text-4xl text-[#042EFF]"></label>
                     </div>
                     <div class="initial-info">
-                      <label for="productImage4" class="block py-2">Browse image:</label>
+                      <label for="fourthImage" class="block py-2">Browse image:</label>
                     </div>
                   </div>
                 </div>
-                  <input type="file" name="productImage4" id="productImage4" class="file4" hidden>
+                  <input type="file" name="fourthImage" id="fourthImage" class="file4" hidden>
               </div>
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
-                  <label for="discountPrice" class="block py-3">Enter the discounted price:</label>
-                  <input type="number" name="discountPrice" id="discountPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <label for="specs" class="block py-3">Enter product specifications (CSV):</label>
+                  <input type="text" name="specs" id="specs" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
                 <div class="input-box md:basis-[48%]">
                   <label for="brandName" class="block py-3">Enter the brand name:</label>

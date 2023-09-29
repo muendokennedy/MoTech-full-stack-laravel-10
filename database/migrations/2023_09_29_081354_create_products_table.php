@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('name');
             $table->decimal('initialPrice', 8, 2);
-            $table->decimal('discountedPrice', 8, 2);
+            $table->decimal('discountPrice', 8, 2);
             $table->string('firstImage');
             $table->string('secondImage');
             $table->string('thirdImage');
