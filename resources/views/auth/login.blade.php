@@ -12,7 +12,7 @@
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full">
               <label for="email" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter your email:</label>
-              <input type="text" name="email" id="email" class="@error('email') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              <input type="text" name="email" id="email" value="{{old('email')}}" class="@error('email') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
               @error('email')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
@@ -22,7 +22,7 @@
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full">
               <label for="password" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter password:</label>
-              <input type="password" name="password" id="password" class="@error('password') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              <input type="password" name="password" id="password" value="{{old('password')}}" class="@error('password') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
               @error('password')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror

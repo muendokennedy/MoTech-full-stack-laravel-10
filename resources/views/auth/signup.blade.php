@@ -12,14 +12,14 @@
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="name" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter name:</label>
-              <input type="text" name="name" id="name" placeholder="John Doe" class="@error('name') border-red-600 @enderror sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              <input type="text" name="name" id="name" placeholder="John Doe"  value="{{old('name')}}" class="@error('name') border-red-600 @enderror sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
               @error('name')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
             </div>
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="email" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter email:</label>
-              <input type="text" name="email" id="email" placeholder="johndoe@example.com" class="@error('email') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              <input type="text" name="email" id="email" placeholder="johndoe@example.com" value="{{old('email')}}" class="@error('email') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
               @error('email')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
@@ -28,14 +28,14 @@
         <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="phone" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter Phone number:</label>
-              <input type="tel" name="phone" id="phone" placeholder="07140234008" class="@error('phone') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              <input type="tel" name="phone" id="phone" placeholder="07140234008" value="{{old('phone')}}" class="@error('phone') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
               @error('phone')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
             </div>
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="address" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter Location address & town:</label>
-              <input type="text" name="address" id="address" placeholder="P.O BOX 45-5766, NAIROBI" class="@error('address') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              <input type="text" name="address" id="address" placeholder="P.O BOX 45-5766, NAIROBI" value="{{old('address')}}" class="@error('address') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
               @error('address')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
@@ -44,14 +44,14 @@
           <div class="input-row flex flex-col sm:flex-row w-full justify-between">
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="password" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter password:</label>
-              <input type="password" name="password" id="password" class="@error('password') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              <input type="password" name="password" id="password" value="{{old('password')}}" class="@error('password') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
               @error('password')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
             </div>
             <div class="input-box my-4 w-full sm:basis-[48%]">
               <label for="password_confirmation" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Confirm your password:</label>
-              <input type="password" name="password_confirmation" id="password_confirmation" class="@error('password_confirmation') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+              <input type="password" name="password_confirmation" id="password_confirmation" value="{{old('password_confirmation')}}" class="@error('password_confirmation') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
               @error('password_confirmation')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
