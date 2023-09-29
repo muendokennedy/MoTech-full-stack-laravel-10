@@ -201,7 +201,7 @@
                   <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
                 </div>
-              </div>
+              </div>`
               <p class="capitalize mt-4">Select product images (Start with the primary image):</p>
               <div class="form-row w-full flex flex-col md:flex-row gap-2 justify-between my-4">
                 <div class="md:basis-[23%]">
