@@ -5,14 +5,14 @@
             <h2 class="text-center text-xl text-[#042EFF] font-semibold capitalize py-4 border-b-2">Login in as admin</h2>
             <div class="input-box">
               <label for="email" class="capitalize block py-3">Enter your email:</label>
-              <input type="text" name="email" id="email" class="@error('email') border-red-600 @enderror p-2 rounded-md border-2 outline-none w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+              <input type="text" name="email" id="email" value="{{old('email')}}" class="@error('email') border-red-600 @enderror p-2 rounded-md border-2 outline-none w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
               @error('email')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
             </div>
             <div class="input-box">
               <label for="password" class="capitalize block py-3">Enter your password</label>
-              <input type="password" name="password" id="password" class="@error('password') border-red-600 @enderror p-2 rounded-md border-2 outline-none w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+              <input type="password" name="password" id="password"  value="{{old('password')}}" class="@error('password') border-red-600 @enderror p-2 rounded-md border-2 outline-none w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
               @error('password')
               <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
               @enderror
