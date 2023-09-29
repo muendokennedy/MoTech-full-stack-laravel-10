@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\CustomerController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,5 @@ Route::prefix('admin')->group(function(){
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     // The routes for storing the product into the database
     Route::post('/addnewproduct', [ProductController::class, 'store'])->name('product.store');
+
 });
