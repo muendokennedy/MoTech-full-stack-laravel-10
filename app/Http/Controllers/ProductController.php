@@ -17,10 +17,10 @@ class ProductController extends Controller
     {
         $productData = $request->validated();
 
-        $firstPath = $this->storeProductImage($productData['firstImage']);
-        $secondPath = $this->storeProductImage($productData['secondImage']);
-        $thirdPath = $this->storeProductImage($productData['thirdImage']);
-        $fourthPath = $this->storeProductImage($productData['fourthImage']);
+        $firstPath = $this->storeProductImage($request->file('firstImage'));
+        $secondPath = $this->storeProductImage($request->file('secondImage'));
+        $thirdPath = $this->storeProductImage($request->file('thirdImage'));
+        $fourthPath = $this->storeProductImage($request->file('fourthImage'));
 
         $product = Product::create([
             'category' => $productData['category'],
@@ -80,7 +80,7 @@ class ProductController extends Controller
 
         $imageName = Str::random(25);
 
-        $path = "products/$imageName.$imageExtension ";
+        $path = "products/$imageName.$imageExtension";
 
         Storage::disk('public')->put($path, $content);
 
