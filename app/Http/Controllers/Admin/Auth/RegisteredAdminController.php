@@ -31,13 +31,14 @@ class RegisteredAdminController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function storeAdmin(Request $request, Admin $admin): RedirectResponse
+    public function storeAdmin(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => ['required','string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
             'adminProfile' => ['required', 'file', 'mimes:png,jpg,jpeg'],
-            'password' => ['required', 'confirmed'],
+            'password' => ['required', 'min:4'],
+            'password_confirmation' => ['required', 'same:password']
         ]);
 
         // Store the profile image
