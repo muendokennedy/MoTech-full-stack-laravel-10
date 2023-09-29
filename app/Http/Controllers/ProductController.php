@@ -2,30 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Store a newly created product in storage.
      */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         //
     }

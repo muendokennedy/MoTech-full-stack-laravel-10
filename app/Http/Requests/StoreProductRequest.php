@@ -22,7 +22,17 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-        ];
+            'category' => 'required | string',
+            'productName'=> 'required | string',
+            'initialPrice' => 'required | numeric',
+            'discountPrice' => 'required | numeric',
+            'firstImage' => 'required | file | mimes:jpg,jpeg,png',
+            'secondImage' => 'required | file | mimes:jpg,jpeg,png',
+            'thirdImage' => 'required | file | mimes:jpg,jpeg,png',
+            'fourthImage' => 'required | file | mimes:jpg,jpeg,png',
+            'specifications'  => 'required | string',
+            'brandName' => 'required | string',
+            'productDescription' => 'required | string'
+         ];
     }
 }

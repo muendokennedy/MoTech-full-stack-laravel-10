@@ -153,7 +153,8 @@
         <div class="new-product bg-white p-4 rounded-md my-4">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-4 capitalize">add new product</h2>
           <div class="new-product-form">
-            <form action="#">
+            <form action="{{route('product.store')}}" method="POST">
+            @csrf
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
                   <label for="category" class="block py-3">Select Category:</label>
@@ -180,6 +181,7 @@
                   <input type="number" name="discountPrice" id="discountPrice" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
               </div>
+              <p class="capitalize mt-4">Select product images (Start with the primary image):</p>
               <div class="form-row w-full flex flex-col md:flex-row gap-2 justify-between my-4">
                 <div class="input-box1 md:basis-[23%]  file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                   <div class="original-info1 flex items-center justify-center flex-col">
@@ -228,8 +230,8 @@
               </div>
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
-                  <label for="specs" class="block py-3">Enter product specifications (CSV):</label>
-                  <input type="text" name="specs" id="specs" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+                  <label for="specifications" class="block py-3">Enter product specifications (CSV):</label>
+                  <input type="text" name="specifications" id="specifications" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
                 </div>
                 <div class="input-box md:basis-[48%]">
                   <label for="brandName" class="block py-3">Enter the brand name:</label>
@@ -270,8 +272,8 @@
           </div>
           <div class="form-row w-full flex flex-col md:flex-row justify-between">
             <div class="input-box md:basis-[48%]">
-              <label for="specs" class="block py-3">Enter product specifications (CSV):</label>
-              <input type="text" name="specs" id="specs" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
+              <label for="specifications" class="block py-3">Enter product specifications (CSV):</label>
+              <input type="text" name="specifications" id="specifications" class="px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out" autofocus>
             </div>
             <div class="input-box md:basis-[48%]">
               <label for="initialPrice" class="block py-3">Enter the initial price:</label>
