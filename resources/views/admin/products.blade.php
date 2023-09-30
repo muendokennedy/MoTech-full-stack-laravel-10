@@ -46,7 +46,7 @@
               <tbody>
                 @foreach ($products as $product)
                 <tr>
-                  <td class="border-2 py-2 px-2">{{$product->productDescription}}</td>
+                  <td class="border-2 py-2 px-2">{!! $product->productDescription !!}</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
                       <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
