@@ -265,4 +265,15 @@
         </div>
       </div>
       </section>
+      <script>
+        const heroImage = document.querySelector('.master-image img');
+
+        const smallImages = document.querySelectorAll('.small-image img');
+
+        smallImages.forEach((image) => {
+        image.onclick = () => {
+            heroImage.src = image.src;
+        }
+        });
+      </script>
 </x-app-layout>
