@@ -11,7 +11,9 @@ class CustomerController extends Controller
     // All the pages that the customer is supposed to see
     public function index()
     {
-        return view('index');
+        $products = Product::all();
+
+        return view('index', compact('products'));
     }
     public function about()
     {
@@ -31,8 +33,8 @@ class CustomerController extends Controller
     {
         return view('cart');
     }
-    public function productPage()
+    public function productPage(Product $product)
     {
-        return view('productpage');
+        return view('productpage', compact('product'));
     }
 }

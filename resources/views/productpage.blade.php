@@ -8,20 +8,20 @@
       <div class="product flex items-center flex-col md:flex-row justify-between w-full">
         <div class="w-full md:basis-[48%] p-2 sm:p-4 flex flex-col items-center">
           <div class="master-image w-[15rem] md:w-[16rem] h-[15rem] md:h-[20rem] flex justify-center items-center my-6">
-            <img src="images/redmi note 12.png" alt="Detailed product image" class="m-auto w-full h-full object-cover">
+            <img src="{{asset('/storage/' . $product->firstImage)}}" alt="Detailed product image" class="m-auto w-full h-full object-cover">
           </div>
           <div class="w-full sm:w-4/5 flex justify-between gap-2 md:gap-4 mx-auto">
             <div class="small-image h-20 border-2 p-1 sm:p-2 rounded-md cursor-pointer">
-              <img src="images/redmi note 12.png" alt="Extra small image description" class="h-full object-cover">
+              <img src="{{asset('/storage/' . $product->firstImage)}}" alt="Extra small image description" class="h-full object-cover">
             </div>
             <div class="small-image h-20 border-2 p-1 sm:p-2 rounded-md cursor-pointer">
-              <img src="images/techno spark 5.png" alt="Extra small image description" class="h-full object-cover">
+              <img src="{{asset('/storage/'. $product->secondImage)}}" alt="Extra small image description" class="h-full object-cover">
             </div>
             <div class="small-image h-20 border-2 p-1 sm:p-2 rounded-md cursor-pointer">
-              <img src="images/xiaomi redmi 10 2022 pro.png" alt="Extra small image description" class="h-full object-cover">
+              <img src="{{asset('/storage/'. $product->thirdImage)}}" alt="Extra small image description" class="h-full object-cover">
             </div>
             <div class="small-image h-20 border-2 p-1 sm:p-2 rounded-md cursor-pointer">
-              <img src="images/techno camon 18p.png" alt="Extra small image description" class="h-full object-cover">
+              <img src="{{asset('/storage/'. $product->fourthImage)}}" alt="Extra small image description" class="h-full object-cover">
             </div>
           </div>
           <div class="action-button-container my-4 sm:my-8 flex w-full justify-between">
@@ -30,8 +30,8 @@
           </div>
         </div>
         <div class="product-content-details w-full md:basis-[48%] p-2 sm:p-4 my-2 md:my-4">
-          <div class="product-title font-semibold text-lg sm:text-xl mb-4 text-[#384857]">Tecno spark 10P</div>
-          <div class="product-manufacturer text-sm text-[#384857]">Produced by techno</div>
+          <div class="product-title font-semibold text-lg sm:text-xl mb-4 text-[#384857]">{{$product->name}}</div>
+          <div class="product-manufacturer text-sm text-[#384857]">Produced by {{$product->brandName}}</div>
           <div class="flex gap-4 items-center my-2 border-b-2 py-4">
             <div class="text-xs text-[#ffcf10]">
               <i class="fa-solid fa-star"></i>

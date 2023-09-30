@@ -21,7 +21,7 @@ Route::get('/about', [CustomerController::class, 'about'])->name('about');
 Route::get('/products', [CustomerController::class, 'products'])->name('products');
 Route::get('/contact', [CustomerController::class, 'contact'])->name('contact');
 Route::get('/cart', [CustomerController::class, 'cart'])->name('cart');
-Route::get('/productpage', [CustomerController::class, 'productPage'])->name('product.page');
+Route::get('/productpage/{product}', [CustomerController::class, 'productPage'])->name('product.page');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/adminauth.php';
