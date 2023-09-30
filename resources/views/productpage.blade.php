@@ -30,8 +30,8 @@
           </div>
         </div>
         <div class="product-content-details w-full md:basis-[48%] p-2 sm:p-4 my-2 md:my-4">
-          <div class="product-title font-semibold text-lg sm:text-xl mb-4 text-[#384857]">{{$product->name}}</div>
-          <div class="product-manufacturer text-sm text-[#384857]">Produced by {{$product->brandName}}</div>
+          <div class="product-title font-semibold text-lg sm:text-xl mb-4 text-[#384857] capitalize">{{$product->name}}</div>
+          <div class="product-manufacturer text-sm text-[#384857] capitalize">Produced by {{$product->brandName}}</div>
           <div class="flex gap-4 items-center my-2 border-b-2 py-4">
             <div class="text-xs text-[#ffcf10]">
               <i class="fa-solid fa-star"></i>
@@ -45,9 +45,12 @@
             </div>
           </div>
           <div class="price-details my-2">
-            <p class="first-price text-sm py-2 text-[#384857]">Most recent price: <span>$180</span></p>
-            <p class="deal-price text-sm py-2 text-[#384857]">Deal price: <span class="text-[#FF412C]">$150</span> inclusive of <span class="inline font-semibold text-[#384857]">VAT</span></p>
-            <p class="save-amount text-sm py-2 capitalize text-[#384857]">save: <span class="text-[#FF412C]">$130</span></p>
+            <p class="first-price text-sm py-2 text-[#384857]">Most recent price: <span>${{$product->initialPrice}}</span></p>
+            <p class="deal-price text-sm py-2 text-[#384857]">Deal price: <span class="text-[#FF412C]">${{$product->discountPrice}}</span> inclusive of <span class="inline font-semibold text-[#384857]">VAT</span></p>
+            @php
+                $save = '$' . $product->initialPrice - $product->discountPrice;
+            @endphp
+            <p class="save-amount text-sm py-2 capitalize text-[#384857]">save: <span class="text-[#FF412C]">{{$save}}</span></p>
           </div>
           <div class="vendor-action-container flex justify-between w-full py-4 border-b-2 text-center">
             <div class="replacement flex flex-col gap-4 items-center">
@@ -97,7 +100,7 @@
         product description
       </div>
       <p class="description-text text-sm my-4">
-        Iure omnis explicabo praesentium. Aut tenetur enim aperiam quibusdam sunt enim quidem aperiam sit. Quos qui id.  Vitae adipisci vitae maxime architecto reiciendis nihil est. Sit maiores quibusdam. Voluptatem dolorem omnis suscipit. Nulla id voluptatem. Sed fugit explicabo dolores quaerat quod voluptatem eos sed. Consequatur optio corporis provident. Sed voluptas mollitia magni expedita dolorem quod qui necessitatibus. Reiciendis sequi est ev eniet sit. Illum quasi quis rerum qui quam fuga aut. Consequatur officiis error molestiae cum.
+        {!! $product->productDescription !!}
       </p>
       </section>
       <section class="related-products px-[4%] mx-auto lg:max-w-[1500px]">
