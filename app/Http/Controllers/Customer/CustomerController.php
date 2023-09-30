@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -18,7 +19,9 @@ class CustomerController extends Controller
     }
     public function products()
     {
-        return view('products');
+        $products = Product::all();
+
+        return view('products', compact('products'));
     }
     public function contact()
     {

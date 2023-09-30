@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -11,9 +12,7 @@ class AdminController extends Controller
     //
     public function dashboard()
     {
-        $admin = auth('admin')->user();
-
-        return view('admin.index', ['admin' => $admin]);
+        return view('admin.index');
     }
 
     public function analytics()
