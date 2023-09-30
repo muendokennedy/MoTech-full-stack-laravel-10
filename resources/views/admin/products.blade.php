@@ -14,38 +14,16 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($products as $product)
                 <tr>
-                  <td class="border-2 py-2 px-2 text-center">Laptop</td>
-                  <td class="border-2 py-2 px-2 text-center">Dell latitude 5320</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/dell latitude 5320.png" alt="A dell laptop" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1500</td>
-                  <td class="border-2 py-2 px-2 text-center">$1000</td>
-                  <td class="border-2 py-2 px-2 text-center">Dell</td>
+                  <td class="border-2 py-2 px-2 text-center">{{$product->category}}</td>
+                  <td class="border-2 py-2 px-2 text-center">{{$product->name}}</td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="{{asset('/storage/' . $product->firstImage)}}" alt="A dell laptop" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center">${{$product->initialPrice}}</td>
+                  <td class="border-2 py-2 px-2 text-center">${{$product->discountPrice}}</td>
+                  <td class="border-2 py-2 px-2 text-center">{{$product->brandName}}</td>
                 </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Laptop</td>
-                  <td class="border-2 py-2 px-2 text-center">HP laptop 15 ci7</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/hp laptop 15 ci7.png" alt="An HP  laptop" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$800</td>
-                  <td class="border-2 py-2 px-2 text-center">$600</td>
-                  <td class="border-2 py-2 px-2 text-center">HP</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Phone</td>
-                  <td class="border-2 py-2 px-2 text-center">Iphone 14</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone14.png" alt="An iphone14" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1100</td>
-                  <td class="border-2 py-2 px-2 text-center">$1102</td>
-                  <td class="border-2 py-2 px-2 text-center">Apple</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Phone</td>
-                  <td class="border-2 py-2 px-2 text-center">Iphone 12</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone12.png" alt="An Iphone12" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1000</td>
-                  <td class="border-2 py-2 px-2 text-center">$900</td>
-                  <td class="border-2 py-2 px-2 text-center">Apple</td>
-                </tr>
+                @endforeach
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">Laptop</td>
                   <td class="border-2 py-2 px-2 text-center">HP laptop 15 ci7</td>
@@ -53,22 +31,6 @@
                   <td class="border-2 py-2 px-2 text-center">$800</td>
                   <td class="border-2 py-2 px-2 text-center">$600</td>
                   <td class="border-2 py-2 px-2 text-center">HP</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Phone</td>
-                  <td class="border-2 py-2 px-2 text-center">Iphone 14</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone14.png" alt="An iphone14" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1100</td>
-                  <td class="border-2 py-2 px-2 text-center">$1102</td>
-                  <td class="border-2 py-2 px-2 text-center">Apple</td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Phone</td>
-                  <td class="border-2 py-2 px-2 text-center">Iphone 12</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/iphone12.png" alt="An Iphone12" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$1000</td>
-                  <td class="border-2 py-2 px-2 text-center">$900</td>
-                  <td class="border-2 py-2 px-2 text-center">Apple</td>
                 </tr>
               </tbody>
             </table>
@@ -82,8 +44,9 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach ($products as $product)
                 <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
+                  <td class="border-2 py-2 px-2">{{$product->productDescription}}</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
                       <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
@@ -91,51 +54,7 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
-                    </div>
-                  </td>
-                </tr>
+                @endforeach
                 <tr>
                   <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
                   <td class="border-2 py-2 px-6 w-1/2">
