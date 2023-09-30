@@ -21,7 +21,7 @@
                   <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="{{asset('/storage/' . $product->firstImage)}}" alt="A dell laptop" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">${{$product->initialPrice}}</td>
                   <td class="border-2 py-2 px-2 text-center">${{$product->discountPrice}}</td>
-                  <td class="border-2 py-2 px-2 text-center">{{$product->brandName}}</td>
+                  <td class="border-2 py-2 px-2 text-center capitalize">{{$product->brandName}}</td>
                 </tr>
                 @endforeach
                 <tr>
