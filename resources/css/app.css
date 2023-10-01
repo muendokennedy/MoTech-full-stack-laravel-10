@@ -118,26 +118,26 @@
 }
 
 .product-image{
-  width: 6.25rem;
-  height: 6.25rem;
+  width: auto;
+  height: 6rem;
 }
 .product-image img{
   height: 100%;
   width: 100%;
-  transform: scale(0.8);
+  transform: scale(0.6);
 }
 @media only screen and (max-width: 640px) {
   .top-sales-container{
     grid-template-columns: repeat(auto-fit, minmax(6.75rem, 1fr));
   }
   .product-image{
-    width: 4.25rem;
-    height: 4.25rem;
+    width: auto;
+    height: 4rem;
   }
   .product-image img{
     height: 100%;
     width: 100%;
-    transform: scale(0.8);
+    transform: scale(0.6);
   }
 }
 .filter-tags a{

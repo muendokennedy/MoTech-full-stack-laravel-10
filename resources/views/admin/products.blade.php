@@ -14,7 +14,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($products as $product)
+                @forelse ($products as $product)
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">{{$product->category}}</td>
                   <td class="border-2 py-2 px-2 text-center">{{$product->name}}</td>
@@ -23,15 +23,9 @@
                   <td class="border-2 py-2 px-2 text-center">${{$product->discountPrice}}</td>
                   <td class="border-2 py-2 px-2 text-center capitalize">{{$product->brandName}}</td>
                 </tr>
-                @endforeach
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">Laptop</td>
-                  <td class="border-2 py-2 px-2 text-center">HP laptop 15 ci7</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="/images/hp laptop 15 ci7.png" alt="An HP  laptop" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">$800</td>
-                  <td class="border-2 py-2 px-2 text-center">$600</td>
-                  <td class="border-2 py-2 px-2 text-center">HP</td>
-                </tr>
+                @empty
+                  <p>There are no products in the store</p>
+                @endforelse
               </tbody>
             </table>
           </div>
@@ -44,7 +38,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($products as $product)
+                @forelse ($products as $product)
                 <tr>
                   <td class="border-2 py-2 px-2">{!! $product->productDescription !!}</td>
                   <td class="border-2 py-2 px-6 w-1/2">
@@ -54,16 +48,9 @@
                     </div>
                   </td>
                 </tr>
-                @endforeach
-                <tr>
-                  <td class="border-2 py-2 px-2">Reiciendis et vel illo quod delectus non sequi est. Ut magni consectetur. Facilis est omnis accusantium neque omnis. Quo qui omnis culpa omnis.</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                      <button type="button" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></button>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
-                    </div>
-                  </td>
-                </tr>
+                @empty
+                  <p>There  are no products in the store</p>
+                @endforelse
               </tbody>
             </table>
           </div>

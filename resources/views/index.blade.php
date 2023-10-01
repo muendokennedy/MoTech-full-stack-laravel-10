@@ -107,15 +107,15 @@
           Top<span class="text-[#68A4FE] px-2">Sales</span>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%]">
-            @foreach ($products as $product)
+            @forelse ($products as $product)
             <div class="product-box text-center my-2 sm:my-4">
               <div class="flex justify-center items-center">
                 <a href="{{route('product.page', $product)}}" class="product-image">
-                  <img src="images/redmi note 12.png" alt="A mobile phone"/>
+                  <img src="{{asset('/storage/'. $product->firstImage)}}" alt="A mobile phone"/>
                 </a>
               </div>
-              <div class="product-title text-sm font-normal sm:font-semibold">
-                infinix hot 12
+              <div class="product-title text-xs font-normal sm:font-semibold">
+                {{ $product->name }}
               </div>
               <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
                 <i class="fa-solid fa-star"></i>
@@ -124,10 +124,12 @@
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
               </div>
-              <div class="first-price my-1 sm:my-3 font-semibold">$136</div>
+              <div class="first-price my-1 sm:my-3 font-semibold">${{$product->initialPrice}}</div>
               <button class="add-cart-btn text-xs">add to cart</button>
             </div>
-            @endforeach
+            @empty
+            <p>There are no products available</p>
+            @endforelse
           <div class="product-box text-center my-2 sm:my-4">
             <div class="flex justify-center items-center">
               <a href="productpage.html" class="product-image">

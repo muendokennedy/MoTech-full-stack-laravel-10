@@ -51,14 +51,14 @@
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
-            @foreach ($products as $product)
-                <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
+            @forelse ($products as $product)
+            <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
                 <div class="flex justify-center items-center">
                 <div class="product-image">
                     <img src="{{ asset('/storage/'. $product->firstImage)}}" alt="A mobile phone" />
                 </div>
                 </div>
-                <div class="product-title text-sm font-normal sm:font-semibold">
+                <div class="product-title text-xs font-normal sm:font-semibold">
                     {{ $product->name }}
                 </div>
                 <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
@@ -69,12 +69,14 @@
                 <i class="fa-solid fa-star"></i>
                 </div>
                 <div class="flex justify-between w-20 sm:w-24 mx-auto">
-                <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">{{ $product->initialPrice }}</div>
-                <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">{{$product->discountPrice}}</div>
+                <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $product->initialPrice }}</div>
+                <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$product->discountPrice}}</div>
                 </div>
                 <button class="add-cart-btn text-xs">add to cart</button>
             </div>
-            @endforeach
+            @empty
+            <p>There are no products in the store </p>
+            @endforelse
         </div>
       </section>
       <!-- The laptops section -->
