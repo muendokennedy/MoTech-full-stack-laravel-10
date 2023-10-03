@@ -110,7 +110,7 @@
                                 <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                                 @enderror
                             </div>
-                            <input type="file" name="firstImageEdit" id="firstImageEdit" class="file1-edit" hidden>
+                            <input type="file" name="firstImageEdit"  id="firstImageEdit" class="file1-edit" hidden>
                             <div class="md:basis-[23%]">
                                 <div class="@error('secondImageEdit') border-red-600 @enderror input-box2-edit file-box flex items-center justify-center flex-col  border-dashed border-2 border-[#042EFF]">
                                     <div class="original-info2-edit flex items-center justify-center flex-col">
@@ -305,7 +305,7 @@
                 {{ session('productSuccess') }}
             </div>
         @endif
-        <div class="new-product bg-white p-4 rounded-md my-4">
+        <div class="new-product bg-white p-4 rounded-md my-4"  id="new-product">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-4 capitalize">add new product</h2>
           <div class="new-product-form">
             <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
@@ -459,6 +459,7 @@
             const orignalInfoBox2 =  document.querySelector('.original-info2');
             const orignalInfoBox3 =  document.querySelector('.original-info3');
             const orignalInfoBox4 =  document.querySelector('.original-info4');
+            const newProductForm = document.querySelector('#new-product');
 
 
 
@@ -551,12 +552,7 @@
     <script src="js/imageBrowser.js"></script> -->
     <script>
       ClassicEditor
-          .create( document.querySelector( '#product-description' ) )
-          .catch( error => {
-              console.error( error );
-          } );
-      ClassicEditor
-          .create( document.querySelector( '#product-description-edit' ) )
+          .create( newProductForm.querySelector( '#product-description' ) )
           .catch( error => {
               console.error( error );
           } );

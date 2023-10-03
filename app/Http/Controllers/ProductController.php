@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -59,9 +60,26 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductRequest $request, Product $product)
     {
         //
+        $product->update($request->except(['firstImageEdit','secondImageEdit','thirdImageEdit','fourthImageEdit']));
+
+        $firstPath = $this->storeUpdatedProductImage($request->file('firstImageEdit'), $product, $product->firstImage);
+        $secondPath = $this->storeUpdatedProductImage($request->file('secondImageEdit'), $product, $product->secondImage);
+        $thirdPath = $this->storeUpdatedProductImage($request->file('thirdImageEdit'), $product, $product->thirdImage);
+        $fourthPath = $this->storeUpdatedProductImage($request->file('fourthImageEdit'), $product, $product->fourthImage);
+
+        $product->update(
+            [
+            'firstImage' => $firstPath,
+            'secondImage' => $secondPath,
+            'thirdImage' => $thirdPath,
+            'fourthImage' => $fourthPath,
+            ]
+        );
+
+        return redirect()->route('admin.products')->with('productUpdateSuccess', 'The product data has been updated successfully');
     }
 
     /**
@@ -74,6 +92,25 @@ class ProductController extends Controller
 
     private function storeProductImage($productFile)
     {
+        $imageExtension = $productFile->extension();
+
+        $content = file_get_contents($productFile);
+
+        $imageName = Str::random(25);
+
+        $path = "products/$imageName.$imageExtension";
+
+        Storage::disk('public')->put($path, $content);
+
+        return $path;
+    }
+
+    private function storeUpdatedProductImage($productFile, $product, $oldFile)
+    {
+        dd($oldFile);
+
+        Storage::disk('public')->delete($oldFile);
+
         $imageExtension = $productFile->extension();
 
         $content = file_get_contents($productFile);
