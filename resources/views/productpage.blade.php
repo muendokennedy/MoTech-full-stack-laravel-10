@@ -45,12 +45,12 @@
             </div>
           </div>
           <div class="price-details my-2">
-            <p class="first-price text-sm py-2 text-[#384857]">Most recent price: <span>${{$product->initialPrice}}</span></p>
-            <p class="deal-price text-sm py-2 text-[#384857]">Deal price: <span class="text-[#FF412C]">${{$product->discountPrice}}</span> inclusive of <span class="inline font-semibold text-[#384857]">VAT</span></p>
+            <p class="first-price text-sm py-2 text-[#384857]">Most recent price: <span>${{number_format($product->initialPrice)}}</span></p>
+            <p class="deal-price text-sm py-2 text-[#384857]">Deal price: <span class="text-[#FF412C]">${{number_format($product->discountPrice)}}</span> inclusive of <span class="inline font-semibold text-[#384857]">VAT</span></p>
             @php
-                $save = '$' . $product->initialPrice - $product->discountPrice;
+                $save = $product->initialPrice - $product->discountPrice;
             @endphp
-            <p class="save-amount text-sm py-2 capitalize text-[#384857]">save: <span class="text-[#FF412C]">{{$save}}</span></p>
+            <p class="save-amount text-sm py-2 capitalize text-[#384857]">save: <span class="text-[#FF412C]">${{number_format($save)}}</span></p>
           </div>
           <div class="vendor-action-container flex justify-between w-full py-4 border-b-2 text-center">
             <div class="replacement flex flex-col gap-4 items-center">
