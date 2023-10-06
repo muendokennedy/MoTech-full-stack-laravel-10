@@ -76,18 +76,21 @@
           <div class="vendor-name text-sm my-4">
             <span>Sold by MoTech electronics</span> <span>(250 out of 300 already sold)</span>
           </div>
+          @php
+              $specs = explode(',',$product->specifications);
+          @endphp
           <div class="product-specification-details flex justify-between my-6 text-[#384857] mb-auto">
             <div class="ram flex flex-col gap-2">
-              <span class="block font-semibold text-[#384857] text-base sm:text-xl">size:</span>
-              <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">4GB</span>
+              <span class="block font-semibold text-[#384857] text-base sm:text-xl">RAM size:</span>
+              <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">{{$specs[0]}}</span>
             </div>
             <div class="ram flex flex-col gap-2">
               <span class="block font-semibold text-[#384857] text-base sm:text-xl">Resolution:</span>
-              <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">450 X 1080</span>
+              <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">{{$specs[1]}}</span>
             </div>
             <div class="ram flex flex-col gap-2">
               <span class="block font-semibold text-[#384857] text-base sm:text-xl">camera:</span>
-              <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">40MP</span>
+              <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">{{$specs[2]}}</span>
             </div>
           </div>
         </div>

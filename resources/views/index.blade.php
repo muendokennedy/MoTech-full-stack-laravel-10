@@ -124,7 +124,7 @@
                 <i class="fa-solid fa-star"></i>
                 <i class="fa-solid fa-star"></i>
               </div>
-              <div class="first-price my-1 sm:my-3 font-semibold">${{$product->initialPrice}}</div>
+              <div class="first-price my-1 sm:my-3 font-semibold">${{number_format($product->initialPrice)}}</div>
               <button class="add-cart-btn text-xs">add to cart</button>
             </div>
             @empty
