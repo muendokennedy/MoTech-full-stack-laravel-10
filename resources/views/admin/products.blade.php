@@ -5,19 +5,21 @@
 <div class="recent-sales bg-white p-4 rounded-md">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-lg md:text-xl py-4 capitalize">Products in stock</h2>
           <div class="table-container overflow-x-auto">
+            @if ($products->count())
             <table class="w-[45rem] md:w-full border-2 my-4">
-              <thead>
+            <thead>
                 <tr>
-                  <th class="border-2 py-4 px-2">Category</th>
-                  <th class="border-2 py-4 px-2">Name</th>
-                  <th class="border-2 py-4 px-2">Image</th>
-                  <th class="border-2 py-4 px-2">Price</th>
-                  <th class="border-2 py-4 px-2">Discounted price</th>
-                  <th class="border-2 py-4 px-2">Brand</th>
+                <th class="border-2 py-4 px-2">Category</th>
+                <th class="border-2 py-4 px-2">Name</th>
+                <th class="border-2 py-4 px-2">Image</th>
+                <th class="border-2 py-4 px-2">Price</th>
+                <th class="border-2 py-4 px-2">Discounted price</th>
+                <th class="border-2 py-4 px-2">Brand</th>
                 </tr>
-              </thead>
-              <tbody>
-                @forelse ($products as $product)
+            </thead>
+            <tbody>
+            @endif
+            @forelse ($products as $product)
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">{{$product->category}}</td>
                   <td class="border-2 py-2 px-2 text-center">{{$product->name}}</td>
@@ -27,27 +29,44 @@
                   <td class="border-2 py-2 px-2 text-center capitalize">{{$product->brandName}}</td>
                 </tr>
                 @empty
-                  <p>There are no products in the store</p>
-                @endforelse
-              </tbody>
-            </table>
+                  <tr>
+                    <p>There are no products in the store  <strong>{{auth('admin')->user()->name}}</strong>. Please consider adding some products using the form below.</p>
+                  </tr>
+                  @endforelse
+                </tbody>
+                </table>
+          </div>
+          @php
+            if(auth('admin')->user()){
+                $extractedName = explode(' ', auth('admin')->user()->name);
+                $firstAdminName = $extractedName[0];
+            }
+            @endphp
+          <div class="product-delete-confirm bg-red-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+            <div class="delete-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+            <p class="text-red-700 mt-6">
+                {{$firstAdminName}}, are you sure you want to permanently remove this product from the store. Once deleted it cannot be recovered!
+            </p>
+            <button type="button" class="confirm-button bg-[#FF4004] py-2 px-6 capitalize rounded-md my-2">Continue</button>
           </div>
           <div class="table-container overflow-x-auto">
+            @if ($products->count())
             <table class="w-[45rem] lg:w-[90%] border-2 mt-8">
-              <thead>
-                <tr>
-                  <th class="border-2 py-4">Product Description</th>
-                  <th class="border-2 py-4">Manage</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse ($products as $product)
+            <thead>
+              <tr>
+                <th class="border-2 py-4">Product Description</th>
+                <th class="border-2 py-4">Manage</th>
+              </tr>
+            </thead>
+            <tbody>
+            @endif
+              @forelse ($products as $product)
                 <tr>
                   <td class="border-2 py-2 px-2">{!! $product->productDescription !!}</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
                     <a href="{{route('product.edit', $product)}}" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></a>
-                    <form action="{{route('product.delete', $product)}}" method="POST">
+                    <form class='product-delete-form' action="{{route('product.delete', $product)}}" method="POST">
                     @csrf
                     @method('DELETE')
                       <button type="submit" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
@@ -56,27 +75,55 @@
                   </td>
                 </tr>
                 @empty
-                  <p>There  are no products in the store</p>
                 @endforelse
-              </tbody>
+            </tbody>
             </table>
           </div>
 
         </div>
-        @if (session('productSuccess'))
-            <div class="success-message fixed top-36 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md bg-green-600 text-white text-base">
-                {{ session('productSuccess') }}
-            </div>
+            <script>
+                const deleteForm = document.querySelectorAll('.product-delete-form'),
+                deleteConfirm = document.querySelector('.product-delete-confirm'),
+                confirmButton = document.querySelector('.confirm-button'),
+                deleteClose = document.querySelector('.delete-close');
+
+                deleteForm.forEach((form) => {
+                    form.onsubmit = (e) => {
+                    e.preventDefault();
+                    deleteConfirm.style.display = 'block';
+                    }
+                    confirmButton.onclick = () => {
+                        form.submit();
+                    }
+                });
+                deleteClose.onclick = () => {
+                    deleteConfirm.style.display = 'none';
+                }
+            </script>
+       @if (session('productSuccess'))
+                <div class="success-message bg-green-600 rounded-md py-2 px-8 w-1/3 m-auto fixed top-36 left-1/2 -translate-x-1/2 z-50">
+                    <div class="success-close text-2xl absolute right-2 top-0" onclick="this.parentElement.style.display = 'none'"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+                    <p class="text-white text-base mt-6 py-4">
+                    {{--{{ session('productSuccess') }}--}}
+                    The Product has been added successfully to the store
+                    </p>
+                </div>
         @endif
         @if (session('productUpdateSuccess'))
-            <div class="success-message fixed top-36 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md bg-green-600 text-white text-base">
-                {{ session('productUpdateSuccess') }}
-            </div>
+                <div class="success-message bg-green-600 rounded-md py-2 px-8 w-1/3 m-auto fixed top-36 left-1/2 -translate-x-1/2 z-50">
+                    <div class="success-close text-2xl absolute right-2 top-0" onclick="this.parentElement.style.display = 'none'"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+                    <p class="text-white text-base mt-6 py-4">
+                    {{ session('productUpdateSuccess') }}
+                    </p>
+                </div>
         @endif
         @if (session('productDeleteSuccess'))
-            <div class="success-message fixed top-36 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md bg-green-600 text-white text-base">
-                {{ session('productDeleteSuccess') }}
-            </div>
+                <div class="success-message bg-green-600 rounded-md py-2 px-8 w-1/3 m-auto fixed top-36 left-1/2 -translate-x-1/2 z-50">
+                    <div class="success-close text-2xl absolute right-2 top-0" onclick="this.parentElement.style.display = 'none'"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+                    <p class="text-white text-base mt-6 py-4">
+                    {{ session('productDeleteSuccess') }}
+                    </p>
+                </div>
         @endif
         <div class="new-product bg-white p-4 rounded-md my-4"  id="new-product">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-4 capitalize">add new product</h2>
