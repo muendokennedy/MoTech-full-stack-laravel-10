@@ -23,17 +23,17 @@ class UpdateProductRequest extends FormRequest
     {
         return [
             //
-            'categoryEdit' => 'required | string',
-            'productNameEdit'=> 'required | string',
-            'initialPriceEdit' => 'required | numeric',
-            'discountPriceEdit' => 'required | numeric',
-            'firstImageEdit' => 'required | file | mimes:jpg,jpeg,png',
-            'secondImageEdit' => 'required | file | mimes:jpg,jpeg,png',
-            'thirdImageEdit' => 'required | file | mimes:jpg,jpeg,png',
-            'fourthImageEdit' => 'required | file | mimes:jpg,jpeg,png',
-            'specificationsEdit'  => 'required | string',
-            'brandNameEdit' => 'required | string',
-            'productDescriptionEdit' => 'required | string'
+            'category' => 'required | string',
+            'productName'=> 'required | string',
+            'initialPrice' => 'required | numeric',
+            'discountPrice' => 'required | numeric',
+            'firstImage' => 'required | file | mimes:jpg,jpeg,png',
+            'secondImage' => 'required | file | mimes:jpg,jpeg,png',
+            'thirdImage' => 'required | file | mimes:jpg,jpeg,png',
+            'fourthImage' => 'required | file | mimes:jpg,jpeg,png',
+            'specifications'  => 'required | string',
+            'brandName' => 'required | string',
+            'productDescription' => 'required | string'
         ];
     }
 }

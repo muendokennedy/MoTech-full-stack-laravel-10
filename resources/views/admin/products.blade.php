@@ -47,7 +47,11 @@
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
                     <a href="{{route('product.edit', $product)}}" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></a>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                    <form action="{{route('product.delete', $product)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                      <button type="submit" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                    </form>
                     </div>
                   </td>
                 </tr>
@@ -62,6 +66,16 @@
         @if (session('productSuccess'))
             <div class="success-message fixed top-36 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md bg-green-600 text-white text-base">
                 {{ session('productSuccess') }}
+            </div>
+        @endif
+        @if (session('productUpdateSuccess'))
+            <div class="success-message fixed top-36 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md bg-green-600 text-white text-base">
+                {{ session('productUpdateSuccess') }}
+            </div>
+        @endif
+        @if (session('productDeleteSuccess'))
+            <div class="success-message fixed top-36 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md bg-green-600 text-white text-base">
+                {{ session('productDeleteSuccess') }}
             </div>
         @endif
         <div class="new-product bg-white p-4 rounded-md my-4"  id="new-product">

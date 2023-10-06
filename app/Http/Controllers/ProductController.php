@@ -40,15 +40,6 @@ class ProductController extends Controller
         return redirect()->route('admin.products')->with('productSuccess', 'The product has been added successfully');
 
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
@@ -64,12 +55,12 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         //
-        $product->update($request->except(['firstImageEdit','secondImageEdit','thirdImageEdit','fourthImageEdit']));
+        $product->update($request->except(['firstImage','secondImage','thirdImage','fourthImage']));
 
-        $firstPath = $this->storeUpdatedProductImage($request->file('firstImageEdit'), $product->firstImage);
-        $secondPath = $this->storeUpdatedProductImage($request->file('secondImageEdit'), $product->secondImage);
-        $thirdPath = $this->storeUpdatedProductImage($request->file('thirdImageEdit'), $product->thirdImage);
-        $fourthPath = $this->storeUpdatedProductImage($request->file('fourthImageEdit'), $product->fourthImage);
+        $firstPath = $this->storeUpdatedProductImage($request->file('firstImage'), $product->firstImage);
+        $secondPath = $this->storeUpdatedProductImage($request->file('secondImage'), $product->secondImage);
+        $thirdPath = $this->storeUpdatedProductImage($request->file('thirdImage'), $product->thirdImage);
+        $fourthPath = $this->storeUpdatedProductImage($request->file('fourthImage'), $product->fourthImage);
 
         $product->update(
             [
@@ -86,9 +77,12 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
         //
+        $product->delete();
+
+        return redirect()->route('admin.products')->with('productDeleteSuccess', 'The product has been deleted successfully');
     }
 
     private function storeProductImage($productFile)
