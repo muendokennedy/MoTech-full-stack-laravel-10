@@ -63,57 +63,7 @@
       </main>
     </section>
     <script>
-        // const editForms = document.getElementsByClassName("edit-product"),
-        const editForms = document.querySelectorAll(".edit-product"),
-        // closeButtons = document.querySelectorAll(".close i"),
-        editButtons = document.querySelectorAll(".edit-button"),
-        newproductForms = document.querySelectorAll(".new-product");
 
-        // editButtons.forEach((button) => {
-        // button.onclick = () => {
-
-        //     window.scrollTo(0,0);
-        //     editForms.forEach((editForm) => {
-        //         editForm.classList.toggle("active");
-        //     });
-        //     newproductForms.forEach((newproductForm) => {
-
-        //         newproductForm.style.display = "none";
-        //     });
-        //     closeButtons.forEach((closeButton) => {
-
-        //         closeButton.onclick = () => {
-        //         editButtons.forEach((button) => {
-        //             button.click();
-        //             newproductForm.style.display = "block";
-        //     })
-        //     }
-        //     })
-        // }
-        // });
-
-        for (let i = 0; i < editButtons.length; i++) {
-
-          for (let i = 0; i < editForms.length; i++) {
-
-            editButtons[i].onclick = () => {
-              editForms[i].style.display = 'block';
-              editForms[i].classList.toggle('active');
-              window.scrollTo(0,0);
-              let closeButton = editForms[i].querySelector(".close i");
-              ClassicEditor
-                .create( editForms[i].querySelector( '#product-description-edit' ) )
-                .catch( error => {
-                    console.error( error );
-                } );
-              closeButton.onclick = () => {
-                  editForms[i].classList.toggle('active');
-                  editForms[i].style.display = 'none';
-                  location.reload();
-                }
-            }
-
-        }
 
 
     </script>

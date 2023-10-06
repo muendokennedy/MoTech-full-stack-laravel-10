@@ -2,73 +2,20 @@
 @php
             $productCategory = ['Phone', 'Laptop', 'Smartwatch', 'Television'];
 @endphp
-<div class="recent-sales bg-white p-4 rounded-md">
-          <h2 class="text-[rgb(4,46,255)] font-semibold text-lg md:text-xl py-4 capitalize">Products in stock</h2>
-          <div class="table-container overflow-x-auto">
-            <table class="w-[45rem] md:w-full border-2 my-4">
-              <thead>
-                <tr>
-                  <th class="border-2 py-4 px-2">Category</th>
-                  <th class="border-2 py-4 px-2">Name</th>
-                  <th class="border-2 py-4 px-2">Image</th>
-                  <th class="border-2 py-4 px-2">Price</th>
-                  <th class="border-2 py-4 px-2">Discounted price</th>
-                  <th class="border-2 py-4 px-2">Brand</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse ($products as $product)
-                <tr>
-                  <td class="border-2 py-2 px-2 text-center">{{$product->category}}</td>
-                  <td class="border-2 py-2 px-2 text-center">{{$product->name}}</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="{{asset('/storage/' . $product->firstImage)}}" alt="A dell laptop" class="h-14 w-auto"></td>
-                  <td class="border-2 py-2 px-2 text-center">${{$product->initialPrice}}</td>
-                  <td class="border-2 py-2 px-2 text-center">${{$product->discountPrice}}</td>
-                  <td class="border-2 py-2 px-2 text-center capitalize">{{$product->brandName}}</td>
-                </tr>
-                @empty
-                  <p>There are no products in the store</p>
-                @endforelse
-              </tbody>
-            </table>
-          </div>
-          <div class="table-container overflow-x-auto">
-            <table class="w-[45rem] lg:w-[90%] border-2 mt-8">
-              <thead>
-                <tr>
-                  <th class="border-2 py-4">Product Description</th>
-                  <th class="border-2 py-4">Manage</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse ($products as $product)
-                <tr>
-                  <td class="border-2 py-2 px-2">{!! $product->productDescription !!}</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                    <a href="{{route('product.edit', $product)}}" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></a>
-                      <button type="button" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
-                    </div>
-                  </td>
-                </tr>
-                @empty
-                  <p>There  are no products in the store</p>
-                @endforelse
-              </tbody>
-            </table>
-          </div>
-
-        </div>
         @if (session('productSuccess'))
             <div class="success-message fixed top-36 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md bg-green-600 text-white text-base">
                 {{ session('productSuccess') }}
             </div>
         @endif
         <div class="new-product bg-white p-4 rounded-md my-4"  id="new-product">
-          <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-4 capitalize">add new product</h2>
+            <div class="product-header flex gap-4 items-center">
+                <a href="{{route('admin.products')}}" class="capitalize px-4 py-2 bg-[#042EFF] rounded-md text-white my-4">Back</a>
+                <h2 class="text-[rgb(4,46,255)] font-semibold text-base md:text-xl py-4 capitalize">Edit this product</h2>
+            </div>
           <div class="new-product-form">
-            <form action="{{route('product.store')}}" method="POST" enctype="multipart/form-data">
-            @csrf
+            <form action="{{route('product.update', $product)}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
                   <label for="category" class="block py-3">Select Category:</label>
@@ -77,7 +24,7 @@
                     <option value="None" selected disabled hidden>Select a category</option>
                     @endif
                     @foreach ($productCategory as $category)
-                        <option value="{{ $category }}" @selected(old('category') == $category)>{{ $category }}</option>
+                        <option value="{{ $category }}" @selected(old('category') == $category || $product->category == $category)>{{ $category }}</option>
                     @endforeach
                   </select>
                   @error('category')
@@ -86,7 +33,7 @@
                 </div>
                 <div class="input-box md:basis-[48%]">
                   <label for="productName" class="block py-3">Enter Product name:</label>
-                  <input type="text" name="productName" id="productName" value="{{old('productName')}}" class="@error('productName') border-red-500 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+                  <input type="text" name="productName" id="productName" value="{{old('productName') ?? $product->name }}" class="@error('productName') border-red-500 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
                   @error('productName')
                     <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
@@ -95,14 +42,14 @@
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
                     <label for="initialPrice" class="block py-3">Enter the initial price:</label>
-                    <input type="number" name="initialPrice" id="initialPrice" value="{{old('initialPrice')}}" class="@error('initialPrice') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+                    <input type="number" name="initialPrice" id="initialPrice" value="{{old('initialPrice') ?? $product->initialPrice}}" class="@error('initialPrice') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
                     @error('initialPrice')
                     <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                     @enderror
                 </div>
                 <div class="input-box md:basis-[48%]">
                   <label for="discountPrice" class="block py-3">Enter the discounted price:</label>
-                  <input type="number" name="discountPrice" id="discountPrice" value="{{old('discountPrice')}}" class="@error('discountPrice') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+                  <input type="number" name="discountPrice" id="discountPrice" value="{{old('discountPrice') ?? $product->discountPrice}}" class="@error('discountPrice') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
                   @error('discountPrice')
                   <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
@@ -173,19 +120,20 @@
                       <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                       @enderror
                   </div>
-                  <input type="file" name="fourthImage" id="fourthImage" class="file4" hidden>
+                  <input type="file" name="fourthImage"  id="fourthImage" class="file4" hidden>
+                  <input type="text" name="fourthImage" value="{{asset('/storage/'.$product->fourthImage)}}" id="fourthImage" class="file4-image" hidden>
               </div>
               <div class="form-row w-full flex flex-col md:flex-row justify-between">
                 <div class="input-box md:basis-[48%]">
                   <label for="specifications" class="block py-3">Enter product specifications (CSV):</label>
-                  <input type="text" name="specifications" id="specifications" value="{{old('specifications')}}" class="@error('specifications') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+                  <input type="text" name="specifications" id="specifications" value="{{old('specifications') ?? $product->specifications}}" class="@error('specifications') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
                   @error('specifications')
                   <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
                 </div>
                 <div class="input-box md:basis-[48%]">
                   <label for="brandName" class="block py-3">Enter the brand name:</label>
-                  <input type="text" name="brandName" id="brandName" value="{{old('brandName')}}" class="@error('brandName') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+                  <input type="text" name="brandName" id="brandName" value="{{old('brandName') ?? $product->brandName}}" class="@error('brandName') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
                   @error('brandName')
                   <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
@@ -194,13 +142,13 @@
               <div class="form-row">
                 <div class="input-box">
                   <label for="product-description" class="block py-3">Type the product description:</label>
-                  <textarea name="productDescription" id="product-description" cols="30" rows="10" class="@error('productDescription') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">{{old('productDescription')}}</textarea>
+                  <textarea name="productDescription" id="product-description-edit" cols="30" rows="10" class="@error('productDescription') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">{{old('productDescription') ?? $product->productDescription}}</textarea>
                   @error('productDescription')
                   <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
                 </div>
               </div>
-              <button type="submit" class="capitalize px-4 py-2 bg-[#042EFF] rounded-md text-white my-4">add product</button>
+              <button type="submit" class="capitalize px-4 py-2 bg-[#042EFF] rounded-md text-white my-4">update product</button>
             </form>
           </div>
           </table>
@@ -218,9 +166,7 @@
             const orignalInfoBox2 =  document.querySelector('.original-info2');
             const orignalInfoBox3 =  document.querySelector('.original-info3');
             const orignalInfoBox4 =  document.querySelector('.original-info4');
-            const newProductForm = document.querySelector('#new-product');
-
-
+            const fileFourImage = document.querySelector('.file4-image');
 
             input1.addEventListener('change', function(){
             // input1.click();
@@ -264,6 +210,7 @@
             }
             fileReader.readAsDataURL(file);
             });
+
             input4.addEventListener('change', function(){
             // input4.click();
             let file = this.files[0];
@@ -278,6 +225,8 @@
             }
             fileReader.readAsDataURL(file);
             });
+
+
             window.onclick = (e) => {
             if(e.target.classList.contains('remove-btn1')){
                 e.target.parentElement.remove();
@@ -303,6 +252,7 @@
             }else if(e.target.parentElement.classList.contains('remove-btn4')){
                 e.target.parentElement.parentElement.remove();
                 fileBox4.appendChild(orignalInfoBox4);
+                fileBox4.classList.add('file4-remove');
             }
             }
         </script>
@@ -311,7 +261,7 @@
     <script src="js/imageBrowser.js"></script> -->
     <script>
       ClassicEditor
-          .create( newProductForm.querySelector( '#product-description' ) )
+          .create( document.querySelector( '#product-description-edit' ) )
           .catch( error => {
               console.error( error );
           } );

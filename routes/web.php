@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
     // The routes for storing the product into the database
     Route::post('/addnewproduct', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/edit/{product}', [ProductController::class, 'edit'])->name('product.edit');
     Route::put('/product/edit/{product}', [ProductController::class, 'update'])->name('product.update');
 
 });

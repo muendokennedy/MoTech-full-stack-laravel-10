@@ -52,9 +52,10 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
         //
+        return view('admin.productedit', compact('product'));
     }
 
     /**
@@ -65,10 +66,10 @@ class ProductController extends Controller
         //
         $product->update($request->except(['firstImageEdit','secondImageEdit','thirdImageEdit','fourthImageEdit']));
 
-        $firstPath = $this->storeUpdatedProductImage($request->file('firstImageEdit'), $product, $product->firstImage);
-        $secondPath = $this->storeUpdatedProductImage($request->file('secondImageEdit'), $product, $product->secondImage);
-        $thirdPath = $this->storeUpdatedProductImage($request->file('thirdImageEdit'), $product, $product->thirdImage);
-        $fourthPath = $this->storeUpdatedProductImage($request->file('fourthImageEdit'), $product, $product->fourthImage);
+        $firstPath = $this->storeUpdatedProductImage($request->file('firstImageEdit'), $product->firstImage);
+        $secondPath = $this->storeUpdatedProductImage($request->file('secondImageEdit'), $product->secondImage);
+        $thirdPath = $this->storeUpdatedProductImage($request->file('thirdImageEdit'), $product->thirdImage);
+        $fourthPath = $this->storeUpdatedProductImage($request->file('fourthImageEdit'), $product->fourthImage);
 
         $product->update(
             [
@@ -105,9 +106,8 @@ class ProductController extends Controller
         return $path;
     }
 
-    private function storeUpdatedProductImage($productFile, $product, $oldFile)
+    private function storeUpdatedProductImage($productFile, $oldFile)
     {
-        dd($oldFile);
 
         Storage::disk('public')->delete($oldFile);
 
