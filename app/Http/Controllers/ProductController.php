@@ -80,6 +80,11 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+        Storage::disk('public')->delete($product->firstImage);
+        Storage::disk('public')->delete($product->secondImage);
+        Storage::disk('public')->delete($product->thirdImage);
+        Storage::disk('public')->delete($product->fourthImage);
+
         $product->delete();
 
         return redirect()->route('admin.products')->with('productDeleteSuccess', 'The product has been deleted successfully');
