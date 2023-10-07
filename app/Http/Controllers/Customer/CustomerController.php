@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use Illuminate\Http\Request;
-use NumberFormatter;
+
 
 class CustomerController extends Controller
 {
@@ -14,7 +13,9 @@ class CustomerController extends Controller
     {
         $products = Product::all();
 
-        return view('index', compact('products'));
+        $offerProducts  =  Product::all()->take(3);
+
+        return view('index', compact('products', 'offerProducts'));
     }
     public function about()
     {

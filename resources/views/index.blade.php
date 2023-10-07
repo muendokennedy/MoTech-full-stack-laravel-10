@@ -1,104 +1,82 @@
 <x-app-layout>
+    @php
+    $deviceReady = ($offerProducts[0]->category == 'Phone') ? 'mobile' : $offerProducts->category;
+    @endphp
+    @foreach ($offerProducts as $offerProduct)
     <section
-        class="slide active home min-h-screen w-full px-[6%] sm:px-[4%] md:pl-[4%] mx-auto bg-[#536474] scroll-mt-[100px] lg:max-w-[1500px] flex-col-reverse relative md:flex-row pb-16 md:pb-4">
+        class="@if ($loop->iteration == 1)
+          bg-[#536474]
+          @elseif ($loop->iteration == 2)
+          bg-[#28a9c9]
+          @elseif ($loop->iteration == 3)
+          bg-[#b237be]
+          @endif slide @if ($loop->iteration == 1)
+          active
+          @endif home min-h-screen w-full px-[6%] sm:px-[4%] md:pl-[4%] mx-auto scroll-mt-[100px] lg:max-w-[1500px] flex-col-reverse relative md:flex-row pb-16 md:pb-4">
 
         <div
-          class="bg-[#536474] slide-content basis-2/4 flex justify-center items-start flex-col">
+          class="@if ($loop->iteration == 1)
+          bg-[#536474]
+          @elseif ($loop->iteration == 2)
+          bg-[#28a9c9]
+          @elseif ($loop->iteration == 3)
+          bg-[#b237be]
+          @endif slide-content basis-2/4 flex justify-center items-start flex-col">
           <h3 class="text-lg sm:text-xl font-semibold text-white capitalize sm:my-4 my-1">
-            mobile ready
+             @if ($offerProduct->category == "Phone")
+             mobile ready
+             @else
+             {{ $offerProduct->category }} ready
+             @endif
           </h3>
           <h1 class="text-2xl sm:text-3xl text-white font-semibold my-2 sm:my-4">
-            xiaomi redmi note  4
+            {{ $offerProduct->name }}
           </h1>
-          <div class="hero-description text-sm sm:text-lg font-normal text-white mb-6">
-            The Redmi 8A Dual Comes With AI Portrait Mode And Ai Scene Detection
+          <div class="hero-description text-sm sm:text-base font-normal text-white mb-6">
+            {!! $offerProduct->productDescription !!}
           </div>
-          <button class="shop-btn text-white text-base sm:text-lg font-semibold bg-[#68A4FE] py-2 sm:py-4 px-8 sm:px-11 rounded-md capitalize cursor-pointer hover:bg-[#3b81eb] transition-all
+          <button class="@if ($loop->iteration == 1)
+          bg-[#68A4FE] hover:bg-[#3b81eb]
+          @elseif ($loop->iteration == 2)
+          bg-[#536474] hover:bg-[#3b81eb]
+          @elseif ($loop->iteration == 3)
+          bg-[#68A4FE] hover:bg-[#3b81eb]
+          @endif shop-btn text-white text-base sm:text-lg font-semibold py-2 sm:py-4 px-8 sm:px-11 rounded-md capitalize cursor-pointer transition-all
            duration-300 ease-in-out">
             shop now
           </button>
           <span class="text-white my-4 block">up to 50% off</span>
         </div>
-        <div class="home-1 slide-image basis-2/4 flex justify-center items-center scale-[0.6] md:scale-100 pt-10">
+        <div class="@if ($loop->iteration == 1)
+          home-1
+          @elseif ($loop->iteration == 2)
+          home-2
+          @elseif ($loop->iteration == 3)
+          home-3
+          @endif  slide-image basis-2/4 flex justify-center items-center scale-[0.6] md:scale-100 pt-10">
           <div class="hero-image">
-            <img src="{{asset('/images/redmi note 12.png')}}" alt="Hero image" />
+            <img src="{{asset('/storage/'. $offerProduct->firstImage)}}" alt="Hero image" />
           </div>
         </div>
         <div class="progress-container absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-4">
-          <div class="progress-bar bg-[#68A4FE] h-3 w-10 sm:w-20 rounded-md"></div>
-          <div class="progress-bar bg-white h-3 w-10 sm:w-20 rounded-md"></div>
-          <div class="progress-bar bg-white h-3 w-10 sm:w-20 rounded-md"></div>
-        </div>
-        <div id="prev" onclick="prev()">&lt</div>
-        <div id="next" onclick="next()">&gt</div>
-      </section>
-      <section
-        class="slide home min-h-screen w-full px-[6%] sm:px-[4%] md:pl-[4%] mx-auto bg-[#28a9c9] scroll-mt-[100px] lg:max-w-[1500px] flex-col-reverse relative md:flex-row pb-16 md:pb-4">
-
-        <div
-          class="bg-[#28a9c9] slide-content basis-2/4 flex justify-center items-start flex-col">
-          <h3 class="text-lg sm:text-xl font-semibold text-white capitalize sm:my-4 my-1">
-            mobile ready
-          </h3>
-          <h1 class="text-2xl sm:text-3xl text-white font-semibold my-2 sm:my-4">
-            techno spark10P
-          </h1>
-          <div class="hero-description text-sm sm:text-lg font-normal text-white mb-6">
-            The Redmi 8A Dual Comes With AI Portrait Mode And Ai Scene Detection
-          </div>
-          <button class="shop-btn text-white text-base sm:text-lg font-semibold bg-[#536474] py-2 sm:py-4 px-8 sm:px-11 rounded-md capitalize cursor-pointer hover:bg-[#3b81eb] transition-all
-           duration-300 ease-in-out">
-            shop now
-          </button>
-          <span class="text-white my-4 block">up to 50% off</span>
-        </div>
-        <div class="home-2 slide-image basis-2/4 flex justify-center items-center scale-[0.6] md:scale-100 pt-10">
-          <div class="hero-image">
-            <img src="{{asset('/images/techno camon 18p.png')}}" alt="Hero image" />
-          </div>
-        </div>
-        <div class="progress-container absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-4">
+        @if ($loop->iteration == 1)
+         <div class="progress-bar bg-[#68A4FE] h-3 w-10 sm:w-20 rounded-md"></div>
+         <div class="progress-bar bg-white h-3 w-10 sm:w-20 rounded-md"></div>
+         <div class="progress-bar bg-white h-3 w-10 sm:w-20 rounded-md"></div>
+          @elseif ($loop->iteration == 2)
           <div class="progress-bar bg-white  h-3 w-10 sm:w-20 rounded-md"></div>
           <div class="progress-bar bg-[#536474] h-3 w-10 sm:w-20 rounded-md"></div>
           <div class="progress-bar bg-white h-3 w-10 sm:w-20 rounded-md"></div>
-        </div>
-        <div id="prev" onclick="prev()">&lt</div>
-        <div id="next" onclick="next()">&gt</div>
-      </section>
-      <section
-        class="slide home min-h-screen w-full px-[6%] sm:px-[4%] md:pl-[4%] mx-auto bg-[#b237be] scroll-mt-[100px] lg:max-w-[1500px] flex-col-reverse relative md:flex-row pb-16 md:pb-4">
-
-        <div
-          class="bg-[#b237be] slide-content basis-2/4 flex justify-center items-start flex-col">
-          <h3 class="text-lg sm:text-xl font-semibold text-white capitalize sm:my-4 my-1">
-            mobile ready
-          </h3>
-          <h1 class="text-2xl sm:text-3xl text-white font-semibold my-2 sm:my-4">
-            samsung galaxy A50
-          </h1>
-          <div class="hero-description text-sm sm:text-lg font-normal text-white mb-6">
-            The Redmi 8A Dual Comes With AI Portrait Mode And Ai Scene Detection
-          </div>
-          <button class="shop-btn text-white text-base sm:text-lg font-semibold bg-[#68A4FE] py-2 sm:py-4 px-8 sm:px-11 rounded-md capitalize cursor-pointer hover:bg-[#3b81eb] transition-all
-           duration-300 ease-in-out">
-            shop now
-          </button>
-          <span class="text-white my-4 block">up to 50% off</span>
-        </div>
-        <div class="home-3 slide-image basis-2/4 flex justify-center items-center scale-[0.6] md:scale-100 pt-10">
-          <div class="hero-image">
-            <img src="{{asset('/images/techno spark 5.png')}}" alt="Hero image" />
-          </div>
-        </div>
-        <div class="progress-container absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-4">
+          @elseif ($loop->iteration == 3)
           <div class="progress-bar bg-white h-3 w-10 sm:w-20 rounded-md"></div>
           <div class="progress-bar bg-white h-3 w-10 sm:w-20 rounded-md"></div>
           <div class="progress-bar bg-[#68A4FE] h-3 w-10 sm:w-20 rounded-md"></div>
+          @endif
         </div>
         <div id="prev" onclick="prev()">&lt</div>
         <div id="next" onclick="next()">&gt</div>
       </section>
-
+    @endforeach
       <!-- The top sales section -->
       <section class="top-sales px-[4%] mx-auto lg:max-w-[1500px]">
         <div
@@ -117,12 +95,77 @@
               <div class="product-title text-xs font-normal sm:font-semibold">
                 {{ $product->name }}
               </div>
-              <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+                  <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
+                  @switch($product->avgRating)
+                      @case(1)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(1.5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(2)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(2.5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(3)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(3.5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(4)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(4.5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                      @break
+                      @case(5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      @default
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  @endswitch
               </div>
               <div class="first-price my-1 sm:my-3 font-semibold">${{number_format($product->initialPrice)}}</div>
               <button class="add-cart-btn text-xs">add to cart</button>
