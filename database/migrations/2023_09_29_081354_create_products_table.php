@@ -24,7 +24,7 @@ return new class extends Migration
             $table->text('specifications');
             $table->text('brandName');
             $table->text('productDescription');
-            $table->decimal('avgRating',1,1);
+            $table->decimal('avgRating',5,1);
             $table->string('productWarranty');
             $table->timestamps();
         });

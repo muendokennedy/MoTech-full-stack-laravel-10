@@ -33,12 +33,77 @@
           <div class="product-title font-semibold text-lg sm:text-xl mb-4 text-[#384857] capitalize">{{$product->name}}</div>
           <div class="product-manufacturer text-sm text-[#384857] capitalize">Produced by {{$product->brandName}}</div>
           <div class="flex gap-4 items-center my-2 border-b-2 py-4">
-            <div class="text-xs text-[#ffcf10]">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
+            <div class="text-xs">
+                @switch($product->avgRating)
+                    @case(1)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    @break
+                    @case(1.5)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    @break
+                    @case(2)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    @break
+                    @case(2.5)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    @break
+                    @case(3)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    @break
+                    @case(3.5)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    @break
+                    @case(4)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                    @break
+                    @case(4.5)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                    @break
+                    @case(5)
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    @default
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                @endswitch
             </div>
             <div class="rating-text text-xs text-[#68a4fe]">
               100,450+ ratings | over 100k delivered
@@ -69,7 +134,7 @@
               <span class="w-[3rem] h-[3rem] sm:w-[4rem] sm:h-[4rem] flex items-center justify-center text-center leading-[3rem] sm:leading-[4rem] bg-[#ECEEEF] rounded-full border-2 border-[#8DAFCF]">
                 <i class="fa-solid fa-check-double text-[#68a4fe] text-lg sm:text-2xl"></i>
               </span>
-              <div class="return-text text-sm text-[#68a4fe]">1 year warranty</div>
+              <div class="return-text text-sm text-[#68a4fe]">{{$product->productWarranty}} warranty</div>
             </div>
           </div>
           <div class="delivery-timeline text-sm my-4">Delivery by: <span>March 29 - April 1</span></div>
