@@ -13,7 +13,6 @@
           @endif slide @if ($loop->iteration == 1)
           active
           @endif home min-h-screen w-full px-[6%] sm:px-[4%] md:pl-[4%] mx-auto scroll-mt-[100px] lg:max-w-[1500px] flex-col-reverse relative md:flex-row pb-16 md:pb-4">
-
         <div
           class="@if ($loop->iteration == 1)
           bg-[#536474]
