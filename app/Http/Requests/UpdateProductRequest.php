@@ -32,6 +32,8 @@ class UpdateProductRequest extends FormRequest
             'thirdImage' => 'required | file | mimes:jpg,jpeg,png',
             'fourthImage' => 'required | file | mimes:jpg,jpeg,png',
             'specifications'  => 'required | string',
+            'avgRating' => 'required | numeric',
+            'productWarranty' => 'required | string',
             'brandName' => 'required | string',
             'productDescription' => 'required | string'
         ];

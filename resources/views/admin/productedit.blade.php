@@ -139,6 +139,22 @@
                   @enderror
                 </div>
               </div>
+              <div class="form-row w-full flex flex-col md:flex-row justify-between">
+                <div class="input-box md:basis-[48%]">
+                  <label for="avgRating" class="block py-3">Enter product average rating:</label>
+                  <input type="text" name="avgRating" id="avgRating" value="{{old('avgRating')}}" class="@error('avgRating') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+                  @error('avgRating')
+                  <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
+                  @enderror
+                </div>
+                <div class="input-box md:basis-[48%]">
+                  <label for="productWarranty" class="block py-3">Enter the product warranty:</label>
+                  <input type="text" name="productWarranty" id="productWarranty" value="{{old('productWarranty')}}" class="@error('productWarranty') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">
+                  @error('productWarranty')
+                  <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>
+                  @enderror
+                </div>
+              </div>
               <div class="form-row">
                 <div class="input-box">
                   <label for="product-description" class="block py-3">Type the product description:</label>

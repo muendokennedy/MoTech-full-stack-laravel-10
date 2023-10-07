@@ -33,6 +33,8 @@ class ProductController extends Controller
             'thirdImage' => $thirdPath,
             'fourthImage' => $fourthPath,
             'specifications' => $productData['specifications'],
+            'avgRating' => $productData['avgRating'],
+            'productWarranty' => $productData['productWarranty'],
             'brandName' => $productData['brandName'],
             'productDescription' => $productData['productDescription']
         ]);

@@ -20,6 +20,8 @@ class Product extends Model
         'fourthImage',
         'specifications',
         'brandName',
+        'avgRating',
+        'productWarranty',
         'productDescription'
     ];
 }
