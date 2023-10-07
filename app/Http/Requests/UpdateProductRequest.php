@@ -38,4 +38,11 @@ class UpdateProductRequest extends FormRequest
             'productDescription' => 'required | string'
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'avgRating.required' => 'The average rating field is required',
+            'avgRating.numeric' => 'The avarage rating field must be a number'
+        ];
+    }
 }
