@@ -461,10 +461,8 @@
       </section>
       <!-- The new arrivals section -->
       <section class="top-sales px-[4%] mx-auto lg:max-w-[1500px]">
-        <div
-          class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4"
-        >
-          Top<span class="text-[#68A4FE] px-2">Sales</span>
+        <div class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize">
+          new<span class="text-[#68A4FE] px-2">Arrivals</span>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%]">
           <div class="product-box text-center my-2 sm:my-4">

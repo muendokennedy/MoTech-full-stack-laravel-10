@@ -1,6 +1,6 @@
 @php
-if(Auth::guard('web')->user()){
-    $extractedName = explode(' ', Auth::guard('web')->user()->name);
+if(auth('web')->user()){
+    $extractedName = explode(' ', auth('web')->user()->name);
     $firstName = $extractedName[0];
 }
 @endphp

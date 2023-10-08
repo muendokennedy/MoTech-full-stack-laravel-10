@@ -150,11 +150,31 @@
               <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">{{$specs[0]}}</span>
             </div>
             <div class="ram flex flex-col gap-2">
-              <span class="block font-semibold text-[#384857] text-base sm:text-xl">Resolution:</span>
+              <span class="block font-semibold text-[#384857] text-base sm:text-xl">
+              @if ($product->category === 'Phone')
+              Resolution:
+              @elseif ($product->category === 'Laptop')
+              Memory:
+              @elseif ($product->category === 'Television')
+              Screen:
+              @elseif ($product->category === 'Smartwatch')
+              Battery:
+              @endif
+            </span>
               <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">{{$specs[1]}}</span>
             </div>
             <div class="ram flex flex-col gap-2">
-              <span class="block font-semibold text-[#384857] text-base sm:text-xl">camera:</span>
+              <span class="block font-semibold text-[#384857] text-base sm:text-xl">
+              @if ($product->category === 'Phone')
+              Camera:
+              @elseif ($product->category === 'Laptop')
+              Graphics:
+              @elseif ($product->category === 'Television')
+              Screen:
+              @elseif ($product->category === 'Smartwatch')
+              Battery:
+              @endif
+              </span>
               <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">{{$specs[2]}}</span>
             </div>
           </div>
