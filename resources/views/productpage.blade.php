@@ -137,9 +137,9 @@
               <div class="return-text text-sm text-[#68a4fe]">{{$product->productWarranty}} warranty</div>
             </div>
           </div>
-          <div class="delivery-timeline text-sm my-4">Delivery by: <span>March 29 - April 1</span></div>
+          <div class="delivery-timeline text-sm my-4">Delivery by: <strong> {{date('M d', strtotime('+3 days'))}} - {{date('M d', strtotime('+8 days'))}}</strong></div>
           <div class="vendor-name text-sm my-4">
-            <span>Sold by MoTech electronics</span> <span>(250 out of 300 already sold)</span>
+            <span>Sold by {{ config('app.name') }} electronics</span> <span>(250 out of 300 already sold)</span>
           </div>
           @php
               $specs = explode(',',$product->specifications);
