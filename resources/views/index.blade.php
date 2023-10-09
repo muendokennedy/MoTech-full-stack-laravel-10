@@ -1,7 +1,4 @@
 <x-app-layout>
-    @php
-    $deviceReady = ($offerProducts[0]->category == 'Phone') ? 'mobile' : $offerProducts->category;
-    @endphp
     @foreach ($offerProducts as $offerProduct)
     <section
         class="@if ($loop->iteration == 1)

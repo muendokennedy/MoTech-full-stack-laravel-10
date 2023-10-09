@@ -21,7 +21,7 @@ class AdminController extends Controller
     }
     public function products()
     {
-        $products = Product::all();
+        $products = Product::latest()->get();
 
         return view('admin.products', compact('products'));
     }
