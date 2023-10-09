@@ -1,6 +1,6 @@
 <x-admin-layout>
 @php
-            $productCategory = ['Phone', 'Laptop', 'Smartwatch', 'Television'];
+            $productCategory = ['Phone', 'Laptop', 'Smartwatch', 'Television', 'Tablet'];
 @endphp
 <div class="recent-sales bg-white p-4 rounded-md">
           <h2 class="text-[rgb(4,46,255)] font-semibold text-lg md:text-xl py-4 capitalize">Products in stock</h2>
@@ -91,9 +91,9 @@
                     form.onsubmit = (e) => {
                     e.preventDefault();
                     deleteConfirm.style.display = 'block';
-                    }
                     confirmButton.onclick = () => {
                         form.submit();
+                    }
                     }
                 });
                 deleteClose.onclick = () => {

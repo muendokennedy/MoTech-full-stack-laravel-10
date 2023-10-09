@@ -7,7 +7,7 @@
       </div>
       <div class="product flex items-center flex-col md:flex-row justify-between w-full">
         <div class="w-full md:basis-[48%] p-2 sm:p-4 flex flex-col items-center">
-          <div class="master-image w-[15rem] md:w-[16rem] h-[15rem] md:h-[20rem] flex justify-center items-center my-6">
+          <div class="master-image w-[6rem] md:w-[12rem] h-auto md:h-auto flex justify-center items-center my-6">
             <img src="{{asset('/storage/' . $product->firstImage)}}" alt="Detailed product image" class="m-auto w-full h-full object-cover">
           </div>
           <div class="w-full sm:w-4/5 flex justify-between gap-2 md:gap-4 mx-auto">
@@ -159,6 +159,8 @@
               Screen:
               @elseif ($product->category === 'Smartwatch')
               Battery:
+              @elseif ($product->category === 'Tablet')
+              Resolution:
               @endif
             </span>
               <span class="border-2 px-2 sm:px-6 md:px-3 py-2 rounded-md font-normal sm:font-semibold text-base sm:text-xl">{{$specs[1]}}</span>
@@ -172,6 +174,8 @@
               @elseif ($product->category === 'Television')
               Screen:
               @elseif ($product->category === 'Smartwatch')
+              Battery:
+              @elseif ($product->category === 'Tablet')
               Battery:
               @endif
               </span>
