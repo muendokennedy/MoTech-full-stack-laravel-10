@@ -62,7 +62,10 @@
             @endif
               @forelse ($products as $product)
                 <tr>
-                  <td class="border-2 py-2 px-2">{!! $product->productDescription !!}</td>
+                    @php
+                        $modifiedProductDescription = str_replace('|', '', strip_tags($product->productDescription));
+                    @endphp
+                  <td class="border-2 py-2 px-2">{{ $modifiedProductDescription }}</td>
                   <td class="border-2 py-2 px-6 w-1/2">
                     <div class="flex w-full justify-between">
                     <a href="{{route('product.edit', $product)}}" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></a>
@@ -270,7 +273,7 @@
               </div>
               <div class="form-row">
                 <div class="input-box">
-                  <label for="product-description" class="block py-3">Type the product description:</label>
+                  <label for="product-description" class="block py-3">Type the product description(End the first sentence with pipe(|) then period(.))</label>
                   <textarea name="productDescription" id="product-description" cols="30" rows="10" class="@error('productDescription') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">{{old('productDescription')}}</textarea>
                   @error('productDescription')
                   <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>

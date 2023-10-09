@@ -157,7 +157,7 @@
               </div>
               <div class="form-row">
                 <div class="input-box">
-                  <label for="product-description" class="block py-3">Type the product description:</label>
+                  <label for="product-description" class="block py-3">Type the product description(End the first sentence with pipe(|) then period(.)):</label>
                   <textarea name="productDescription" id="product-description-edit" cols="30" rows="10" class="@error('productDescription') border-red-600 @enderror px-2 py-2 rounded-md outline-none border-2 w-full focus:border-[#042EFF] transition-all duration-300 ease-in-out">{{old('productDescription') ?? $product->productDescription}}</textarea>
                   @error('productDescription')
                   <p class="text-red-500 text-sm sm:text-base py-2 w-full">{{$message}}</p>

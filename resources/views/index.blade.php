@@ -29,7 +29,11 @@
             {{ $offerProduct->name }}
           </h1>
           <div class="hero-description text-sm sm:text-base font-normal text-white mb-6">
-            {!! $offerProduct->productDescription !!}
+            @php
+                $initialProductDesc = strip_tags($offerProduct->productDescription);
+                $shortDesc = explode('|', $initialProductDesc);
+            @endphp
+            {{ $shortDesc[0] }}
           </div>
           <button class="@if ($loop->iteration == 1)
           bg-[#68A4FE] hover:bg-[#3b81eb]
