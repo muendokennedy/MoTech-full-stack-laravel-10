@@ -15,7 +15,9 @@ class CustomerController extends Controller
 
         $offerProducts  =  Product::latest()->get()->take(3);
 
-        return view('index', compact('products', 'offerProducts'));
+        $newArrivals = Product::latest()->get()->take(5);
+
+        return view('index', compact('products', 'offerProducts', 'newArrivals'));
     }
     public function about()
     {
