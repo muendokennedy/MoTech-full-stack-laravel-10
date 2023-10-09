@@ -13,7 +13,7 @@ class CustomerController extends Controller
     {
         $products = Product::all();
 
-        $offerProducts  =  Product::all()->take(3);
+        $offerProducts  =  Product::latest()->get()->take(3);
 
         return view('index', compact('products', 'offerProducts'));
     }
