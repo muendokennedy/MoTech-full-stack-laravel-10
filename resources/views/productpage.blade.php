@@ -192,7 +192,10 @@
         product description
       </div>
       <p class="description-text text-sm my-4">
-        {!! $product->productDescription !!}
+      @php
+        $modifiedProductDescription = str_replace('|', '', $product->productDescription);
+      @endphp
+        {!! $modifiedProductDescription !!}
       </p>
       </section>
       <section class="related-products px-[4%] mx-auto lg:max-w-[1500px]">

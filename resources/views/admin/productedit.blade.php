@@ -1,6 +1,6 @@
 <x-admin-layout>
 @php
-            $productCategory = ['Phone', 'Laptop', 'Smartwatch', 'Television'];
+            $productCategory = ['Phone', 'Laptop', 'Smartwatch', 'Television', 'Tablet'];
 @endphp
         @if (session('productSuccess'))
             <div class="success-message fixed top-36 left-1/2 -translate-x-1/2 px-4 py-2 rounded-md bg-green-600 text-white text-base">
