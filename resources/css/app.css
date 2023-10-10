@@ -143,6 +143,29 @@
 .filter-tags a{
   transition: all .3s ease-in-out;
 }
+.filter-tags a.active{
+    color: #28a9c9;
+}
+.filter-product-box.hide{
+    display: none;
+}
+.filter-product-box.active{
+    -webkit-animation: fadeUp 0.4s linear;
+            animation: fadeUp 0.4s linear;
+}
+@-webkit-keyframes fadeUp {
+    0% {
+      transform: translateY(5rem);
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeUp {
+    0% {
+      transform: translateY(5rem);
+      opacity: 0;
+    }
+  }
 .footer-grid{
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }

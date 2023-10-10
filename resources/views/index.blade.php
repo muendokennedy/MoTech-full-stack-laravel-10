@@ -184,106 +184,131 @@
         </div>
         <div class="filter-bar flex justify-between sm:justify-end items-center my-2 sm:my-4">
           <div class="filter-tags space-x-4 capitalize text-xs sm:text-sm">
-            <a href="#" class="hover:text-[#68A4FE]">All brands</a>
-            <a href="#" class="hover:text-[#68A4FE]">Apple</a>
-            <a href="#" class="hover:text-[#68A4FE]">Samsung</a>
-            <a href="#" class="hover:text-[#68A4FE]">redmi</a>
+            <a class="buttons active hover:text-[#68A4FE] cursor-pointer" data-filter="all">All brands</a>
+            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="apple">Apple</a>
+            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="samsung">Samsung</a>
+            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="redmi">redmi</a>
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
         @forelse ($products as $product)
-            <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-              <div class="flex justify-center items-center">
-                <a href="{{route('product.page', $product)}}" class="product-image">
-                  <img src="{{asset('/storage/'. $product->firstImage)}}" alt="A mobile phone"/>
-                </a>
-              </div>
-              <div class="product-title text-xs font-normal sm:font-semibold">
-                {{ $product->name }}
-              </div>
-                  <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
-                  @switch($product->avgRating)
-                      @case(1)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      @break
-                      @case(1.5)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      @break
-                      @case(2)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      @break
-                      @case(2.5)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      @break
-                      @case(3)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      @break
-                      @case(3.5)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      @break
-                      @case(4)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
-                      @break
-                      @case(4.5)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
-                      @break
-                      @case(5)
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      @default
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                  @endswitch
-              </div>
-              <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">
-                {{ number_format($product->initialPrice) }}
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">{{ number_format($product->discountPrice) }}</div>
-            </div>
-              <button class="add-cart-btn text-xs">add to cart</button>
-            </div>
-            @empty
-            <p>There are no products available</p>
-            @endforelse
+        <div class="filter-product-box text-center my-2 sm:my-4 border-2 py-4" data-item="{{strtolower($product->brandName)}}">
+          <div class="flex justify-center items-center">
+            <a href="{{route('product.page', $product)}}" class="product-image">
+              <img src="{{asset('/storage/'. $product->firstImage)}}" alt="A mobile phone"/>
+            </a>
+          </div>
+          <div class="product-title text-xs font-normal sm:font-semibold">
+            {{ $product->name }}
+          </div>
+              <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
+              @switch($product->avgRating)
+                  @case(1)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(1.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  @break
+                  @case(5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  @default
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+              @endswitch
+          </div>
+          <div class="flex justify-between w-20 sm:w-24 mx-auto">
+          <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">
+            {{ number_format($product->initialPrice) }}
+          </div>
+          <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">{{ number_format($product->discountPrice) }}</div>
+        </div>
+          <button class="add-cart-btn text-xs">add to cart</button>
+        </div>
+         @empty
+        <p>There are no products available</p>
+        @endforelse
+        <script>
+            const filterButtons = document.querySelectorAll('.filter-tags .buttons');
+            const filterProduct = document.querySelectorAll('.filter-product-box');
+
+            filterButtons.forEach(button => {
+                button.onclick = () => {
+                    filterButtons.forEach(btn => btn.classList.remove("active"));
+                    button.classList.add('active');
+
+                    let dataFilter = button.getAttribute('data-filter');
+
+                    filterProduct.forEach(item => {
+                        item.classList.remove('active');
+                        item.classList.add('hide');
+
+                        if(item.getAttribute('data-item') == dataFilter || dataFilter == 'all'){
+                            item.classList.add('active');
+                            item.classList.remove('hide');
+                        }
+                    });
+                }
+            });
+
+
+        </script>
         </div>
         <div class="offer-container flex my-4 sm:my-8 gap-6 flex-col sm:flex-row">
             @php
