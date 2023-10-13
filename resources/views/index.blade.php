@@ -85,18 +85,18 @@
           Top<span class="text-[#68A4FE] px-2">Sales</span>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%]">
-            @forelse ($products as $product)
+            @forelse ($topSalesProducts as $topSalesProduct)
             <div class="product-box text-center my-2 sm:my-4">
               <div class="flex justify-center items-center">
-                <a href="{{route('product.page', $product)}}" class="product-image">
-                  <img src="{{asset('/storage/'. $product->firstImage)}}" alt="A mobile phone"/>
+                <a href="{{route('product.page', $topSalesProduct)}}" class="product-image">
+                  <img src="{{asset('/storage/'. $topSalesProduct->firstImage)}}" alt="A mobile phone"/>
                 </a>
               </div>
               <div class="product-title text-xs font-normal sm:font-semibold">
-                {{ $product->name }}
+                {{ $topSalesProduct->name }}
               </div>
                   <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
-                  @switch($product->avgRating)
+                  @switch($topSalesProduct->avgRating)
                       @case(1)
                       <i class="fa-solid fa-star text-[#ffcf10]"></i>
                       <i class="fa-solid fa-star text-[#d3d2cd]"></i>
@@ -167,7 +167,7 @@
                       <i class="fa-solid fa-star text-[#ffcf10]"></i>
                   @endswitch
               </div>
-              <div class="first-price my-1 sm:my-3 font-semibold">${{number_format($product->initialPrice)}}</div>
+              <div class="first-price my-1 sm:my-3 font-semibold">${{number_format($topSalesProduct->initialPrice)}}</div>
               <button class="add-cart-btn text-xs">add to cart</button>
             </div>
             @empty
@@ -188,6 +188,9 @@
             <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="apple">Apple</a>
             <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="samsung">Samsung</a>
             <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="redmi">redmi</a>
+            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="tecno">tecno</a>
+            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="sony">sony</a>
+            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="hp">hp</a>
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">

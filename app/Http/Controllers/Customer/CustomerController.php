@@ -13,13 +13,15 @@ class CustomerController extends Controller
     public function index()
     {
 
+        $topSalesProducts = Product::all()->take(8);
+
         $products = Product::all();
 
-        $offerProducts  =  Product::latest()->get()->take(3);
+        $offerProducts  =  Product::all()->take(3);
 
         $newArrivals = Product::latest()->get()->take(5);
 
-        return view('index', compact('products', 'offerProducts', 'newArrivals'));
+        return view('index', compact('products', 'offerProducts', 'newArrivals', 'topSalesProducts'));
     }
     public function about()
     {
