@@ -98,11 +98,6 @@
                     <i class="fa-solid fa-star text-[#ffcf10]"></i>
                     <i class="fa-solid fa-star text-[#ffcf10]"></i>
                     @default
-                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                    <i class="fa-solid fa-star text-[#ffcf10]"></i>
                 @endswitch
             </div>
             <div class="rating-text text-xs text-[#68a4fe]">

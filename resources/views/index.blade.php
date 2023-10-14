@@ -269,11 +269,6 @@
                   <i class="fa-solid fa-star text-[#ffcf10]"></i>
                   <i class="fa-solid fa-star text-[#ffcf10]"></i>
                   @default
-                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
               @endswitch
           </div>
           <div class="flex justify-between w-20 sm:w-24 mx-auto">
