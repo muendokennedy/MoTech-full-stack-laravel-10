@@ -93,7 +93,7 @@
                 </a>
               </div>
               <div class="product-title text-xs font-normal sm:font-semibold">
-                {{ $topSalesProduct->name }}
+                {{ $topSalesProduct->productName }}
               </div>
                   <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
                   @switch($topSalesProduct->avgRating)
@@ -202,7 +202,7 @@
             </a>
           </div>
           <div class="product-title text-xs font-normal sm:font-semibold">
-            {{ $product->name }}
+            {{ $product->productName }}
           </div>
               <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
               @switch($product->avgRating)
@@ -312,7 +312,7 @@
             @php
                 $productsOnOffer = collect([]);
                 foreach ($products as $key => $value) {
-                    if($value->name == 'Dell Inspiron' || $value->name == 'xiaomi redmi note 10'){
+                    if($value->productName == 'Dell Inspiron' || $value->productName == 'xiaomi redmi note 10'){
                         $productsOnOffer->push($value);
                     };
                 }
@@ -325,7 +325,7 @@
           <div class="content">
             <div class="content-head font-bold capitalize">
                 <div class="basis-[48%] content-head text-xs sm:text-sm">
-                @if ($product->name === 'Dell Inspiron')
+                @if ($product->productName === 'Dell Inspiron')
                 <span class="pr-2 text-[#68A4FE] text-sm sm:text-base">50% discount</span>Plus free
                 gift
                 @else
@@ -334,7 +334,7 @@
                 @endif
                 </div>
             </div>
-            @if ($product->name === 'xiaomi redmi note 10')
+            @if ($product->productName === 'xiaomi redmi note 10')
             <div class="basis-[48%] content-head text-xs sm:text-sm">
               This applies to all new releases of Xiaomi Redmi 10 for a
               limited amount of time
@@ -365,7 +365,7 @@
                 </a>
               </div>
               <div class="product-title text-xs font-normal sm:font-semibold">
-                {{ $product->name }}
+                {{ $product->productName }}
               </div>
                   <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
                   @switch($product->avgRating)
@@ -432,11 +432,6 @@
                       <i class="fa-solid fa-star text-[#ffcf10]"></i>
                       <i class="fa-solid fa-star text-[#ffcf10]"></i>
                       @default
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
                   @endswitch
               </div>
               <div class="first-price my-1 sm:my-3 font-semibold">${{number_format($product->initialPrice)}}</div>
