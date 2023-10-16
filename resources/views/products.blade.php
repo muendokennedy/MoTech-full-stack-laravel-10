@@ -59,15 +59,75 @@
                 </div>
                 </div>
                 <div class="product-title text-xs font-normal sm:font-semibold">
-                    {{ $product->name }}
+                    {{ $product->productName }}
                 </div>
-                <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                </div>
+                <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
+              @switch($product->avgRating)
+                  @case(1)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(1.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  @break
+                  @case(5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  @default
+              @endswitch
+          </div>
                 <div class="flex justify-between w-20 sm:w-24 mx-auto">
                 <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $product->initialPrice }}</div>
                 <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$product->discountPrice}}</div>

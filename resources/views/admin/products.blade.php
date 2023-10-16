@@ -22,7 +22,7 @@
             @forelse ($products as $product)
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">{{$product->category}}</td>
-                  <td class="border-2 py-2 px-2 text-center">{{$product->name}}</td>
+                  <td class="border-2 py-2 px-2 text-center">{{$product->productName}}</td>
                   <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="{{asset('/storage/' . $product->firstImage)}}" alt="A dell laptop" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">${{$product->initialPrice}}</td>
                   <td class="border-2 py-2 px-2 text-center">${{$product->discountPrice}}</td>

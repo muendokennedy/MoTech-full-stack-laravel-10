@@ -25,7 +25,7 @@ class ProductController extends Controller
 
         $product = Product::create([
             'category' => $productData['category'],
-            'name' => $productData['productName'],
+            'productName' => $productData['productName'],
             'initialPrice' => $productData['initialPrice'],
             'discountPrice' => $productData['discountPrice'],
             'firstImage' => $firstPath,

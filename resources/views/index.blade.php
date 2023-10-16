@@ -189,8 +189,8 @@
             <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="samsung">Samsung</a>
             <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="redmi">redmi</a>
             <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="tecno">tecno</a>
-            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="sony">sony</a>
-            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="hp">hp</a>
+            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="hp">HP</a>
+            <a class="buttons hover:text-[#68A4FE] cursor-pointer" data-filter="dell">dell</a>
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
@@ -273,9 +273,9 @@
           </div>
           <div class="flex justify-between w-20 sm:w-24 mx-auto">
           <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">
-            {{ number_format($product->initialPrice) }}
+            ${{ number_format($product->initialPrice) }}
           </div>
-          <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">{{ number_format($product->discountPrice) }}</div>
+          <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{ number_format($product->discountPrice) }}</div>
         </div>
           <button class="add-cart-btn text-xs">add to cart</button>
         </div>
