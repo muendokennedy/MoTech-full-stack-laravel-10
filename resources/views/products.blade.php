@@ -51,18 +51,18 @@
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
-            @forelse ($products as $product)
-            <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
+            @forelse ($phones as $phone)
+            <a href="{{route('product.page', $phone)}}" class="product-box text-center my-2 sm:my-4 border-2 py-4">
                 <div class="flex justify-center items-center">
                 <div class="product-image">
-                    <img src="{{ asset('/storage/'. $product->firstImage)}}" alt="A mobile phone" />
+                    <img src="{{ asset('/storage/'. $phone->firstImage)}}" alt="A mobile phone" />
                 </div>
                 </div>
                 <div class="product-title text-xs font-normal sm:font-semibold">
-                    {{ $product->productName }}
+                    {{ $phone->productName }}
                 </div>
                 <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
-              @switch($product->avgRating)
+              @switch($phone->avgRating)
                   @case(1)
                   <i class="fa-solid fa-star text-[#ffcf10]"></i>
                   <i class="fa-solid fa-star text-[#d3d2cd]"></i>
@@ -129,11 +129,11 @@
               @endswitch
           </div>
                 <div class="flex justify-between w-20 sm:w-24 mx-auto">
-                <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $product->initialPrice }}</div>
-                <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$product->discountPrice}}</div>
+                <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $phone->initialPrice }}</div>
+                <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$phone->discountPrice}}</div>
                 </div>
                 <button class="add-cart-btn text-xs">add to cart</button>
-            </div>
+            </a>
             @empty
             <p>There are no products in the store </p>
             @endforelse
@@ -153,162 +153,92 @@
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
+            @forelse ($laptops as $laptop)
+            <a href="{{route('product.page', $laptop)}}" class="product-box text-center my-2 sm:my-4 border-2 py-4">
+                <div class="flex justify-center items-center">
+                <div class="product-image">
+                    <img src="{{ asset('/storage/'. $laptop->firstImage)}}" alt="A mobile phone" />
+                </div>
+                </div>
+                <div class="product-title text-xs font-normal sm:font-semibold">
+                    {{ $laptop->productName }}
+                </div>
+                <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
+              @switch($laptop->avgRating)
+                  @case(1)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(1.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  @break
+                  @case(5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  @default
+              @endswitch
           </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
+                <div class="flex justify-between w-20 sm:w-24 mx-auto">
+                <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $laptop->initialPrice }}</div>
+                <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$laptop->discountPrice}}</div>
+                </div>
+                <button class="add-cart-btn text-xs">add to cart</button>
+            </a>
+            @empty
+            <p>There are no products in the store </p>
+            @endforelse
         </div>
       </section>
       <!-- The smartwatches section -->
@@ -325,162 +255,92 @@
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
+            @forelse ($smartwatches as $smartwatch)
+            <a href="{{route('product.page', $smartwatch)}}" class="product-box text-center my-2 sm:my-4 border-2 py-4">
+                <div class="flex justify-center items-center">
+                <div class="product-image">
+                    <img src="{{ asset('/storage/'. $smartwatch->firstImage)}}" alt="A mobile phone" />
+                </div>
+                </div>
+                <div class="product-title text-xs font-normal sm:font-semibold">
+                    {{ $smartwatch->productName }}
+                </div>
+                <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
+              @switch($smartwatch->avgRating)
+                  @case(1)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(1.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  @break
+                  @case(5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  @default
+              @endswitch
           </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
+                <div class="flex justify-between w-20 sm:w-24 mx-auto">
+                <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $smartwatch->initialPrice }}</div>
+                <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$smartwatch->discountPrice}}</div>
+                </div>
+                <button class="add-cart-btn text-xs">add to cart</button>
+            </a>
+            @empty
+            <p>There are no products in the store </p>
+            @endforelse
         </div>
       </section>
       <!-- The Televisions section -->
@@ -497,162 +357,92 @@
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
+            @forelse ($televisions as $television)
+            <a href="{{route('product.page', $television)}}" class="product-box text-center my-2 sm:my-4 border-2 py-4">
+                <div class="flex justify-center items-center">
+                <div class="product-image">
+                    <img src="{{ asset('/storage/'. $television->firstImage)}}" alt="A mobile phone" />
+                </div>
+                </div>
+                <div class="product-title text-xs font-normal sm:font-semibold">
+                    {{ $television->productName }}
+                </div>
+                <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
+              @switch($television->avgRating)
+                  @case(1)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(1.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(2.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(3.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                  @break
+                  @case(4.5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                  @break
+                  @case(5)
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                  @default
+              @endswitch
           </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
-          <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
-            <div class="flex justify-center items-center">
-              <div class="product-image">
-                <img src="images/redmi note 12.png" alt="A mobile phone" />
-              </div>
-            </div>
-            <div class="product-title text-sm font-normal sm:font-semibold">
-              infinix hot 12
-            </div>
-            <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-            </div>
-            <div class="flex justify-between w-20 sm:w-24 mx-auto">
-              <div
-                class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50"
-              >
-                $206
-              </div>
-              <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">$136</div>
-            </div>
-            <button class="add-cart-btn text-xs">add to cart</button>
-          </div>
+                <div class="flex justify-between w-20 sm:w-24 mx-auto">
+                <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $television->initialPrice }}</div>
+                <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$television->discountPrice}}</div>
+                </div>
+                <button class="add-cart-btn text-xs">add to cart</button>
+            </a>
+            @empty
+            <p>There are no products in the store </p>
+            @endforelse
         </div>
       </section>
 </x-app-layout>

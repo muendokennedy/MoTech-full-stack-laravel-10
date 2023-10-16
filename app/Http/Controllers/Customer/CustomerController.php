@@ -29,9 +29,12 @@ class CustomerController extends Controller
     }
     public function products()
     {
-        $products = Product::all();
+        $phones = Product::where('category', 'Phone')->latest()->get();
+        $laptops = Product::where('category', 'Laptop')->latest()->get();
+        $smartwatches = Product::where('category', 'Smartwatch')->latest()->get();
+        $televisions = Product::where('category', 'Television')->latest()->get();
 
-        return view('products', compact('products'));
+        return view('products', compact('phones', 'laptops', 'smartwatches', 'televisions'));
     }
     public function contact()
     {
