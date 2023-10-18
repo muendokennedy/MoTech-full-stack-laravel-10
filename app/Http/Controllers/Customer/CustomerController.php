@@ -29,10 +29,10 @@ class CustomerController extends Controller
     }
     public function products()
     {
-        $phones = Product::where('category', 'Phone')->latest()->filter(request(['phone']))->get();
-        $laptops = Product::where('category', 'Laptop')->latest()->get();
-        $smartwatches = Product::where('category', 'Smartwatch')->latest()->get();
-        $televisions = Product::where('category', 'Television')->latest()->get();
+        $phones = Product::where('category', 'Phone')->latest()->filter(request(['phone', 'search']))->get();
+        $laptops = Product::where('category', 'Laptop')->latest()->filter(request(['laptop','search']))->get();
+        $smartwatches = Product::where('category', 'Smartwatch')->latest()->filter(request(['smartwatch','search']))->get();
+        $televisions = Product::where('category', 'Television')->latest()->filter(request(['television','search']))->get();
 
         return view('products', compact('phones', 'laptops', 'smartwatches', 'televisions'));
     }
