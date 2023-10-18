@@ -29,7 +29,7 @@ class CustomerController extends Controller
     }
     public function products()
     {
-        $phones = Product::where('category', 'Phone')->latest()->get();
+        $phones = Product::where('category', 'Phone')->latest()->filter(request(['phone']))->get();
         $laptops = Product::where('category', 'Laptop')->latest()->get();
         $smartwatches = Product::where('category', 'Smartwatch')->latest()->get();
         $televisions = Product::where('category', 'Television')->latest()->get();

@@ -44,10 +44,10 @@
         >mobile phones</div>
         <div class="filter-bar flex justify-between sm:justify-end items-center my-2 sm:my-4">
           <div class="filter-tags space-x-4 capitalize text-xs sm:text-sm">
-            <a href="#" class="hover:text-[#68A4FE]">All brands</a>
-            <a href="#" class="hover:text-[#68A4FE]">Apple</a>
-            <a href="#" class="hover:text-[#68A4FE]">Samsung</a>
-            <a href="#" class="hover:text-[#68A4FE]">redmi</a>
+            <a href="{{route('products', ['phone' => 'all'])}}" class="hover:text-[#68A4FE]">All brands</a>
+            <a href="{{route('products', ['phone' => 'Apple'])}}" class="hover:text-[#68A4FE]">Apple</a>
+            <a href="{{route('products', ['phone' => 'Samsung'])}}" class="hover:text-[#68A4FE]">Samsung</a>
+            <a href="{{route('products', ['phone' => 'Redmi'])}}" class="hover:text-[#68A4FE]">redmi</a>
           </div>
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">

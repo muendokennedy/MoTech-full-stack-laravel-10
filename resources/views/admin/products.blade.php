@@ -6,7 +6,7 @@
           <h2 class="text-[rgb(4,46,255)] font-semibold text-lg md:text-xl py-4 capitalize">Products in stock</h2>
           <div class="table-container overflow-x-auto">
             @if ($products->count())
-            <table class="w-[45rem] md:w-full border-2 my-4">
+            <table class="w-[45rem] md:w-[140rem] border-2 my-4">
             <thead>
                 <tr>
                 <th class="border-2 py-4 px-2">Category</th>
@@ -15,6 +15,8 @@
                 <th class="border-2 py-4 px-2">Price</th>
                 <th class="border-2 py-4 px-2">Discounted price</th>
                 <th class="border-2 py-4 px-2">Brand</th>
+                <th class="border-2 py-4">Product Description</th>
+                <th class="border-2 py-4">Manage</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,10 +25,24 @@
                 <tr>
                   <td class="border-2 py-2 px-2 text-center">{{$product->category}}</td>
                   <td class="border-2 py-2 px-2 text-center">{{$product->productName}}</td>
-                  <td class="border-2 py-2 px-2 text-center md:px-4 md:translate-x-4 lg:translate-x-8"><img src="{{asset('/storage/' . $product->firstImage)}}" alt="A dell laptop" class="h-14 w-auto"></td>
+                  <td class="border-2 py-2 px-2 text-center md:px-4 w-32"><img src="{{asset('/storage/' . $product->firstImage)}}" alt="A dell laptop" class="h-14 w-auto"></td>
                   <td class="border-2 py-2 px-2 text-center">${{$product->initialPrice}}</td>
                   <td class="border-2 py-2 px-2 text-center">${{$product->discountPrice}}</td>
                   <td class="border-2 py-2 px-2 text-center capitalize">{{$product->brandName}}</td>
+                  @php
+                        $modifiedProductDescription = str_replace('|', '', $product->productDescription);
+                  @endphp
+                  <td class="border-2 py-2 px-6">{!! $modifiedProductDescription !!}</td>
+                  <td class="border-2 py-2 px-6 w-[25rem]">
+                      <div class="flex w-full justify-between">
+                          <a href="{{route('product.edit', $product)}}" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></a>
+                          <form class='product-delete-form' action="{{route('product.delete', $product)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
+                </form>
+                </div>
+                </td>
                 </tr>
                 @empty
                   <tr>
@@ -49,40 +65,6 @@
             </p>
             <button type="button" class="confirm-button bg-[#FF4004] py-2 px-6 capitalize rounded-md my-2">Continue</button>
           </div>
-          <div class="table-container overflow-x-auto">
-            @if ($products->count())
-            <table class="w-[45rem] lg:w-[90%] border-2 mt-8">
-            <thead>
-              <tr>
-                <th class="border-2 py-4">Product Description</th>
-                <th class="border-2 py-4">Manage</th>
-              </tr>
-            </thead>
-            <tbody>
-            @endif
-              @forelse ($products as $product)
-                <tr>
-                    @php
-                        $modifiedProductDescription = str_replace('|', '', $product->productDescription);
-                    @endphp
-                  <td class="border-2 py-2 px-2">{!! $modifiedProductDescription !!}</td>
-                  <td class="border-2 py-2 px-6 w-1/2">
-                    <div class="flex w-full justify-between">
-                    <a href="{{route('product.edit', $product)}}" class="bg-[#FFCF10] edit-button py-3 px-8 capitalize rounded-md">edit <i class="fa-solid fa-edit pl-2"></i></a>
-                    <form class='product-delete-form' action="{{route('product.delete', $product)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                      <button type="submit" class="bg-[#FF4004] py-3 px-8 capitalize rounded-md">remove <i class="fa-solid fa-trash pl-2"></i></button>
-                    </form>
-                    </div>
-                  </td>
-                </tr>
-                @empty
-                @endforelse
-            </tbody>
-            </table>
-          </div>
-
         </div>
             <script>
                 const deleteForm = document.querySelectorAll('.product-delete-form'),

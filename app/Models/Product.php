@@ -24,4 +24,13 @@ class Product extends Model
         'productWarranty',
         'productDescription'
     ];
+
+    protected function scopeFilter($query, array $filters)
+    {
+        if($filters['phone'] ?? false){
+            if($filters['phone'] !== 'all'){
+                $query->where('brandName', 'like', '%' . request('phone') . '%');
+            }
+        }
+    }
 }
