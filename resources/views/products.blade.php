@@ -11,7 +11,7 @@
             type="search"
             name="search"
             value="{{request('search')}}"
-            placeholder="Search here... eg, phone, laptop, smartwatch, television"
+            placeholder="Search here... eg, phone, laptop, smartwatch, television or specific product name"
             class="w-full p-2 sm:p-4 pr-[6rem] sm:pr-32 border-2 rounded-md outline-none focus:border-[#68A4FE] placeholder:text-sm sm:placeholder:text-base text-sm sm:text-base"
           />
           <button

@@ -15,11 +15,12 @@ class CustomerController extends Controller
 
         $topSalesProducts = Product::all()->take(8);
 
-        $products = Product::all();
+        $products = Product::all()->take(10);
 
         $offerProducts  =  Product::all()->take(3);
 
-        $newArrivals = Product::latest()->get()->take(5);
+        $newArrivals = Product::latest()->where('category', 'Phone')
+        ->orWhere('category', 'Laptop')->get()->take(10);
 
         return view('index', compact('products', 'offerProducts', 'newArrivals', 'topSalesProducts'));
     }
