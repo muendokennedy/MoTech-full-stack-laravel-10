@@ -13,7 +13,9 @@ class CartController extends Controller
 
         $product = json_decode($jsonData, true);
 
-
         return response()->json(['productNumber' => $product['id']]);
+
+
+
     }
 }
