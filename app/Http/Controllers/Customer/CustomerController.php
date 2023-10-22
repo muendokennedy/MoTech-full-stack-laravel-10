@@ -28,14 +28,26 @@ class CustomerController extends Controller
     {
         return view('about');
     }
-    public function products()
+    public function products(Request $request)
     {
-        $phones = Product::where('category', 'Phone')->latest()->filter(request(['phone', 'search']))->get();
-        $laptops = Product::where('category', 'Laptop')->latest()->filter(request(['laptop','search']))->get();
-        $smartwatches = Product::where('category', 'Smartwatch')->latest()->filter(request(['smartwatch','search']))->get();
-        $televisions = Product::where('category', 'Television')->latest()->filter(request(['television','search']))->get();
+        if(!($request->query('search') || $request->query('phone') || $request->query('laptop') || $request->query('smartwatch') || $request->query('television'))){
 
-        return view('products', compact('phones', 'laptops', 'smartwatches', 'televisions'));
+            $phones = Product::where('category', 'Phone')->latest()->get();
+            $laptops = Product::where('category', 'Laptop')->latest()->get();
+            $smartwatches = Product::where('category', 'Smartwatch')->latest()->get();
+            $televisions = Product::where('category', 'Television')->latest()->get();
+
+        } else{
+
+            $phones = Product::where('category', 'Phone')->latest()->filter(request(['phone', 'search']))->get();
+            $laptops = Product::where('category', 'Laptop')->latest()->filter(request(['laptop','search']))->get();
+            $smartwatches = Product::where('category', 'Smartwatch')->latest()->filter(request(['smartwatch','search']))->get();
+            $televisions = Product::where('category', 'Television')->latest()->filter(request(['television','search']))->get();
+
+        }
+
+       return view('products', compact('phones', 'laptops', 'smartwatches', 'televisions'));
+
     }
     public function contact()
     {

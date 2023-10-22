@@ -1,4 +1,23 @@
 <x-app-layout>
+    @php
+        if(request()->query('phone')){
+            $laptops = null;
+            $smartwatches = null;
+            $televisions = null;
+        } else if(request()->query('laptop')){
+            $phones = null;
+            $smartwatches = null;
+            $televisions = null;
+        } else if(request()->query('smartwatch')){
+            $phones = null;
+            $laptops = null;
+            $televisions = null;
+        } else if(request()->query('television')){
+            $phones = null;
+            $laptops = null;
+            $smartwatches = null;
+        }
+    @endphp
     <section class="product-top pt-16 px-[4%] mx-auto lg:max-w-[1500px]">
         <div
         class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
@@ -11,9 +30,9 @@
             type="search"
             name="search"
             value="{{request('search')}}"
-            placeholder="Search here... eg, phone, laptop, smartwatch, television or specific product name"
+            placeholder="Search here... eg, phone, laptop, smartwatch, television or specific product name or even brandname"
             class="w-full p-2 sm:p-4 pr-[6rem] sm:pr-32 border-2 rounded-md outline-none focus:border-[#68A4FE] placeholder:text-sm sm:placeholder:text-base text-sm sm:text-base"
-          />
+            autofocus/>
           <button
             type="submit"
             class="text-sm sm:text-base absolute  top-1/2 right-2 -translate-y-1/2 bg-[#68A4FE] rounded-md px-4 py-1 sm:py-2 text-white hover:bg-[#384857] transition-all duration-300 ease-in-out capitalize"
@@ -24,7 +43,7 @@
     </form>
       </section>
       <!-- The mobile phones section -->
-      @if(($phones && $phones->count() !== 0) && ((request('phone') || request('search')) ?? false))
+      @if(($phones && $phones->count() !== 0))
       <section class="phones-section px-[4%] mx-auto lg:max-w-[1500px]">
             <div class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
             >mobile phones</div>
@@ -128,7 +147,7 @@
       </section>
       @endif
       <!-- The laptops section -->
-      @if (($laptops && $laptops->count() !== 0) && ((request('laptop') || request('search')) ?? false))
+      @if (($laptops && $laptops->count() !== 0))
       <section class="phones-section px-[4%] mx-auto lg:max-w-[1500px]">
         <div
           class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
@@ -233,7 +252,7 @@
       </section>
       @endif
       <!-- The smartwatches section -->
-      @if(($smartwatches && $smartwatches->count() !== 0) && ((request('smartwatch') || request('search')) ?? false))
+      @if(($smartwatches && $smartwatches->count() !== 0))
       <section class="phones-section px-[4%] mx-auto lg:max-w-[1500px]">
         <div
           class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
@@ -338,7 +357,7 @@
       </section>
       @endif
       <!-- The Televisions section -->
-      @if ($televisions && $televisions->count() !== 0 && ((request('television') || request('search')) ?? false))
+      @if ($televisions && $televisions->count() !== 0)
       <section class="phones-section px-[4%] mx-auto lg:max-w-[1500px]">
         <div
           class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
@@ -442,7 +461,7 @@
         </div>
       </section>
       @endif
-      @if ($phones->count() === 0 && $laptops->count() === 0 && $smartwatches->count() === 0 && $televisions->count() === 0)
+      @if (($phones !== null && $phones->count() === 0) && $laptops->count() === 0 && $smartwatches->count() === 0 && $televisions->count() === 0)
       <section class="phones-section px-[4%] mx-auto lg:max-w-[1500px]">
           <p>No products found!</p>
       </section>

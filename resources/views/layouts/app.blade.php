@@ -69,11 +69,8 @@ if(auth('web')->user()){
         @endif
         </div>
         <nav class="primary-navigation-bar flex items-center justify-between">
-          <a
-            href="{{route('home')}}"
-            class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
-            >Home</a
-          >
+          <a href="{{route('home')}}"
+            class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out">Home</a>
           <a
             href="{{route('about')}}"
             class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
