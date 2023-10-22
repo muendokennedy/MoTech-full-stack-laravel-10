@@ -138,7 +138,7 @@
                     <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $phone->initialPrice }}</div>
                     <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$phone->discountPrice}}</div>
                     </div>
-                    <button class="add-cart-btn text-xs">add to cart</button>
+                    <button class="add-cart-btn text-xs" onclick="addToCart({{$phone->id}})">add to cart</button>
                 </div>
                 @empty
                 <p>There are no products in the store </p>
@@ -146,6 +146,36 @@
             </div>
       </section>
       @endif
+            <!-- script to send the AJAX Request to server -->
+            <script type="text/javascript">
+              function addToCart(product_id){
+                // Get the data
+                const productId = {
+                  id: product_id
+                };
+
+                console.log(JSON.stringify(productId));
+
+                console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+                // Create an AJAX Request
+                const xhrHttp = new XMLHttpRequest();
+                let targetUrl = "{{ route('add.cart') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function () {
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        console.log(response);
+                    } else if(xhrHttp.readyState === 4){
+                        console.log('There was an error in making the request');
+                    }
+                };
+                xhrHttp.send(JSON.stringify(productId));
+              }
+            </script>
       <!-- The laptops section -->
       @if (($laptops && $laptops->count() !== 0))
       <section class="phones-section px-[4%] mx-auto lg:max-w-[1500px]">

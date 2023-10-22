@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +42,6 @@ Route::prefix('admin')->group(function(){
     Route::delete('/product/delete/{product}', [ProductController::class, 'destroy'])->name('product.delete');
 
 });
+
+// Route to receive the add to cart AJAX request
+Route::post('/products/add/cart', [CartController::class, 'addToCart'])->name('add.cart');
