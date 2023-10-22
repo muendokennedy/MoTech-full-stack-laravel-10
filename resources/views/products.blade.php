@@ -461,7 +461,7 @@
         </div>
       </section>
       @endif
-      @if (($phones !== null && $phones->count() === 0) && $laptops->count() === 0 && $smartwatches->count() === 0 && $televisions->count() === 0)
+      @if (($phones !== null && $phones->count() === 0) && ($laptops !== null && $laptops->count() === 0) && ($smartwatches !== null && $smartwatches->count() === 0) && ($televisions !== null && $televisions->count() === 0))
       <section class="phones-section px-[4%] mx-auto lg:max-w-[1500px]">
           <p>No products found!</p>
       </section>
