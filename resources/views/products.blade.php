@@ -58,11 +58,11 @@
             </div>
             <div class="top-sales-container grid mx-auto w-[95%] gap-3">
                 @forelse ($phones as $phone)
-                <a href="{{route('product.page', $phone)}}" class="product-box text-center my-2 sm:my-4 border-2 py-4">
+                <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
                     <div class="flex justify-center items-center">
-                    <div class="product-image">
+                    <a href="{{route('product.page', $phone)}}" class="product-image">
                         <img src="{{ asset('/storage/'. $phone->firstImage)}}" alt="A mobile phone" />
-                    </div>
+                    </a>
                     </div>
                     <div class="product-title text-xs font-normal sm:font-semibold">
                         {{ $phone->productName }}
@@ -133,13 +133,13 @@
                       <i class="fa-solid fa-star text-[#ffcf10]"></i>
                       @default
                   @endswitch
-              </div>
+                  </div>
                     <div class="flex justify-between w-20 sm:w-24 mx-auto">
                     <div class="deal-price my-1 text-xs sm:text-base sm:my-3 font-semibold line-through opacity-50">${{ $phone->initialPrice }}</div>
                     <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$phone->discountPrice}}</div>
                     </div>
                     <button class="add-cart-btn text-xs">add to cart</button>
-                </a>
+                </div>
                 @empty
                 <p>There are no products in the store </p>
                 @endforelse
@@ -163,11 +163,11 @@
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
             @forelse ($laptops as $laptop)
-            <a href="{{route('product.page', $laptop)}}" class="product-box text-center my-2 sm:my-4 border-2 py-4">
+            <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
                 <div class="flex justify-center items-center">
-                <div class="product-image">
+                <a href="{{route('product.page', $laptop)}}" class="product-image">
                     <img src="{{ asset('/storage/'. $laptop->firstImage)}}" alt="A mobile phone" />
-                </div>
+                </a>
                 </div>
                 <div class="product-title text-xs font-normal sm:font-semibold">
                     {{ $laptop->productName }}
@@ -244,7 +244,7 @@
                 <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$laptop->discountPrice}}</div>
                 </div>
                 <button class="add-cart-btn text-xs">add to cart</button>
-            </a>
+            </div>
             @empty
             <p>There are no products in the store </p>
             @endforelse
@@ -268,11 +268,11 @@
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
             @forelse ($smartwatches as $smartwatch)
-            <a href="{{route('product.page', $smartwatch)}}" class="product-box text-center my-2 sm:my-4 border-2 py-4">
+            <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
                 <div class="flex justify-center items-center">
-                <div class="product-image">
+                <a href="{{route('product.page', $smartwatch)}}" class="product-image">
                     <img src="{{ asset('/storage/'. $smartwatch->firstImage)}}" alt="A mobile phone" />
-                </div>
+                </a>
                 </div>
                 <div class="product-title text-xs font-normal sm:font-semibold">
                     {{ $smartwatch->productName }}
@@ -349,7 +349,7 @@
                 <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$smartwatch->discountPrice}}</div>
                 </div>
                 <button class="add-cart-btn text-xs">add to cart</button>
-            </a>
+            </div>
             @empty
             <p>There are no products in the store </p>
             @endforelse
@@ -373,11 +373,11 @@
         </div>
         <div class="top-sales-container grid mx-auto w-[95%] gap-3">
             @forelse ($televisions as $television)
-            <a href="{{route('product.page', $television)}}" class="product-box text-center my-2 sm:my-4 border-2 py-4">
+            <div class="product-box text-center my-2 sm:my-4 border-2 py-4">
                 <div class="flex justify-center items-center">
-                <div class="product-image">
+                <a href="{{route('product.page', $television)}}" class="product-image">
                     <img src="{{ asset('/storage/'. $television->firstImage)}}" alt="A mobile phone" />
-                </div>
+                </a>
                 </div>
                 <div class="product-title text-xs font-normal sm:font-semibold">
                     {{ $television->productName }}
@@ -454,7 +454,7 @@
                 <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{$television->discountPrice}}</div>
                 </div>
                 <button class="add-cart-btn text-xs">add to cart</button>
-            </a>
+            </div>
             @empty
             <p>There are no products in the store </p>
             @endforelse
