@@ -21,7 +21,7 @@
                   <div class="product-name font-semibold text-base sm:text-lg capitalize">
                   {{ $cart->product->productName }}
                   </div>
-                  <div class="product-text text-sm">{{ $cart->product->brandName }}</div>
+                  <div class="product-text text-sm capitalize">{{ $cart->product->brandName }}</div>
                   <div class="rating-box flex gap-2 items-center">
                     <div class="star-box text-center text-xs sm:text-sm my-2 sm:my-4">
                     @switch($cart->product->avgRating)
