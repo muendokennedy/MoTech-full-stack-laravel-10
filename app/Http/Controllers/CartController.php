@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -36,5 +38,16 @@ class CartController extends Controller
             return response()->json(['status' => 'login to continue']);
         }
 
+    }
+
+    public function showCartItems()
+    {
+
+        $carts = Cart::where('user_id', auth('web')->user()->id)->get();
+
+
+
+
+        return view('cart', compact('carts'));
     }
 }

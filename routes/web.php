@@ -21,7 +21,6 @@ Route::get('/', [CustomerController::class, 'index'])->name('home');
 Route::get('/about', [CustomerController::class, 'about'])->name('about');
 Route::get('/products', [CustomerController::class, 'products'])->name('products');
 Route::get('/contact', [CustomerController::class, 'contact'])->name('contact');
-Route::get('/cart', [CustomerController::class, 'cart'])->name('cart');
 Route::get('/productpage/{product}', [CustomerController::class, 'productPage'])->name('product.page');
 
 require __DIR__.'/auth.php';
@@ -45,3 +44,6 @@ Route::prefix('admin')->group(function(){
 
 // Route to receive the add to cart AJAX request
 Route::post('/products/add/cart', [CartController::class, 'addToCart'])->name('add.cart');
+Route::middleware('auth')->group(function(){
+    Route::get('/cart', [CartController::class, 'showCartItems'])->name('cart');
+});

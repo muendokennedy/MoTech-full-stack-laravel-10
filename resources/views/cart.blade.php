@@ -7,29 +7,88 @@
       </div>
         <div class="cart-section flex flex-col lg:flex-row justify-between w-full">
           <div class="shopping-cart-container text-[#384857] w-full lg:w-3/5">
-            <div
-              class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-48 w-full border-b-2 my-4"
-            >
+            @forelse ($carts as $cart)
+            <div class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-56 w-full border-b-2 my-4">
               <div class="cart-image h-full">
                 <img
-                  src="images/redmi note 12.png"
+                  src="{{ asset('/storage/'. $cart->product->firstImage)}}"
                   alt="A cart item"
-                  class="md:-translate-y-4 h-auto scale-50 sm:scale-100 sm:h-full"
+                  class="md:-translate-y-4 h-auto scale-50 sm:scale-70 sm:h-full"
                 />
               </div>
               <div class="cart-info h-full flex flex-col justify-between">
                 <div class="space-y-2">
-                  <div class="product-name font-semibold text-base sm:text-xl capitalize">
-                    redmi note 12
+                  <div class="product-name font-semibold text-base sm:text-lg capitalize">
+                  {{ $cart->product->productName }}
                   </div>
-                  <div class="product-text text-sm">From redmi</div>
+                  <div class="product-text text-sm">{{ $cart->product->brandName }}</div>
                   <div class="rating-box flex gap-2 items-center">
-                    <div class="star-box text-sm text-[#FFCF10]">
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
+                    <div class="star-box text-center text-xs sm:text-sm my-2 sm:my-4">
+                    @switch($cart->product->avgRating)
+                        @case(1)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(1.5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(2)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(2.5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(3)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(3.5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(4)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(4.5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                        @break
+                        @case(5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        @default
+                    @endswitch
                     </div>
                     <div class="rating-text text-xs text-[#68A4FE]">
                       100,450 Ratings
@@ -55,7 +114,7 @@
                 <div
                   class="product-price self-end text-[#FF412C] text-lg font-normal"
                 >
-                  $316
+                ${{ number_format($cart->product->discountPrice) }}
                 </div>
                 <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
                   <button
@@ -73,204 +132,9 @@
                 </div>
               </div>
             </div>
-            <div
-              class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-48 w-full border-b-2 my-4"
-            >
-              <div class="cart-image h-full">
-                <img
-                  src="images/redmi note 12.png"
-                  alt="A cart item"
-                  class="md:-translate-y-4 h-auto scale-50 sm:scale-100 sm:h-full"
-                />
-              </div>
-              <div class="cart-info h-full flex flex-col justify-between">
-                <div class="space-y-2">
-                  <div class="product-name font-semibold text-base sm:text-xl capitalize">
-                    redmi note 12
-                  </div>
-                  <div class="product-text text-sm">From redmi</div>
-                  <div class="rating-box flex gap-2 items-center">
-                    <div class="star-box text-sm text-[#FFCF10]">
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="rating-text text-xs text-[#68A4FE]">
-                      100,450 Ratings
-                    </div>
-                  </div>
-                </div>
-                <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                  <i
-                    class="fa-solid fa-plus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                  ></i>
-                  <input
-                    type="number"
-                    name=""
-                    id=""
-                    class="p-2 border-2 rounded-md outline-none w-24"
-                  />
-                  <i
-                    class="fa-solid fa-minus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                  ></i>
-                </div>
-              </div>
-              <div class="action-box h-full flex flex-col justify-between">
-                <div
-                  class="product-price self-end text-[#FF412C] text-lg font-normal"
-                >
-                  $316
-                </div>
-                <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                  <button
-                    type="submit"
-                    class="px-4 py-2 bg-[#ffcf10] rounded-md text-white text-center"
-                  >
-                    Remove
-                  </button>
-                  <button
-                    type="submit"
-                    class="px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"
-                  >
-                    Save for later
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-48 w-full border-b-2 my-4"
-            >
-              <div class="cart-image h-full">
-                <img
-                  src="images/redmi note 12.png"
-                  alt="A cart item"
-                  class="md:-translate-y-4 h-auto scale-50 sm:scale-100 sm:h-full"
-                />
-              </div>
-              <div class="cart-info h-full flex flex-col justify-between">
-                <div class="space-y-2">
-                  <div class="product-name font-semibold text-base sm:text-xl capitalize">
-                    redmi note 12
-                  </div>
-                  <div class="product-text text-sm">From redmi</div>
-                  <div class="rating-box flex gap-2 items-center">
-                    <div class="star-box text-sm text-[#FFCF10]">
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="rating-text text-xs text-[#68A4FE]">
-                      100,450 Ratings
-                    </div>
-                  </div>
-                </div>
-                <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                  <i
-                    class="fa-solid fa-plus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                  ></i>
-                  <input
-                    type="number"
-                    name=""
-                    id=""
-                    class="p-2 border-2 rounded-md outline-none w-24"
-                  />
-                  <i
-                    class="fa-solid fa-minus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                  ></i>
-                </div>
-              </div>
-              <div class="action-box h-full flex flex-col justify-between">
-                <div
-                  class="product-price self-end text-[#FF412C] text-lg font-normal"
-                >
-                  $316
-                </div>
-                <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                  <button
-                    type="submit"
-                    class="px-4 py-2 bg-[#ffcf10] rounded-md text-white text-center"
-                  >
-                    Remove
-                  </button>
-                  <button
-                    type="submit"
-                    class="px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"
-                  >
-                    Save for later
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div
-              class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-48 w-full border-b-2 my-4"
-            >
-              <div class="cart-image h-full">
-                <img
-                  src="images/redmi note 12.png"
-                  alt="A cart item"
-                  class="md:-translate-y-4 h-auto scale-50 sm:scale-100 sm:h-full"
-                />
-              </div>
-              <div class="cart-info h-full flex flex-col justify-between">
-                <div class="space-y-2">
-                  <div class="product-name font-semibold text-base sm:text-xl capitalize">
-                    redmi note 12
-                  </div>
-                  <div class="product-text text-sm">From redmi</div>
-                  <div class="rating-box flex gap-2 items-center">
-                    <div class="star-box text-sm text-[#FFCF10]">
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                    </div>
-                    <div class="rating-text text-xs text-[#68A4FE]">
-                      100,450 Ratings
-                    </div>
-                  </div>
-                </div>
-                <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                  <i
-                    class="fa-solid fa-plus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                  ></i>
-                  <input
-                    type="number"
-                    name=""
-                    id=""
-                    class="p-2 border-2 rounded-md outline-none w-24"
-                  />
-                  <i
-                    class="fa-solid fa-minus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                  ></i>
-                </div>
-              </div>
-              <div class="action-box h-full flex flex-col justify-between">
-                <div
-                  class="product-price self-end text-[#FF412C] text-lg font-normal"
-                >
-                  $316
-                </div>
-                <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                  <button
-                    type="submit"
-                    class="px-4 py-2 bg-[#ffcf10] rounded-md text-white text-center"
-                  >
-                    Remove
-                  </button>
-                  <button
-                    type="submit"
-                    class="px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"
-                  >
-                    Save for later
-                  </button>
-                </div>
-              </div>
-            </div>
+            @empty
+            <p>There are no products in the cart!</p>
+            @endforelse
           </div>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
             <h2
