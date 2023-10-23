@@ -17,14 +17,19 @@
             $laptops = null;
             $smartwatches = null;
         }
+
+        if(auth('web')->user()){
+            $extractedName = explode(' ', auth('web')->user()->name);
+            $firstCustomerName = $extractedName[0];
+        }
     @endphp
     <section class="product-top pt-16 px-[4%] mx-auto lg:max-w-[1500px]">
         <div
         class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
-      >
+        >
         What we <span class="text-[#68A4FE] px-2">sell</span>
-      </div>
-      <form action="{{route('products')}}">
+    </div>
+    <form action="{{route('products')}}">
         <div class="product-search flex w-full relative my-4">
           <input
             type="search"
@@ -33,14 +38,20 @@
             placeholder="Search here... eg, phone, laptop, smartwatch, television or specific product name or even brandname"
             class="w-full p-2 sm:p-4 pr-[6rem] sm:pr-32 border-2 rounded-md outline-none focus:border-[#68A4FE] placeholder:text-sm sm:placeholder:text-base text-sm sm:text-base"
             autofocus/>
-          <button
+            <button
             type="submit"
             class="text-sm sm:text-base absolute  top-1/2 right-2 -translate-y-1/2 bg-[#68A4FE] rounded-md px-4 py-1 sm:py-2 text-white hover:bg-[#384857] transition-all duration-300 ease-in-out capitalize"
-          >
+            >
             search
-          </button>
-        </div>
-    </form>
+        </button>
+    </div>
+</form>
+<div class="product-addcart-confirm bg-green-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div onclick="this.parentElement.style.display = 'none'" class="addcart-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+        <p class="text-green-700 mt-6 mb-4">
+            {{ $firstCustomerName }}, The product has been added to cart successfully!
+        </p>
+</div>
       </section>
       <!-- The mobile phones section -->
       @if(($phones && $phones->count() !== 0))
@@ -148,6 +159,7 @@
       @endif
             <!-- script to send the AJAX Request to server -->
             <script type="text/javascript">
+              const productCartAlertMoodle = document.querySelector('.product-addcart-confirm');
               function addToCart(product_id){
                 // Get the data
                 const productId = {
@@ -171,6 +183,11 @@
                         console.log(response.status);
                         if(response.status === 'login to continue'){
                             location.href = '/login/customer';
+                        } else if(response.status === 'added to cart successfully'){
+                            productCartAlertMoodle.style.display = 'block';
+                            setTimeout(() => {
+                              productCartAlertMoodle.style.display = 'none';
+                            }, 4000);
                         }
                     } else if(xhrHttp.readyState === 4){
                         console.log('There was an error in making the request');
@@ -178,6 +195,8 @@
                 };
                 xhrHttp.send(JSON.stringify(productId));
               }
+
+
             </script>
       <!-- The laptops section -->
       @if (($laptops && $laptops->count() !== 0))

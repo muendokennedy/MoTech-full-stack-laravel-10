@@ -21,11 +21,11 @@ class CartController extends Controller
                 'product_id' => $product['id']
             ]);
 
+            return response()->json(['status' => 'added to cart successfully']);
+
         } else {
             return response()->json(['status' => 'login to continue']);
         }
-
-        return response()->json(['productNumber' => $product['id']]);
 
     }
 }
