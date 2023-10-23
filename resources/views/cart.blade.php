@@ -133,7 +133,7 @@
               </div>
             </div>
             @empty
-            <p>There are no products in the cart!</p>
+            <p class="my-8 text-base sm:text-lg">There are no products in the cart!</p>
             @endforelse
           </div>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
