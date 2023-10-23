@@ -16,12 +16,21 @@ class CartController extends Controller
 
         if(auth('web')->user()){
 
-            $cart = Cart::create([
-                'user_id' => auth()->user()->id,
-                'product_id' => $product['id']
-            ]);
+            $productinCart = Cart::where('product_id', $product['id'])->get();
 
-            return response()->json(['status' => 'added to cart successfully']);
+            if($productinCart->count() === 0){
+
+                $cart = Cart::create([
+                    'user_id' => auth()->user()->id,
+                    'product_id' => $product['id']
+                ]);
+
+                return response()->json(['status' => 'The product has been added to cart successfully!']);
+
+            } else {
+
+                return response()->json(['status' => 'The product is already in the cart!']);
+            }
 
         } else {
             return response()->json(['status' => 'login to continue']);
