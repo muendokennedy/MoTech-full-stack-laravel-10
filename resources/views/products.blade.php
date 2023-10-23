@@ -168,7 +168,10 @@
                 xhrHttp.onreadystatechange = function () {
                     if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
                         let response = JSON.parse(xhrHttp.responseText);
-                        console.log(response);
+                        console.log(response.status);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        }
                     } else if(xhrHttp.readyState === 4){
                         console.log('There was an error in making the request');
                     }
