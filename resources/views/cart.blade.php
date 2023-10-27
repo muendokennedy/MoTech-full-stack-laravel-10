@@ -127,7 +127,7 @@
               }
             }
             function decreaseProductQty(product){
-              if(product.previousElementSibling.value != 0){
+              if(product.previousElementSibling.value != 1){
                 product.previousElementSibling.value--;
               }
             }
