@@ -96,9 +96,9 @@
                   </div>
                 </div>
                 <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                  <i class="fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
-                  <input type="number" value="1" name="" id="" class="p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
-                  <i class="fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
+                  <i onclick="increaseProductQty(this)" class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
+                  <input type="number" value="1" name="" id="" class="product-qty p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
+                  <i onclick="decreaseProductQty(this)" class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
                 </div>
               </div>
               <div class="action-box h-full flex flex-col justify-between">
@@ -119,6 +119,19 @@
             <p class="my-8 text-base sm:text-lg">There are no products in the cart!</p>
             @endforelse
           </div>
+          <!-- A script to increase and decrease the quantiy -->
+          <script>
+            function increaseProductQty(product){
+              if(product.nextElementSibling.value != 10){
+                product.nextElementSibling.value++;
+              }
+            }
+            function decreaseProductQty(product){
+              if(product.previousElementSibling.value != 0){
+                product.previousElementSibling.value--;
+              }
+            }
+          </script>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
             <h2
               class="cart-total-title capitalize border-b-2 px-1 py-4 text-center space-x-2 sm:space-x-4 text-base sm:text-xl font-semibold text-[#009F25]"
