@@ -96,14 +96,14 @@
                   </div>
                 </div>
                 <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                  <i onclick="increaseProductQty(this)" class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
-                  <input type="number" value="1" name="" id="" class="product-qty p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
-                  <i onclick="decreaseProductQty(this)" class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
+                  <i onclick="increaseProductQty(this, '{{$cart->product->id}}')" class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
+                  <input type="text" name="" id=""  value="1" class="{{$cart->product->id}} product-qty p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
+                  <i onclick="decreaseProductQty(this, '{{$cart->product->id}}')" class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
                 </div>
               </div>
               <div class="action-box h-full flex flex-col justify-between">
                 <div class="product-price self-end text-[#FF412C] text-sm font-bold">
-                ${{ number_format($cart->product->discountPrice) }}
+                ${{ $cart->product->discountPrice }}
                 </div>
                 <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
                   <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center">
@@ -121,16 +121,65 @@
           </div>
           <!-- A script to increase and decrease the quantiy -->
           <script>
-            function increaseProductQty(product){
+            let currentValue = document.querySelectorAll('.product-qty'){
+              forEach((current => {
+                if(current.classList.contains())
+              }))
+            }
+            function getValue(){
+
+            }
+            function increaseProductQty(product, id){
               if(product.nextElementSibling.value != 10){
                 product.nextElementSibling.value++;
+                let productPrice = subtotalPrice(product);
+                let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
+                let newSubtotal = Number.parseInt(productPrice) + Number.parseInt(subTotal);
+                document.querySelector('.subtotal-price').innerText =`$ ${newSubtotal}`;
+                storeQuantityValue1(id, product);
+                getQuantityValue1(id, product);
               }
             }
-            function decreaseProductQty(product){
-              if(product.previousElementSibling.value != 1){
+            function decreaseProductQty(product, id){
+                if(product.previousElementSibling.value != 1){
                 product.previousElementSibling.value--;
+                let productPrice = subtotalPrice(product);
+                let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
+                let newSubtotal = Number.parseInt(subTotal) - Number.parseInt(productPrice);
+                document.querySelector('.subtotal-price').innerText =`$ ${newSubtotal}`;
+                storeQuantityValue2(id, product);
+                getQuantityValue2(id, product);
               }
             }
+            function subtotalPrice(price){
+              let currentPrice = price.parentElement.parentElement.parentElement.querySelector('.product-price').innerText.replace('$', '');
+              return currentPrice;
+            }
+            function storeQuantityValue1(productId, plus){
+              console.log(productId);
+              localStorage.setItem(productId, plus.nextElementSibling.value);
+            }
+            function getQuantityValue1(productId, plus){
+              console.log(productId);
+              if(!localStorage.getItem(productId)){
+                plus.nextElementSibling.value = 1
+              } else {
+                plus.nextElementSibling.value = localStorage.getItem(productId);
+              }
+            }
+            function storeQuantityValue2(productId, minus){
+              console.log(productId);
+              localStorage.setItem(productId, minus.previousElementSibling.value);
+            }
+            function getQuantityValue2(productId, minus){
+              console.log(productId);
+              if(!localStorage.getItem(productId)){
+                minus.previousElementSibling.value = 1
+              } else {
+                minus.previousElementSibling.value = localStorage.getItem(productId);
+              }
+            }
+            // document.querySelector('.subtotal-price').innerText =`$ ${newSubtotal}`;
           </script>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
             <h2
@@ -142,10 +191,16 @@
             <div class="cart-total-content flex flex-col gap-4 p-2">
               <div class="content-title space-y-2">
                 <h2 class="p-2 text-sm sm:text-base capitalize text-[#384857] font-semibold">
-                  subtotal(2 items):
+                  subtotal({{ ($carts->count() === 1) ? "{$carts->count()} item" : "{$carts->count()} items" }}):
                 </h2>
-                <div class="price px-2 text-[#FF412C] text-sm sm:text-base font-semibold">
-                  $13000
+                @php
+                  $subtotal = collect([]);
+                  foreach($carts as $cart){
+                    $subtotal->push($cart->product->discountPrice);
+                  }
+                @endphp
+                <div class="subtotal-price price px-2 text-[#FF412C] text-sm sm:text-base font-semibold">
+                  ${{ $subtotal->sum() }}
                 </div>
               </div>
               <a  href="{{route('customer.login')}}"
