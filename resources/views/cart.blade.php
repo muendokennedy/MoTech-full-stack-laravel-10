@@ -97,7 +97,7 @@
                 </div>
                 <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
                   <i onclick="increaseProductQty(this, '{{$cart->product->id}}')" class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
-                  <input type="text" name="" id=""  value="1" class="{{$cart->product->id}} product-qty p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
+                  <input type="text" name="" id=""  value="1" data-content="{{$cart->product->id}}" class="product-qty p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
                   <i onclick="decreaseProductQty(this, '{{$cart->product->id}}')" class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
                 </div>
               </div>
@@ -121,21 +121,26 @@
           </div>
           <!-- A script to increase and decrease the quantiy -->
           <script>
-            let currentValue = document.querySelectorAll('.product-qty'){
-              forEach((current => {
-                if(current.classList.contains())
-              }))
-            }
-            function getValue(){
+            let currentValue = document.querySelectorAll('.product-qty');
 
+            function getValueAfterRefresh(){
+                currentValue.forEach((current => {
+                let id = current.getAttribute('data-content');
+                if(localStorage.getItem(id)){
+                    current.value = localStorage.getItem(id);
+                }
+              }));
             }
+
+            getValueAfterRefresh();
             function increaseProductQty(product, id){
               if(product.nextElementSibling.value != 10){
                 product.nextElementSibling.value++;
                 let productPrice = subtotalPrice(product);
                 let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
                 let newSubtotal = Number.parseInt(productPrice) + Number.parseInt(subTotal);
-                document.querySelector('.subtotal-price').innerText =`$ ${newSubtotal}`;
+                localStorage.setItem('Subtotal', newSubtotal)
+                document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem(Subtotal)}`;
                 storeQuantityValue1(id, product);
                 getQuantityValue1(id, product);
               }
@@ -146,7 +151,8 @@
                 let productPrice = subtotalPrice(product);
                 let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
                 let newSubtotal = Number.parseInt(subTotal) - Number.parseInt(productPrice);
-                document.querySelector('.subtotal-price').innerText =`$ ${newSubtotal}`;
+                localStorage.setItem('Subtotal', newSubtotal);
+                document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem(Subtotal)}`;
                 storeQuantityValue2(id, product);
                 getQuantityValue2(id, product);
               }
