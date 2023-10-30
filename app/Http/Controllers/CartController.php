@@ -50,7 +50,10 @@ class CartController extends Controller
 
             $deleted = Cart::where('product_id', $product['id'])->delete();
 
-            return response()->json(['status' => 'The product has been removed from the cart!']);
+            return response()->json([
+                'status' => 'The product has been removed from the cart!',
+                'id' => $product['id']
+            ]);
 
         } else {
             return response()->json(['status' => 'login to continue']);

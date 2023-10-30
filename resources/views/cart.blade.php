@@ -120,7 +120,7 @@
                 ${{ $cart->product->discountPrice }}
                 </div>
                 <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                  <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center" onclick="removeCartItem('{{$cart->product->id}}')">
+                  <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center" onclick="removeCartItem('{{$cart->product->id}}', '{{$cart->product->discountPrice}}')">
                     Remove
                   </button>
                   <button type="submit"class="text-xs sm:text-sm px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center">
@@ -176,7 +176,6 @@
                   let subTotal = localStorage.getItem('subtotal');
                   let newSubtotal =  Number.parseInt(subTotal) - newPrice;
                   localStorage.setItem('subtotal', newSubtotal);
-                    console.log(localStorage.getItem('subtotal'));
                   document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem('subtotal')}`;
                   storeQuantityValue2(id, product);
                   getQuantityValue2(id, product);
@@ -219,12 +218,16 @@
               }
             }
 
+
+
             // Sending a AJAX request to remove an item from cart
-            function removeCartItem(product_id){
+            function removeCartItem(product_id, product_price){
                 // Get the data
                 const productId = {
                     id: product_id
                 };
+
+
                 // Create an AJAX request
                 const xhrHttp = new XMLHttpRequest();
 
@@ -245,7 +248,7 @@
                             setTimeout(() => {
                               productCartAlertMoodle.style.display = 'none';
                             }, 8000);
-
+                            modifySubtotal(product_id, product_price);
                             location.reload();
                     }  else if(xhrHttp.readyState === 4){
                         console.log('There was an error making the requst to remove this item frm the cart');
@@ -254,6 +257,25 @@
             }
             xhrHttp.send(JSON.stringify(productId));
         }
+        function modifySubtotal(id, price){
+                // let subTotal = localStorage.getItem('subtotal');
+                localStorage.clear();
+                // localStorage.removeItem('subtotal');
+                // let productPrice, productQty;
+                // if(localStorage.getItem(id)){
+                //     productQty = localStorage.getItem(id);
+                //     console.log(price);
+                //     productPrice = Number.parseInt(price) * Number.parseInt(productQty);
+                // } else {
+                //     productPrice = Number.parseInt(price);
+                // }
+                // let newSubtotal =  Number.parseInt(subTotal) - productPrice;
+                // localStorage.setItem('subtotal', newSubtotal);
+                // if(localStorage.getItem('subtotal') ===  productPrice){
+                //     localStorage.removeItem('subtotal');
+                // }
+                // localStorage.removeItem(id);
+            }
           </script>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
             <h2
@@ -292,7 +314,7 @@
       <script>
             let  subtotal = document.querySelector('.subtotal-holder');
             let actualSubtotal = document.querySelector('.subtotal-price');
-            if(subtotal.innerText && !localStorage.getItem('subtotal')){
+            if(subtotal.innerText || !localStorage.getItem('subtotal')){
               localStorage.setItem('subtotal', subtotal.innerText);
               actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
             }else{

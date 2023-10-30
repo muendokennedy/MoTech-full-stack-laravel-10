@@ -488,7 +488,7 @@
       </section>
       @endif
       <!-- script to send the AJAX Request to server -->
-      <script type="text/javascript">
+      <script>
               const productCartAlertMoodle = document.querySelector('.product-addcart-confirm');
               const moodleText = productCartAlertMoodle.querySelector('span');
               const productAlreadyCartAlert = document.querySelector('.product-alreadycart-confirm');
@@ -532,7 +532,5 @@
                 };
                 xhrHttp.send(JSON.stringify(productId));
               }
-
-
             </script>
 </x-app-layout>
