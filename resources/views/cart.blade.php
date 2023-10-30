@@ -97,7 +97,7 @@
                 </div>
                 <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
                   <i onclick="increaseProductQty(this, '{{$cart->product->id}}')" class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
-                  <input type="text" name="" id=""  value="1" data-content="{{$cart->product->id}}" class="product-qty p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
+                  <input type="text" name="" id="" oninput="changeProductQty(this, '{{$cart->product->id}}')"  value="1" data-content="{{$cart->product->id}}" class="product-qty p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
                   <i onclick="decreaseProductQty(this, '{{$cart->product->id}}')" class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
                 </div>
               </div>
@@ -134,6 +134,7 @@
             }
 
             getValueAfterRefresh(currentValue);
+
             function increaseProductQty(product, id){
               if(product.nextElementSibling.value != 10){
                 product.nextElementSibling.value++;
@@ -169,6 +170,13 @@
               console.log(currentPrice);
               return currentPrice;
             }
+            function changeProductQty(product, id){
+              if(product.value > 1 && !localStorage.getItem(id)){
+                product.value = 1;
+              } else{
+                product.value = localStorage.getItem(id);
+              }
+          }
             function storeQuantityValue1(productId, plus){
               console.log(productId);
               localStorage.setItem(productId, plus.nextElementSibling.value);
