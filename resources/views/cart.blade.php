@@ -123,42 +123,50 @@
           <script>
             let currentValue = document.querySelectorAll('.product-qty');
 
-            function getValueAfterRefresh(){
-                currentValue.forEach((current => {
-                let id = current.getAttribute('data-content');
+            function getValueAfterRefresh(value){
+                value.forEach((current => {
+                    let id = current.getAttribute('data-content');
+                    console.log(localStorage.getItem(id));
                 if(localStorage.getItem(id)){
                     current.value = localStorage.getItem(id);
                 }
               }));
             }
 
-            getValueAfterRefresh();
+            getValueAfterRefresh(currentValue);
             function increaseProductQty(product, id){
               if(product.nextElementSibling.value != 10){
                 product.nextElementSibling.value++;
-                let productPrice = subtotalPrice(product);
-                let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
-                let newSubtotal = Number.parseInt(productPrice) + Number.parseInt(subTotal);
-                localStorage.setItem('Subtotal', newSubtotal)
-                document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem(Subtotal)}`;
+                  let productPrice = subtotalPrice(product);
+                  console.log(product.nextElementSibling.value);
+                  let newPrice = Number.parseInt(product.nextElementSibling.value) * Number.parseInt(productPrice);
+                  let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
+                  let newSubtotal = newPrice + Number.parseInt(subTotal) - (productPrice * (Number.parseInt(product.nextElementSibling.value) - 1));
+                  localStorage.setItem('subtotal', newSubtotal);
+                    console.log(localStorage.getItem('subtotal'));
+                document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem('subtotal')}`;
                 storeQuantityValue1(id, product);
                 getQuantityValue1(id, product);
               }
             }
             function decreaseProductQty(product, id){
                 if(product.previousElementSibling.value != 1){
-                product.previousElementSibling.value--;
-                let productPrice = subtotalPrice(product);
-                let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
-                let newSubtotal = Number.parseInt(subTotal) - Number.parseInt(productPrice);
-                localStorage.setItem('Subtotal', newSubtotal);
-                document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem(Subtotal)}`;
-                storeQuantityValue2(id, product);
-                getQuantityValue2(id, product);
+                  product.previousElementSibling.value--;
+                  let productPrice = subtotalPrice(product);
+                  console.log(product.previousElementSibling.value);
+                  let newPrice = Number.parseInt(productPrice);
+                  let subTotal = localStorage.getItem('subtotal');
+                  let newSubtotal =  Number.parseInt(subTotal) - newPrice;
+                  localStorage.setItem('subtotal', newSubtotal);
+                    console.log(localStorage.getItem('subtotal'));
+                  document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem('subtotal')}`;
+                  storeQuantityValue2(id, product);
+                  getQuantityValue2(id, product);
               }
             }
             function subtotalPrice(price){
               let currentPrice = price.parentElement.parentElement.parentElement.querySelector('.product-price').innerText.replace('$', '');
+              console.log(currentPrice);
               return currentPrice;
             }
             function storeQuantityValue1(productId, plus){
@@ -180,12 +188,11 @@
             function getQuantityValue2(productId, minus){
               console.log(productId);
               if(!localStorage.getItem(productId)){
-                minus.previousElementSibling.value = 1
+                minus.previousElementSibling.value = 1;
               } else {
                 minus.previousElementSibling.value = localStorage.getItem(productId);
               }
             }
-            // document.querySelector('.subtotal-price').innerText =`$ ${newSubtotal}`;
           </script>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
             <h2
@@ -205,8 +212,11 @@
                     $subtotal->push($cart->product->discountPrice);
                   }
                 @endphp
+                <div class="subtotal-holder hidden">
+                {{ $subtotal->sum() }}
+                </div>
                 <div class="subtotal-price price px-2 text-[#FF412C] text-sm sm:text-base font-semibold">
-                  ${{ $subtotal->sum() }}
+
                 </div>
               </div>
               <a  href="{{route('customer.login')}}"
@@ -218,6 +228,16 @@
           </div>
         </div>
       </section>
+      <script>
+            let  subtotal = document.querySelector('.subtotal-holder');
+            let actualSubtotal = document.querySelector('.subtotal-price');
+            if(subtotal.innerText && !localStorage.getItem('subtotal')){
+              localStorage.setItem('subtotal', subtotal.innerText);
+              actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+            }else{
+              actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+            }
+      </script>
       <section class="shopping-cart mx-auto px-[4%] lg:max-w-[1500px]">
         <div
         class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
