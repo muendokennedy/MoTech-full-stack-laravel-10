@@ -500,9 +500,6 @@
                   id: product_id
                 };
 
-                console.log(JSON.stringify(productId));
-
-                console.log(document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
                 // Create an AJAX Request
                 const xhrHttp = new XMLHttpRequest();
                 let targetUrl = "{{ route('add.cart') }}";
@@ -514,7 +511,6 @@
                 xhrHttp.onreadystatechange = function () {
                     if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
                         let response = JSON.parse(xhrHttp.responseText);
-                        console.log(response.status);
                         if(response.status === 'login to continue'){
                             location.href = '/login/customer';
                         } else if(response.status === 'The product has been added to cart successfully!'){

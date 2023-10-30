@@ -44,6 +44,7 @@ Route::prefix('admin')->group(function(){
 
 // Route to receive the add to cart AJAX request
 Route::post('/products/add/cart', [CartController::class, 'addToCart'])->name('add.cart');
+Route::post('/products/add/cart', [CartController::class, 'removeFromCart'])->name('remove.cart');
 Route::middleware('auth')->group(function(){
     Route::get('/cart', [CartController::class, 'showCartItems'])->name('cart');
 });

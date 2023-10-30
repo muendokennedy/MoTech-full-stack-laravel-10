@@ -1,10 +1,24 @@
 <x-app-layout>
+    @php
+            if(auth('web')->user()){
+                $extractedName = explode(' ', auth('web')->user()->name);
+                $firstCustomerName = $extractedName[0];
+            }
+    @endphp
     <section class="shopping-cart mx-auto pt-16 px-[4%] lg:max-w-[1500px]">
         <div
         class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
       >
         shopping<span class="text-[#68A4FE] px-2"> cart</span>
       </div>
+      <div class="product-removecart-confirm bg-green-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div onclick="this.parentElement.style.display = 'none'" class="addcart-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+        <p class="text-green-700 mt-6 mb-4">
+            @auth('web')
+              {{$firstCustomerName}}
+            @endauth, <span></span>
+        </p>
+        </div>
         <div class="cart-section flex flex-col lg:flex-row justify-between w-full">
           <div class="shopping-cart-container text-[#384857] w-full lg:w-[65%]">
             @forelse ($carts as $cart)
@@ -106,7 +120,7 @@
                 ${{ $cart->product->discountPrice }}
                 </div>
                 <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                  <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center">
+                  <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center" onclick="removeCartItem('{{$cart->product->id}}')">
                     Remove
                   </button>
                   <button type="submit"class="text-xs sm:text-sm px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center">
@@ -121,6 +135,9 @@
           </div>
           <!-- A script to increase and decrease the quantiy -->
           <script>
+              const productCartAlertMoodle = document.querySelector('.product-removecart-confirm');
+              const moodleText = productCartAlertMoodle.querySelector('span');
+
             let currentValue = document.querySelectorAll('.product-qty');
 
             function getValueAfterRefresh(value){
@@ -201,6 +218,42 @@
                 minus.previousElementSibling.value = localStorage.getItem(productId);
               }
             }
+
+            // Sending a AJAX request to remove an item from cart
+            function removeCartItem(product_id){
+                // Get the data
+                const productId = {
+                    id: product_id
+                };
+                // Create an AJAX request
+                const xhrHttp = new XMLHttpRequest();
+
+                let targetUrl = "{{ route('remove.cart') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function(){
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        } else if(response.status === 'The product has been removed from the cart!'){
+                            productCartAlertMoodle.style.display = 'block';
+                            moodleText.textContent = response.status;
+                            setTimeout(() => {
+                              productCartAlertMoodle.style.display = 'none';
+                            }, 8000);
+
+                            location.reload();
+                    }  else if(xhrHttp.readyState === 4){
+                        console.log('There was an error making the requst to remove this item frm the cart');
+                    }
+                }
+            }
+            xhrHttp.send(JSON.stringify(productId));
+        }
           </script>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
             <h2

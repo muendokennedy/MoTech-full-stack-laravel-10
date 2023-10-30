@@ -40,6 +40,23 @@ class CartController extends Controller
 
     }
 
+    public function removeFromCart(Request $request)
+    {
+        $jsonData = $request->getContent();
+
+        $product = json_decode($jsonData, true);
+
+        if(auth('web')->user()){
+
+            $deleted = Cart::where('product_id', $product['id'])->delete();
+
+            return response()->json(['status' => 'The product has been removed from the cart!']);
+
+        } else {
+            return response()->json(['status' => 'login to continue']);
+        }
+    }
+
     public function showCartItems()
     {
 
