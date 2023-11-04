@@ -250,36 +250,31 @@
                             }, 8000);
                             modifySubtotal(product_id, product_price);
                             location.reload();
-                        }  else if(xhrHttp.readyState === 4){
-                            console.log('There was an error making the requst to remove this item frm the cart');
-                        }
+                    }  else if(xhrHttp.readyState === 4){
+                        console.log('There was an error making the requst to remove this item frm the cart');
                     }
                 }
-                xhrHttp.send(JSON.stringify(productId));
             }
-            function modifySubtotal(id, price){
-                let subTotal = localStorage.getItem('subtotal');
-                localStorage.removeItem('subtotal');
-                let productPrice, productQty;
-                if(localStorage.getItem(id)){
-                    productQty = localStorage.getItem(id);
-                    productPrice = Number.parseInt(price) * (Number.parseInt(productQty) - 1);
-                    localStorage.removeItem(id);
-                    console.log(productPrice);
-                } else {
-                    productPrice = Number.parseInt(price);
-                    console.log(productPrice);
-                }
-                let newSubtotal =  Number.parseInt(subTotal) - productPrice;
-                console.log(newSubtotal);
-                localStorage.setItem('subtotal', newSubtotal);
-
-                if(localStorage.getItem('subtotal') == productPrice || localStorage.getItem('subtotal') == 'NaN'){
-                    console.log("The subtotal shoud be removed");
-                    localStorage.removeItem('subtotal');
-                }
-                console.log(localStorage.getItem('subtotal'));
-                console.log(productPrice);
+            xhrHttp.send(JSON.stringify(productId));
+        }
+        function modifySubtotal(id, price){
+                // let subTotal = localStorage.getItem('subtotal');
+                localStorage.clear();
+                // localStorage.removeItem('subtotal');
+                // let productPrice, productQty;
+                // if(localStorage.getItem(id)){
+                //     productQty = localStorage.getItem(id);
+                //     console.log(price);
+                //     productPrice = Number.parseInt(price) * Number.parseInt(productQty);
+                // } else {
+                //     productPrice = Number.parseInt(price);
+                // }
+                // let newSubtotal =  Number.parseInt(subTotal) - productPrice;
+                // localStorage.setItem('subtotal', newSubtotal);
+                // if(localStorage.getItem('subtotal') ===  productPrice){
+                //     localStorage.removeItem('subtotal');
+                // }
+                // localStorage.removeItem(id);
             }
           </script>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
@@ -319,7 +314,7 @@
       <script>
             let  subtotal = document.querySelector('.subtotal-holder');
             let actualSubtotal = document.querySelector('.subtotal-price');
-            if(subtotal.innerText && (!localStorage.getItem('subtotal') || localStorage.getItem('subtotal') == 0)){
+            if(subtotal.innerText || !localStorage.getItem('subtotal')){
               localStorage.setItem('subtotal', subtotal.innerText);
               actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
             }else{
