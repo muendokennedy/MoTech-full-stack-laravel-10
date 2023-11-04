@@ -314,10 +314,13 @@
       <script>
             let  subtotal = document.querySelector('.subtotal-holder');
             let actualSubtotal = document.querySelector('.subtotal-price');
-            if(subtotal.innerText || !localStorage.getItem('subtotal')){
-              localStorage.setItem('subtotal', subtotal.innerText);
+            if(subtotal.innerText && !localStorage.getItem('subtotal')){
+              localStorage.setItem('subtotal', subtotal.textContent);
               actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-            }else{
+            }else if(localStorage.getItem('subtotal')){
+                //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+                //   localStorage.setItem('subtotal', subtotal.textContent);
+              localStorage.setItem('subtotal', subtotal.innerText);
               actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
             }
       </script>
