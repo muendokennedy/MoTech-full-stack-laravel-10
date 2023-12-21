@@ -5,6 +5,67 @@
                 $firstCustomerName = $extractedName[0];
             }
     @endphp
+    <div class="product-addcart-confirm bg-green-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div onclick="this.parentElement.style.display = 'none'" class="addcart-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+        <p class="text-green-700 mt-6 mb-4">
+            @auth('web')
+              {{$firstCustomerName}}
+            @endauth, <span>The product has been added to cart successfully!</span>
+        </p>
+</div>
+<div class="product-alreadycart-confirm bg-red-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div onclick="this.parentElement.style.display = 'none'" class="addcart-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+        <p class="text-red-700 mt-6 mb-4">
+            @auth('web')
+              {{$firstCustomerName}}
+            @endauth, <span>The product has been added to cart successfully!</span>
+        </p>
+</div>
+<script>
+              const productCartAlertMoodle = document.querySelector('.product-addcart-confirm');
+              const moodleText = productCartAlertMoodle.querySelector('span');
+              const productAlreadyCartAlert = document.querySelector('.product-alreadycart-confirm');
+              const alreadyText = productAlreadyCartAlert.querySelector('span');
+
+              function addToWishlist(product_id){
+                // Get the data
+                const productId = {
+                  id: product_id
+                };
+
+                // Create an AJAX Request
+                const xhrHttp = new XMLHttpRequest();
+                let targetUrl = "{{ route('add.wishlist') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function () {
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        } else if(response.status === 'The product has been added to wishlist successfully'){
+                            productCartAlertMoodle.style.display = 'block';
+                            moodleText.textContent = response.status;
+                            setTimeout(() => {
+                              productCartAlertMoodle.style.display = 'none';
+                            }, 8000);
+                        } else if(response.status === 'The product is already in the wishlist'){
+                            productAlreadyCartAlert.style.display = 'block';
+                            alreadyText.textContent = response.status;
+                            setTimeout(() => {
+                                productAlreadyCartAlert.style.display = 'none';
+                            }, 8000);
+                        }
+                    } else if(xhrHttp.readyState === 4){
+                        console.log('There was an error in making the request');
+                    }
+                };
+                xhrHttp.send(JSON.stringify(productId));
+              }
+            </script>
     <section class="shopping-cart mx-auto pt-16 px-[4%] lg:max-w-[1500px]">
         <div
         class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
@@ -123,7 +184,7 @@
                   <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center" onclick="removeCartItem('{{$cart->product->id}}', '{{$cart->product->discountPrice}}')">
                     Remove
                   </button>
-                  <button type="submit"class="text-xs sm:text-sm px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center">
+                  <button type="submit"class="text-xs sm:text-sm px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center" onclick="addToWishlist('{{$cart->product->id}}')">
                     Save for later
                   </button>
                 </div>
@@ -324,6 +385,52 @@
               actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
             }
       </script>
+    <!-- script to send the AJAX Request to server -->
+      <script>
+              const productCartAlertMoodle = document.querySelector('.product-addcart-confirm');
+              const moodleText = productCartAlertMoodle.querySelector('span');
+              const productAlreadyCartAlert = document.querySelector('.product-alreadycart-confirm');
+              const alreadyText = productAlreadyCartAlert.querySelector('span');
+
+              function addToCart(product_id){
+                // Get the data
+                const productId = {
+                  id: product_id
+                };
+
+                // Create an AJAX Request
+                const xhrHttp = new XMLHttpRequest();
+                let targetUrl = "{{ route('add.cart') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function () {
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        } else if(response.status === 'The product has been added to cart successfully!'){
+                            productCartAlertMoodle.style.display = 'block';
+                            moodleText.textContent = response.status;
+                            setTimeout(() => {
+                              productCartAlertMoodle.style.display = 'none';
+                            }, 8000);
+                        } else if(response.status === 'The product is already in the cart!'){
+                            productAlreadyCartAlert.style.display = 'block';
+                            alreadyText.textContent = response.status;
+                            setTimeout(() => {
+                                productAlreadyCartAlert.style.display = 'none';
+                            }, 8000);
+                        }
+                    } else if(xhrHttp.readyState === 4){
+                        console.log('There was an error in making the request');
+                    }
+                };
+                xhrHttp.send(JSON.stringify(productId));
+              }
+            </script>
       <section class="shopping-cart mx-auto px-[4%] lg:max-w-[1500px]">
         <div
         class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
@@ -331,205 +438,113 @@
         wishlist
       </div>
         <div class="cart-section">
-          <div class="shopping-cart-container text-[#384857] w-full lg:w-5/6">
-            <div
-            class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-48 w-full border-b-2 my-4"
-          >
-            <div class="cart-image h-full">
-              <img
-                src="images/redmi note 12.png"
-                alt="A cart item"
-                class="md:-translate-y-4 h-auto scale-50 sm:scale-100 sm:h-full"
-              />
-            </div>
-            <div class="cart-info h-full flex flex-col justify-between">
-              <div class="space-y-2">
-                <div class="product-name font-semibold text-base sm:text-xl capitalize">
-                  redmi note 12
-                </div>
-                <div class="product-text text-sm">From redmi</div>
-                <div class="rating-box flex gap-2 items-center">
-                  <div class="star-box text-sm text-[#FFCF10]">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                  </div>
-                  <div class="rating-text text-xs text-[#68A4FE]">
-                    100,450 Ratings
-                  </div>
-                </div>
-              </div>
-              <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                <i
-                  class="fa-solid fa-plus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                ></i>
-                <input
-                  type="number"
-                  name=""
-                  id=""
-                  class="p-2 border-2 rounded-md outline-none w-24"
+          <div class="shopping-cart-container text-[#384857] w-full">
+          @forelse ($wishlists as $wishlist)
+            <div class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-56 w-full border-b-2 my-4">
+              <div class="cart-image h-full w-32 md:w-44">
+                <img
+                  src="{{ asset('/storage/'. $wishlist->product->firstImage)}}"
+                  alt="A cart item"
+                  class="md:-translate-y-4 h-auto scale-50 sm:h-full"
                 />
-                <i
-                  class="fa-solid fa-minus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                ></i>
               </div>
-            </div>
-            <div class="action-box h-full flex flex-col justify-between">
-              <div
-                class="product-price self-end text-[#FF412C] text-lg font-normal"
-              >
-                $316
-              </div>
-              <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                <button
-                  type="submit"
-                  class="px-4 py-2 bg-[#ffcf10] rounded-md text-white text-center"
-                >
-                  Remove
-                </button>
-                <button
-                  type="submit"
-                  class="px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"
-                >
-                  Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div
-            class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-48 w-full border-b-2 my-4"
-          >
-            <div class="cart-image h-full">
-              <img
-                src="images/redmi note 12.png"
-                alt="A cart item"
-                class="md:-translate-y-4 h-auto scale-50 sm:scale-100 sm:h-full"
-              />
-            </div>
-            <div class="cart-info h-full flex flex-col justify-between">
-              <div class="space-y-2">
-                <div class="product-name font-semibold text-base sm:text-xl capitalize">
-                  redmi note 12
+              <div class="cart-info h-full flex flex-col justify-between">
+                <div class="space-y-2">
+                  <div class="product-name font-semibold text-base sm:text-lg capitalize">
+                  {{ $wishlist->product->productName }}
+                  </div>
+                  <div class="product-text text-sm capitalize">{{ $wishlist->product->brandName }}</div>
+                  <div class="rating-box flex gap-2 items-center">
+                    <div class="star-box text-center text-xs my-2 sm:my-4">
+                    @switch($wishlist->product->avgRating)
+                        @case(1)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(1.5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(2)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(2.5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(3)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(3.5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(4)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                        @break
+                        @case(4.5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                        @break
+                        @case(5)
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                        @default
+                    @endswitch
+                    </div>
+                    <div class="rating-text text-xs text-[#68A4FE]">
+                      100,450 Ratings
+                    </div>
                 </div>
-                <div class="product-text text-sm">From redmi</div>
-                <div class="rating-box flex gap-2 items-center">
-                  <div class="star-box text-sm text-[#FFCF10]">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                  </div>
-                  <div class="rating-text text-xs text-[#68A4FE]">
-                    100,450 Ratings
-                  </div>
+            </div>
+              </div>
+              <div class="action-box h-full flex flex-col justify-between">
+                <div class="product-price self-end text-[#FF412C] text-sm font-bold">
+                ${{ $wishlist->product->discountPrice }}
                 </div>
-              </div>
-              <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                <i
-                  class="fa-solid fa-plus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                ></i>
-                <input
-                  type="number"
-                  name=""
-                  id=""
-                  class="p-2 border-2 rounded-md outline-none w-24"
-                />
-                <i
-                  class="fa-solid fa-minus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                ></i>
-              </div>
-            </div>
-            <div class="action-box h-full flex flex-col justify-between">
-              <div
-                class="product-price self-end text-[#FF412C] text-lg font-normal"
-              >
-                $316
-              </div>
-              <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                <button
-                  type="submit"
-                  class="px-4 py-2 bg-[#ffcf10] rounded-md text-white text-center"
-                >
-                  Remove
-                </button>
-                <button
-                  type="submit"
-                  class="px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"
-                >
-                Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
-          <div
-            class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-48 w-full border-b-2 my-4"
-          >
-            <div class="cart-image h-full">
-              <img
-                src="images/redmi note 12.png"
-                alt="A cart item"
-                class="md:-translate-y-4 h-auto scale-50 sm:scale-100 sm:h-full"
-              />
-            </div>
-            <div class="cart-info h-full flex flex-col justify-between">
-              <div class="space-y-2">
-                <div class="product-name font-semibold text-base sm:text-xl capitalize">
-                  redmi note 12
-                </div>
-                <div class="product-text text-sm">From redmi</div>
-                <div class="rating-box flex gap-2 items-center">
-                  <div class="star-box text-sm text-[#FFCF10]">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                  </div>
-                  <div class="rating-text text-xs text-[#68A4FE]">
-                    100,450 Ratings
-                  </div>
+                <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
+                  <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center" onclick="removeCartItem('{{$wishlist->product->id}}', '{{$wishlist->product->discountPrice}}')">
+                    Remove
+                  </button>
+                  <button type="submit"  class="text-xs sm:text-sm px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"    onclick="addToCart({{$wishlist->product->id}})">
+                    add to cart
+                  </button>
                 </div>
               </div>
-              <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                <i
-                  class="fa-solid fa-plus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                ></i>
-                <input
-                  type="number"
-                  name=""
-                  id=""
-                  class="p-2 border-2 rounded-md outline-none w-24"
-                />
-                <i
-                  class="fa-solid fa-minus text-xl p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"
-                ></i>
-              </div>
             </div>
-            <div class="action-box h-full flex flex-col justify-between">
-              <div
-                class="product-price self-end text-[#FF412C] text-lg font-normal"
-              >
-                $316
-              </div>
-              <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                <button
-                  type="submit"
-                  class="px-4 py-2 bg-[#ffcf10] rounded-md text-white text-center"
-                >
-                  Remove
-                </button>
-                <button
-                  type="submit"
-                  class="px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"
-                >
-                Add to Cart
-                </button>
-              </div>
-            </div>
-          </div>
+            @empty
+            <p class="my-8 text-base sm:text-lg">There are no products in the wishlist! You may consider add some</p>
+            @endforelse
           </div>
         </div>
       </section>

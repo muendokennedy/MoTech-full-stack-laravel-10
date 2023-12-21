@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
@@ -20,12 +21,28 @@ class WishlistController extends Controller
 
             if($productinWishlist->count() === 0){
 
+                $productinCart = Cart::where('product_id', $product['id'])->get();
+
+                if($productinCart){
+
+
+                    $deleted = Cart::where('product_id', $product['id'])->delete();
+
+                    $wishlist = Wishlist::create([
+                        'user_id' => auth()->user()->id,
+                        'product_id' => $product['id']
+                    ]);
+                    return response()->json(['status' => 'The product has been added to wishlist successfully']);
+                } else {
+
                 $wishlist = Wishlist::create([
                     'user_id' => auth()->user()->id,
                     'product_id'=> $product['id']
                 ]);
 
-                return response()->json(['status' => 'product added to wishlist successfully']);
+                return response()->json(['status' => 'The product has been added to wishlist successfully']);
+
+                }
             } else {
 
                 return response()->json(['status' => 'The product is already in the wishlist']);
@@ -46,7 +63,7 @@ class WishlistController extends Controller
             $deleted = Wishlist::where('product_id', $product['id'])->delete();
 
             return response()->json([
-                'status'=> 'The product has been removed from wishlist',
+                'status'=> 'The product has been removed from the wishlist',
                 'id' => $product['id']
             ]);
         } else {

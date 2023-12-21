@@ -48,12 +48,9 @@ Route::post('/products/add/cart', [CartController::class, 'addToCart'])->name('a
 Route::post('/products/remove/cart', [CartController::class, 'removeFromCart'])->name('remove.cart');
 // Routes to receive the add to wishlist AJAX request
 Route::post('/products/add/wishlist', [WishlistController::class, 'addToWishlist'])->name('add.wishlist');
-Route::post('/products/remove/wishlist', [WishlistController::class, 'removeFromWishlist'])->name('name.wishlist');
+Route::post('/products/remove/wishlist', [WishlistController::class, 'removeFromWishlist'])->name('remove.wishlist');
 
 Route::middleware('auth')->group(function(){
     Route::get('/cart', [CartController::class, 'showCartItems'])->name('cart');
-
-    // Show the wishlist items
-    Route::get('/cart', [WishlistController::class, 'showWishlistItems'])->name('cart');
 
 });

@@ -82,6 +82,8 @@ class CartController extends Controller
 
         $carts = Cart::where('user_id', auth('web')->user()->id)->get();
 
-        return view('cart', compact('carts'));
+        $wishlists = Wishlist::where('user_id', auth('web')->user()->id)->get();
+
+        return view('cart', compact('carts', 'wishlists'));
     }
 }

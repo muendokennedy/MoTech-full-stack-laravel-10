@@ -1,4 +1,109 @@
 <x-app-layout>
+<div class="product-addcart-confirm bg-green-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div onclick="this.parentElement.style.display = 'none'" class="addcart-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+        <p class="text-green-700 mt-6 mb-4">
+            @auth('web')
+              {{$firstCustomerName}}
+            @endauth, <span>The product has been added to cart successfully!</span>
+        </p>
+</div>
+<div class="product-alreadycart-confirm bg-red-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div onclick="this.parentElement.style.display = 'none'" class="addcart-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+        <p class="text-red-700 mt-6 mb-4">
+            @auth('web')
+              {{$firstCustomerName}}
+            @endauth, <span>The product has been added to cart successfully!</span>
+        </p>
+</div>
+<script>
+              const productCartAlertMoodle = document.querySelector('.product-addcart-confirm');
+              const moodleText = productCartAlertMoodle.querySelector('span');
+              const productAlreadyCartAlert = document.querySelector('.product-alreadycart-confirm');
+              const alreadyText = productAlreadyCartAlert.querySelector('span');
+
+              function addToWishlist(product_id){
+                // Get the data
+                const productId = {
+                  id: product_id
+                };
+
+                // Create an AJAX Request
+                const xhrHttp = new XMLHttpRequest();
+                let targetUrl = "{{ route('add.wishlist') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function () {
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        } else if(response.status === 'The product has been added to wishlist successfully'){
+                            productCartAlertMoodle.style.display = 'block';
+                            moodleText.textContent = response.status;
+                            setTimeout(() => {
+                              productCartAlertMoodle.style.display = 'none';
+                            }, 8000);
+                        } else if(response.status === 'The product is already in the wishlist'){
+                            productAlreadyCartAlert.style.display = 'block';
+                            alreadyText.textContent = response.status;
+                            setTimeout(() => {
+                                productAlreadyCartAlert.style.display = 'none';
+                            }, 8000);
+                        }
+                    } else if(xhrHttp.readyState === 4){
+                        console.log('There was an error in making the request');
+                    }
+                };
+                xhrHttp.send(JSON.stringify(productId));
+              }
+            </script>            <script>
+              const productCartAlertMoodle = document.querySelector('.product-addcart-confirm');
+              const moodleText = productCartAlertMoodle.querySelector('span');
+              const productAlreadyCartAlert = document.querySelector('.product-alreadycart-confirm');
+              const alreadyText = productAlreadyCartAlert.querySelector('span');
+
+              function addToWishlist(product_id){
+                // Get the data
+                const productId = {
+                  id: product_id
+                };
+
+                // Create an AJAX Request
+                const xhrHttp = new XMLHttpRequest();
+                let targetUrl = "{{ route('add.wishlist') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function () {
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        } else if(response.status === 'The product has been added to wishlist successfully'){
+                            productCartAlertMoodle.style.display = 'block';
+                            moodleText.textContent = response.status;
+                            setTimeout(() => {
+                              productCartAlertMoodle.style.display = 'none';
+                            }, 8000);
+                        } else if(response.status === 'The product is already in the wishlist'){
+                            productAlreadyCartAlert.style.display = 'block';
+                            alreadyText.textContent = response.status;
+                            setTimeout(() => {
+                                productAlreadyCartAlert.style.display = 'none';
+                            }, 8000);
+                        }
+                    } else if(xhrHttp.readyState === 4){
+                        console.log('There was an error in making the request');
+                    }
+                };
+                xhrHttp.send(JSON.stringify(productId));
+              }
+            </script>
     <section class="product-home mt-16 px-[4%] mx-auto lg:max-w-[1500px]">
         <div
         class="heading text-[#384857] border-b-2 text-base sm:text-xl font-semibold py-2 sm:py-4 capitalize"
