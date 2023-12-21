@@ -55,4 +55,11 @@ class WishlistController extends Controller
         }
 
     }
+
+    public function showWishlistItems()
+    {
+        $wishlists = Wishlist::where('user_id', auth('web')->user()->id)->get();
+
+        return view('cart', compact('wishlists'));
+    }
 }
