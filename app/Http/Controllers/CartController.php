@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
-use App\Models\Product;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -22,12 +23,28 @@ class CartController extends Controller
 
             if($productinCart->count() === 0){
 
-                $cart = Cart::create([
-                    'user_id' => auth()->user()->id,
-                    'product_id' => $product['id']
-                ]);
+                $productinWishlist = Wishlist::where('product_id', $product['id'])->get();
 
-                return response()->json(['status' => 'The product has been added to cart successfully!']);
+                if($productinWishlist){
+
+                    $deleted = Wishlist::where('product_id', $product['id'])->delete();
+
+                    $cart = Cart::create([
+                        'user_id' => auth()->user()->id,
+                        'product_id' => $product['id']
+                    ]);
+
+                    return response()->json(['status' => 'The product has been added to cart successfully!']);
+
+                } else {
+
+                    $cart = Cart::create([
+                        'user_id' => auth()->user()->id,
+                        'product_id' => $product['id']
+                    ]);
+
+                    return response()->json(['status' => 'The product has been added to cart successfully!']);
+                }
 
             } else {
 
