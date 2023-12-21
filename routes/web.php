@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +46,14 @@ Route::prefix('admin')->group(function(){
 // Route to receive the add to cart AJAX request
 Route::post('/products/add/cart', [CartController::class, 'addToCart'])->name('add.cart');
 Route::post('/products/remove/cart', [CartController::class, 'removeFromCart'])->name('remove.cart');
+// Routes to receive the add to wishlist AJAX request
+Route::post('/products/add/wishlist', [WishlistController::class, 'addToWishlist'])->name('add.wishlist');
+Route::post('/products/remove/wishlist', [WishlistController::class, 'removeFromWishlist'])->name('name.wishlist');
+
 Route::middleware('auth')->group(function(){
     Route::get('/cart', [CartController::class, 'showCartItems'])->name('cart');
+
+    // Show the wishlist items
+    Route::get('/cart', [WishlistController::class, 'showWishlistItems'])->name('cart');
+
 });
