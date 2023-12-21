@@ -35,4 +35,24 @@ class WishlistController extends Controller
             return response()->json(['status' => 'Login to continue']);
         }
     }
+    public function removeFromWishlist(Request $request)
+    {
+        $jsonData = $request->getContent();
+
+        $product = json_decode($jsonData, true);
+
+        if(auth('web')->user()){
+
+            $deleted = Wishlist::where('product_id', $product['id'])->delete();
+
+            return response()->json([
+                'status'=> 'The product has been removed from wishlist',
+                'id' => $product['id']
+            ]);
+        } else {
+
+            return response()->json(['status' => 'Login to continue']);
+        }
+
+    }
 }
