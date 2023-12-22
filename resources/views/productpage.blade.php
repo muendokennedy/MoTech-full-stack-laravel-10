@@ -33,7 +33,7 @@
                   id: product_id
                 };
 
-                // Create an AJAX Request
+                // Create an AJAX Request to add product to wishlist
                 const xhrHttp = new XMLHttpRequest();
                 let targetUrl = "{{ route('add.wishlist') }}";
 
@@ -65,13 +65,10 @@
                 };
                 xhrHttp.send(JSON.stringify(productId));
               }
-            </script>            <script>
-              const productCartAlertMoodle = document.querySelector('.product-addcart-confirm');
-              const moodleText = productCartAlertMoodle.querySelector('span');
-              const productAlreadyCartAlert = document.querySelector('.product-alreadycart-confirm');
-              const alreadyText = productAlreadyCartAlert.querySelector('span');
 
-              function addToWishlist(product_id){
+              // Create an AJAX request to add product to cart
+
+              function addToCart(product_id){
                 // Get the data
                 const productId = {
                   id: product_id
@@ -79,7 +76,7 @@
 
                 // Create an AJAX Request
                 const xhrHttp = new XMLHttpRequest();
-                let targetUrl = "{{ route('add.wishlist') }}";
+                let targetUrl = "{{ route('add.cart') }}";
 
                 xhrHttp.open('POST', targetUrl, true);
                 xhrHttp.setRequestHeader('Content-Type', 'application/json');
@@ -90,18 +87,18 @@
                         let response = JSON.parse(xhrHttp.responseText);
                         if(response.status === 'login to continue'){
                             location.href = '/login/customer';
-                        } else if(response.status === 'The product has been added to wishlist successfully'){
+                        } else if(response.status === 'The product has been added to cart successfully!'){
                             productCartAlertMoodle.style.display = 'block';
                             moodleText.textContent = response.status;
                             setTimeout(() => {
                               productCartAlertMoodle.style.display = 'none';
-                            }, 8000);
-                        } else if(response.status === 'The product is already in the wishlist'){
+                            }, 5000);
+                        } else if(response.status === 'The product is already in the cart!'){
                             productAlreadyCartAlert.style.display = 'block';
                             alreadyText.textContent = response.status;
                             setTimeout(() => {
                                 productAlreadyCartAlert.style.display = 'none';
-                            }, 8000);
+                            }, 5000);
                         }
                     } else if(xhrHttp.readyState === 4){
                         console.log('There was an error in making the request');
@@ -136,8 +133,8 @@
             </div>
           </div>
           <div class="action-button-container my-4 sm:my-8 flex w-full justify-between">
-            <button type="submit" class="text-sm sm:text-base px-2 sm:px-4 py-3 rounded-md w-40 bg-[#ffcf10] basis-[48%] capitalize">Proceed to buy</button>
-            <button type="submit" class="text-sm sm:text-base px-2 sm:px-4 py-3 rounded-md w-40 bg-[#68a4fe] basis-[48%] text-white capitalize">save for later</button>
+            <button type="submit" class="text-sm sm:text-base px-2 sm:px-4 py-3 rounded-md w-40 bg-[#ffcf10] basis-[48%] capitalize" onclick="addToCart({{$product->id}})">Proceed to buy</button>
+            <button type="submit" class="text-sm sm:text-base px-2 sm:px-4 py-3 rounded-md w-40 bg-[#68a4fe] basis-[48%] text-white capitalize" onclick="addToWishlist('{{$product->id}}')">save for later</button>
           </div>
         </div>
         <div class="product-content-details w-full md:basis-[48%] p-2 sm:p-4 my-2 md:my-4">
