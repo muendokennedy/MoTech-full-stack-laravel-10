@@ -584,7 +584,7 @@
                   <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center" onclick="removeWishlistItem('{{$wishlist->product->id}}', '{{$wishlist->product->discountPrice}}')">
                     Remove
                   </button>
-                  <button type="submit"  class="text-xs sm:text-sm px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"    onclick="addToCart({{$wishlist->product->id}})">
+                  <button type="submit"  class="text-xs sm:text-sm px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center" onclick="addToCart({{$wishlist->product->id}})">
                     add to cart
                   </button>
                 </div>
@@ -603,101 +603,89 @@
         you may also<span class="text-[#68A4FE] px-2"> like</span>
       </div>
       <div class="top-sales-container grid mx-auto w-[95%]">
-        <div class="product-box text-center my-2 sm:my-4">
-          <div class="flex justify-center items-center">
-            <div class="product-image">
-              <img src="images/redmi note 12.png" alt="A mobile phone"/>
+      @forelse ($likedProducts as $topSalesProduct)
+            <div class="product-box text-center my-2 sm:my-4">
+              <div class="flex justify-center items-center">
+                <a href="{{route('product.page', $topSalesProduct)}}" class="product-image">
+                  <img src="{{asset('/storage/'. $topSalesProduct->firstImage)}}" alt="A mobile phone"/>
+                </a>
+              </div>
+              <div class="product-title text-xs font-normal sm:font-semibold">
+                {{ $topSalesProduct->productName }}
+              </div>
+                  <div class="star-box text-center text-xs sm:text-base my-2 sm:my-4">
+                  @switch($topSalesProduct->avgRating)
+                      @case(1)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(1.5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(2)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(2.5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(3)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(3.5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(4)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#d3d2cd]"></i>
+                      @break
+                      @case(4.5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star-half-stroke text-[#ffcf10]"></i>
+                      @break
+                      @case(5)
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
+                      @default
+                  @endswitch
+              </div>
+              <div class="first-price my-1 sm:my-3 font-semibold">${{number_format($topSalesProduct->initialPrice)}}</div>
+              <button class="add-cart-btn text-xs" onclick="addToCart({{$topSalesProduct->id}})">add to cart</button>
             </div>
-          </div>
-          <div class="product-title text-sm font-normal sm:font-semibold">
-            infinix hot 12
-          </div>
-          <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <div class="first-price my-1 sm:my-3 font-semibold">$136</div>
-          <button class="add-cart-btn text-xs">add to cart</button>
-        </div>
-        <div class="product-box text-center my-2 sm:my-4">
-          <div class="flex justify-center items-center">
-            <div class="product-image">
-              <img src="images/redmi note 12.png" alt="A mobile phone"/>
-            </div>
-          </div>
-          <div class="product-title text-sm font-normal sm:font-semibold">
-            infinix hot 12
-          </div>
-          <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <div class="first-price my-1 sm:my-3 font-semibold">$136</div>
-          <button class="add-cart-btn text-xs">add to cart</button>
-        </div>
-        <div class="product-box text-center my-2 sm:my-4">
-          <div class="flex justify-center items-center">
-            <div class="product-image">
-              <img src="images/redmi note 12.png" alt="A mobile phone"/>
-            </div>
-          </div>
-          <div class="product-title text-sm font-normal sm:font-semibold">
-            infinix hot 12
-          </div>
-          <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <div class="first-price my-1 sm:my-3 font-semibold">$136</div>
-          <button class="add-cart-btn text-xs">add to cart</button>
-        </div>
-        <div class="product-box text-center my-2 sm:my-4">
-          <div class="flex justify-center items-center">
-            <div class="product-image">
-              <img src="images/redmi note 12.png" alt="A mobile phone"/>
-            </div>
-          </div>
-          <div class="product-title text-sm font-normal sm:font-semibold">
-            infinix hot 12
-          </div>
-          <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <div class="first-price my-1 sm:my-3 font-semibold">$136</div>
-          <button class="add-cart-btn text-xs">add to cart</button>
-        </div>
-        <div class="product-box text-center my-2 sm:my-4">
-          <div class="flex justify-center items-center">
-            <div class="product-image">
-              <img src="images/redmi note 12.png" alt="A mobile phone"/>
-            </div>
-          </div>
-          <div class="product-title text-sm font-normal sm:font-semibold">
-            infinix hot 12
-          </div>
-          <div class="star-box text-center text-xs sm:text-base text-[#FFCF10] my-2 sm:my-4">
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </div>
-          <div class="first-price my-1 sm:my-3 font-semibold">$136</div>
-          <button class="add-cart-btn text-xs">add to cart</button>
-        </div>
+            @empty
+            <p>There are no products available</p>
+            @endforelse
       </div>
       </section>
 </x-app-layout>

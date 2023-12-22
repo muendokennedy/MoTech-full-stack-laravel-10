@@ -442,4 +442,54 @@
             @endforelse
         </div>
       </section>
+      <!-- script to send the AJAX Request to server -->
+      <script>
+              const productCartAlertMoodle = document.querySelector('.product-addcart-confirm');
+              const moodleText = productCartAlertMoodle.querySelector('span');
+              const productAlreadyCartAlert = document.querySelector('.product-alreadycart-confirm');
+              const alreadyText = productAlreadyCartAlert.querySelector('span');
+
+              function addToCart(product_id){
+                // Get the data
+                const productId = {
+                  id: product_id
+                };
+
+                // Create an AJAX Request
+                const xhrHttp = new XMLHttpRequest();
+                let targetUrl = "{{ route('add.cart') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function () {
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        } else if(response.status === 'The product has been added to cart successfully!'){
+                            productCartAlertMoodle.style.display = 'block';
+                            moodleText.textContent = response.status;
+                            setTimeout(() => {
+                              productCartAlertMoodle.style.display = 'none';
+                            }, 5000);
+                        } else if(response.status === 'The product is already in the cart!'){
+                            productAlreadyCartAlert.style.display = 'block';
+                            alreadyText.textContent = response.status;
+                            setTimeout(() => {
+                                productAlreadyCartAlert.style.display = 'none';
+                            }, 5000);
+                        }
+                    } else if(xhrHttp.readyState === 4){
+                        console.log('There was an error in making the request');
+                    }
+                };
+                xhrHttp.send(JSON.stringify(productId));
+
+                setTimeout(() => {
+                    location.reload();
+                }, 5000);
+              }
+            </script>
 </x-app-layout>

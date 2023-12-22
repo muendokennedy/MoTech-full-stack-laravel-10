@@ -84,6 +84,33 @@ class CartController extends Controller
 
         $wishlists = Wishlist::where('user_id', auth('web')->user()->id)->get();
 
-        return view('cart', compact('carts', 'wishlists'));
+        // The algorithm to display the you may also like products in the cart page
+
+        $initialLiked = $carts->concat($wishlists);
+
+        $nowLiked = collect([]);
+
+        foreach ($initialLiked as $value) {
+            # code...
+            $nowLiked->push($value->product->category);
+        }
+
+        $likedProducts = collect([]);
+
+        $likedSubjects = $nowLiked->duplicates();
+
+        if($likedSubjects->count() !== 0){
+
+            foreach($likedSubjects as $key => $secondValue){
+                $likedProducts = Product::where('category', $secondValue)->get()->take(5);
+            }
+
+        } else {
+
+            $likedProducts = Product::where('category', $nowLiked->first())->get()->take(5);
+        }
+
+
+        return view('cart', compact('carts', 'wishlists', 'likedProducts'));
     }
 }
