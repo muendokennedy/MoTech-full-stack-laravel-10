@@ -174,13 +174,13 @@
           <div class="shopping-cart-container text-[#384857] w-full lg:w-[65%]">
             @forelse ($carts as $cart)
             <div class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-56 w-full border-b-2 my-4">
-              <div class="cart-image h-full w-32 md:w-44">
+              <a href="{{route('product.page', $cart->product)}}" class="cart-image h-full w-32 md:w-44">
                 <img
                   src="{{ asset('/storage/'. $cart->product->firstImage)}}"
                   alt="A cart item"
                   class="md:-translate-y-4 h-auto scale-50 sm:h-full"
                 />
-              </div>
+              </a>
               <div class="cart-info h-full flex flex-col justify-between">
                 <div class="space-y-2">
                   <div class="product-name font-semibold text-base sm:text-lg capitalize">
@@ -492,13 +492,14 @@
           <div class="shopping-cart-container wishlist-container text-[#384857] w-full">
           @forelse ($wishlists as $wishlist)
             <div class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-56 w-full border-b-2 my-4">
-              <div class="cart-image h-full w-32 md:w-44">
+              <a href="{{route('product.page', $wishlist->product)}}" class="cart-image h-full w-32 md:w-44">
+
                 <img
                   src="{{ asset('/storage/'. $wishlist->product->firstImage)}}"
                   alt="A cart item"
                   class="md:-translate-y-4 h-auto scale-50 sm:h-full"
                 />
-              </div>
+              </a>
               <div class="cart-info h-full flex flex-col justify-between">
                 <div class="space-y-2">
                   <div class="product-name font-semibold text-base sm:text-lg capitalize">
