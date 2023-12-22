@@ -1,4 +1,26 @@
 <x-app-layout>
+@php
+    if(auth('web')->user()){
+        $extractedName = explode(' ', auth('web')->user()->name);
+        $firstCustomerName = $extractedName[0];
+    }
+@endphp
+<div class="product-addcart-confirm bg-green-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div onclick="this.parentElement.style.display = 'none'" class="addcart-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+        <p class="text-green-700 mt-6 mb-4">
+            @auth('web')
+              {{$firstCustomerName}}
+            @endauth, <span>The product has been added to cart successfully!</span>
+        </p>
+</div>
+<div class="product-alreadycart-confirm bg-red-200 rounded-md py-2 px-4 w-1/2 m-auto fixed top-1/3 left-1/2 -translate-x-1/2 z-50 hidden">
+        <div onclick="this.parentElement.style.display = 'none'" class="addcart-close text-2xl absolute right-2 top-0"><i class="fa-solid fa-times p-2 cursor-pointer font-bold"></i></div>
+        <p class="text-red-700 mt-6 mb-4">
+            @auth('web')
+              {{$firstCustomerName}}
+            @endauth, <span>The product has been added to cart successfully!</span>
+        </p>
+</div>
     @foreach ($offerProducts as $offerProduct)
     <section
         class="@if ($loop->iteration == 1)
@@ -160,15 +182,10 @@
                       <i class="fa-solid fa-star text-[#ffcf10]"></i>
                       <i class="fa-solid fa-star text-[#ffcf10]"></i>
                       @default
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
-                      <i class="fa-solid fa-star text-[#ffcf10]"></i>
                   @endswitch
               </div>
               <div class="first-price my-1 sm:my-3 font-semibold">${{number_format($topSalesProduct->initialPrice)}}</div>
-              <button class="add-cart-btn text-xs">add to cart</button>
+              <button class="add-cart-btn text-xs" onclick="addToCart({{$topSalesProduct->id}})">add to cart</button>
             </div>
             @empty
             <p>There are no products available</p>
@@ -277,7 +294,7 @@
           </div>
           <div class="first-price my-1 text-xs sm:text-base sm:my-3 font-semibold">${{ number_format($product->discountPrice) }}</div>
         </div>
-          <button class="add-cart-btn text-xs">add to cart</button>
+          <button class="add-cart-btn text-xs"  onclick="addToCart({{$product->id}})">add to cart</button>
         </div>
          @empty
         <p>There are no products available</p>
@@ -435,7 +452,7 @@
                   @endswitch
               </div>
               <div class="first-price my-1 sm:my-3 font-semibold">${{number_format($product->initialPrice)}}</div>
-              <button class="add-cart-btn text-xs">add to cart</button>
+              <button class="add-cart-btn text-xs" onclick="addToCart({{$product->id}})">add to cart</button>
             </div>
             @empty
             <p>There are no products available</p>
