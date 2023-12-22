@@ -518,19 +518,23 @@
                             moodleText.textContent = response.status;
                             setTimeout(() => {
                               productCartAlertMoodle.style.display = 'none';
-                            }, 8000);
+                            }, 5000);
                         } else if(response.status === 'The product is already in the cart!'){
                             productAlreadyCartAlert.style.display = 'block';
                             alreadyText.textContent = response.status;
                             setTimeout(() => {
                                 productAlreadyCartAlert.style.display = 'none';
-                            }, 8000);
+                            }, 5000);
                         }
                     } else if(xhrHttp.readyState === 4){
                         console.log('There was an error in making the request');
                     }
                 };
                 xhrHttp.send(JSON.stringify(productId));
+
+                setTimeout(() => {
+                    location.reload();
+                }, 5000);
               }
             </script>
 </x-app-layout>

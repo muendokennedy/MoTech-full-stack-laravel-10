@@ -51,20 +51,110 @@
                             moodleText.textContent = response.status;
                             setTimeout(() => {
                               productCartAlertMoodle.style.display = 'none';
-                            }, 8000);
+                            }, 5000);
                         } else if(response.status === 'The product is already in the wishlist'){
                             productAlreadyCartAlert.style.display = 'block';
                             alreadyText.textContent = response.status;
                             setTimeout(() => {
                                 productAlreadyCartAlert.style.display = 'none';
-                            }, 8000);
+                            }, 5000);
                         }
                     } else if(xhrHttp.readyState === 4){
                         console.log('There was an error in making the request');
                     }
                 };
                 xhrHttp.send(JSON.stringify(productId));
+
+                setTimeout(() => {
+                    location.reload();
+                }, 5000);
               }
+
+            // Sending a AJAX request to remove an item from cart
+            function removeCartItem(product_id, product_price){
+                // Get the data
+                const productId = {
+                    id: product_id
+                };
+
+
+                // Create an AJAX request
+                const xhrHttp = new XMLHttpRequest();
+
+                let targetUrl = "{{ route('remove.cart') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function(){
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        } else if(response.status === 'The product has been removed from the cart!'){
+                            productCartAlertMoodle.style.display = 'block';
+                            moodleText.textContent = response.status;
+                            setTimeout(() => {
+                              productCartAlertMoodle.style.display = 'none';
+                            }, 5000);
+                            modifySubtotal(product_id, product_price);
+                            location.reload();
+                    }  else if(xhrHttp.readyState === 4){
+                        console.log('There was an error making the requst to remove this item frm the cart');
+                    }
+                }
+            }
+            xhrHttp.send(JSON.stringify(productId));
+
+            setTimeout(() => {
+                    location.reload();
+                }, 5000);
+        }
+
+        // Sending a AJAX request to remove an item from cart
+                function removeWishlistItem(product_id, product_price){
+
+                // Get the initial content of the wishlist container
+                // Get the data
+                const productId = {
+                    id: product_id
+                };
+
+
+                // Create an AJAX request
+                const xhrHttp = new XMLHttpRequest();
+
+                let targetUrl = "{{ route('remove.wishlist') }}";
+
+                xhrHttp.open('POST', targetUrl, true);
+                xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                xhrHttp.onreadystatechange = function(){
+                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                        let response = JSON.parse(xhrHttp.responseText);
+                        if(response.status === 'login to continue'){
+                            location.href = '/login/customer';
+                        } else if(response.status === 'The product has been removed from the wishlist'){
+                            productCartAlertMoodle.style.display = 'block';
+                            moodleText.textContent = response.status;
+                            setTimeout(() => {
+                                productCartAlertMoodle.style.display = 'none';
+                            }, 5000);
+                            modifySubtotal(product_id, product_price);
+                        }  else if(xhrHttp.readyState === 4){
+                            console.log('There was an error making the requst to remove this item frm the cart');
+                        }
+                    }
+                }
+                xhrHttp.send(JSON.stringify(productId));
+
+                setTimeout(() => {
+                    location.reload();
+                }, 5000);
+
+        }
             </script>
     <section class="shopping-cart mx-auto pt-16 px-[4%] lg:max-w-[1500px]">
         <div
@@ -279,45 +369,6 @@
               }
             }
 
-
-
-            // Sending a AJAX request to remove an item from cart
-            function removeCartItem(product_id, product_price){
-                // Get the data
-                const productId = {
-                    id: product_id
-                };
-
-
-                // Create an AJAX request
-                const xhrHttp = new XMLHttpRequest();
-
-                let targetUrl = "{{ route('remove.cart') }}";
-
-                xhrHttp.open('POST', targetUrl, true);
-                xhrHttp.setRequestHeader('Content-Type', 'application/json');
-                xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
-
-                xhrHttp.onreadystatechange = function(){
-                    if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
-                        let response = JSON.parse(xhrHttp.responseText);
-                        if(response.status === 'login to continue'){
-                            location.href = '/login/customer';
-                        } else if(response.status === 'The product has been removed from the cart!'){
-                            productCartAlertMoodle.style.display = 'block';
-                            moodleText.textContent = response.status;
-                            setTimeout(() => {
-                              productCartAlertMoodle.style.display = 'none';
-                            }, 8000);
-                            modifySubtotal(product_id, product_price);
-                            location.reload();
-                    }  else if(xhrHttp.readyState === 4){
-                        console.log('There was an error making the requst to remove this item frm the cart');
-                    }
-                }
-            }
-            xhrHttp.send(JSON.stringify(productId));
-        }
         function modifySubtotal(id, price){
                 // let subTotal = localStorage.getItem('subtotal');
                 localStorage.clear();
@@ -438,7 +489,7 @@
         wishlist
       </div>
         <div class="cart-section">
-          <div class="shopping-cart-container text-[#384857] w-full">
+          <div class="shopping-cart-container wishlist-container text-[#384857] w-full">
           @forelse ($wishlists as $wishlist)
             <div class="shopping-cart-box flex flex-col sm:flex-row justify-between items-center sm:items-start p-4 h-auto sm:h-56 w-full border-b-2 my-4">
               <div class="cart-image h-full w-32 md:w-44">
@@ -533,7 +584,7 @@
                 ${{ $wishlist->product->discountPrice }}
                 </div>
                 <div class="action-button mt-4 sm:mt-0 flex items-center gap-4">
-                  <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center" onclick="removeCartItem('{{$wishlist->product->id}}', '{{$wishlist->product->discountPrice}}')">
+                  <button type="submit" class="text-xs sm:text-sm px-4 py-2 bg-[#ffcf10] rounded-md text-center" onclick="removeWishlistItem('{{$wishlist->product->id}}', '{{$wishlist->product->discountPrice}}')">
                     Remove
                   </button>
                   <button type="submit"  class="text-xs sm:text-sm px-4 py-2 bg-[#68a4fe] rounded-md text-white text-center"    onclick="addToCart({{$wishlist->product->id}})">
