@@ -47,7 +47,7 @@
              {{ $offerProduct->category }} ready
              @endif
           </h3>
-          <h1 class="text-2xl sm:text-3xl text-white font-semibold my-2 sm:my-4">
+          <h1 class="text-2xl sm:text-3xl tex`t-white font-semibold my-2 sm:my-4">
             {{ $offerProduct->name }}
           </h1>
           <div class="hero-description text-sm sm:text-base font-normal text-white mb-6">
@@ -57,7 +57,7 @@
             @endphp
             {{ $shortDesc[0] }}
           </div>
-          <button class="@if ($loop->iteration == 1)
+          <a href="{{route('product.page', $offerProduct)}}" class="@if ($loop->iteration == 1)
           bg-[#68A4FE] hover:bg-[#3b81eb]
           @elseif ($loop->iteration == 2)
           bg-[#536474] hover:bg-[#3b81eb]
@@ -66,7 +66,7 @@
           @endif shop-btn text-white text-base sm:text-lg font-semibold py-2 sm:py-4 px-8 sm:px-11 rounded-md capitalize cursor-pointer transition-all
            duration-300 ease-in-out">
             shop now
-          </button>
+          </a>
           <span class="text-white my-4 block">up to 50% off</span>
         </div>
         <div class="@if ($loop->iteration == 1)

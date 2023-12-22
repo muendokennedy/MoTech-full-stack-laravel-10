@@ -59,6 +59,8 @@ class CustomerController extends Controller
     }
     public function productPage(Product $product)
     {
-        return view('productpage', compact('product'));
+        $relatedProducts = Product::where('category', $product->category)->get()->take(5);
+
+        return view('productpage', compact('product', 'relatedProducts'));
     }
 }
