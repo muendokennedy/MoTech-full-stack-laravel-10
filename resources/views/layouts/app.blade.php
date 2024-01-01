@@ -12,9 +12,10 @@ if(auth('web')->user()){
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/script.js'])
             <!-- The font-awesome CDN link -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+            <script src="https://cdn.tailwindcss.com"></script>
+            <link rel="stylesheet" href="{{asset('css/app.css')}}"/>
     </head>
     <body class="font-sans antialiased">
     <header
@@ -30,7 +31,7 @@ if(auth('web')->user()){
         <div>
           <button id="humbuger-btn" class="humbuger-btn text-white font-bold cursor-pointer text-3xl p-4 fa-solid fa-bars"></button>
         </div>
-        <div class="mobile-menu-navigation-bar bg-[#68A4FE] absolute top-[3.9rem] right-0  z-50 h-screen">
+        <div class="mobile-menu-navigation-bar bg-[#68A4FE] absolute top-[3.9rem]  z-50 h-screen">
           <a
           href="{{route('home')}}"
           class="block py-4 px-6  text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
@@ -68,7 +69,7 @@ if(auth('web')->user()){
         </form>
         @endif
         </div>
-        <nav class="primary-navigation-bar flex items-center justify-between">
+        <nav class="primary-navigation-bar items-center justify-between">
           <a href="{{route('home')}}"
             class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out">Home</a>
           <a
@@ -243,7 +244,7 @@ if(auth('web')->user()){
         &#169; official website of MoTech | all rights reserved
       </div>
     </footer>
-    <script src="js/script.js"></script>
+    <script  src="{{asset('js/script.js')}}"></script>
     <script>
         // Working of the home slider container
 

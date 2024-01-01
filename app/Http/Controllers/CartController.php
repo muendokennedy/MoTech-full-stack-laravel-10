@@ -91,7 +91,7 @@ class CartController extends Controller
         $nowLiked = collect([]);
 
         foreach ($initialLiked as $value) {
-            # code...
+        
             $nowLiked->push($value->product->category);
         }
 
