@@ -19,7 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // This should only be enabled if the environment is trusted mosty in production
-        \URL::forceScheme('https');
+        //
     }
 }
