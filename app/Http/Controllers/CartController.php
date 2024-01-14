@@ -101,12 +101,15 @@ class CartController extends Controller
 
         if($likedSubjects->count() !== 0){
 
-                $likedProducts = Product::where('category', $likedSubjects->mode())->get()->take(5);
+            foreach($likedSubjects as $key => $secondValue){
+                $likedProducts = Product::where('category', $secondValue)->get()->take(5);
+            }
 
         } else {
 
             $likedProducts = Product::where('category', $nowLiked->first())->get()->take(5);
         }
+
 
         return view('cart', compact('carts', 'wishlists', 'likedProducts'));
     }
