@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Customer\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WishlistController;
@@ -52,5 +53,5 @@ Route::post('/products/remove/wishlist', [WishlistController::class, 'removeFrom
 
 Route::middleware('auth')->group(function(){
     Route::get('/cart', [CartController::class, 'showCartItems'])->name('cart');
-
+    Route::get('/checkout', [CheckoutController::class, 'getCartItems'])->name('checkout');
 });
