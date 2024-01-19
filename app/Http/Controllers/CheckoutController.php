@@ -10,7 +10,7 @@ class CheckoutController extends Controller
     //
     public function getCartItems()
     {
-        $cartItems = Cart::where('user_id', auth()->user())->get();
+        $cartItems = Cart::where('user_id', auth('web')->user()->id)->get();
 
         return view('checkout', compact('cartItems'));
     }
