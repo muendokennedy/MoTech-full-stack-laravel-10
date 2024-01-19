@@ -243,8 +243,8 @@ if(auth('web')->user()){
         &#169; official website of MoTech | all rights reserved
       </div>
     </footer>
-    <script src="js/script.js"></script>
-    <script>
+    <!-- <script src="js/script.js"></script> -->
+    <!-- <script>
         // Working of the home slider container
 
             const homeSlides = document.querySelectorAll('.slide');
@@ -268,6 +268,6 @@ if(auth('web')->user()){
 
             // call the next function after 6 seconds
             setInterval(next, 5000);
-    </script>
+    </script> -->
     </body>
 </html>

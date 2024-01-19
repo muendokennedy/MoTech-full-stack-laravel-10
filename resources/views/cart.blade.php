@@ -303,9 +303,9 @@
                   </div>
                 </div>
                 <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
-                  <i onclick="increaseProductQty(this, '{{$cart->product->id}}')" class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
-                  <input type="text" name="" id="" oninput="changeProductQty(this, '{{$cart->product->id}}')"  value="1" data-content="{{$cart->product->id}}" class="product-qty p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
-                  <i onclick="decreaseProductQty(this, '{{$cart->product->id}}')" class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
+                  <i class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
+                  <input type="text" name="" id="" value="1" data-content="{{$cart->product->id}}" class="product-qty-input p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
+                  <i class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
                 </div>
               </div>
               <div class="action-box h-full flex flex-col justify-between">
@@ -328,92 +328,138 @@
           </div>
           <!-- A script to increase and decrease the quantiy -->
           <script>
-              const productCartAlertMoodle = document.querySelector('.product-removecart-confirm');
-              const moodleText = productCartAlertMoodle.querySelector('span');
+            //   const productCartAlertMoodle = document.querySelector('.product-removecart-confirm');
+            //   const moodleText = productCartAlertMoodle.querySelector('span');
 
-            let currentValue = document.querySelectorAll('.product-qty');
+            // let currentValue = document.querySelectorAll('.product-qty');
 
-            function getValueAfterRefresh(value){
-                value.forEach((current => {
-                    let id = current.getAttribute('data-content');
-                    console.log(localStorage.getItem(id));
-                if(localStorage.getItem(id)){
-                    current.value = localStorage.getItem(id);
+            // function getValueAfterRefresh(value){
+            //     value.forEach((current => {
+            //         let id = current.getAttribute('data-content');
+            //         console.log(localStorage.getItem(id));
+            //     if(localStorage.getItem(id)){
+            //         current.value = localStorage.getItem(id);
+            //     }
+            //   }));
+            // }
+
+            // getValueAfterRefresh(currentValue);
+
+            // function increaseProductQty(product, id){
+            //   if(product.nextElementSibling.value != 10){
+            //     product.nextElementSibling.value++;
+            //       let productPrice = subtotalPrice(product);
+            //       console.log(product.nextElementSibling.value);
+            //       let newPrice = Number.parseInt(product.nextElementSibling.value) * Number.parseInt(productPrice);
+            //       let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
+            //       let newSubtotal = newPrice + Number.parseInt(subTotal) - (productPrice * (Number.parseInt(product.nextElementSibling.value) - 1));
+            //       localStorage.setItem('subtotal', newSubtotal);
+            //         console.log(localStorage.getItem('subtotal'));
+            //     document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem('subtotal')}`;
+            //     storeQuantityValue1(id, product);
+            //     getQuantityValue1(id, product);
+            //   }
+
+            const incrementBtns = document.querySelectorAll('.quantity-increment');
+
+            incrementBtns.forEach((incrementBtn) => {
+
+                incrementBtn.onclick = (e) => {
+
+                    e.preventDefault();
+
+                    let initialValue = incrementBtn.nextElementSibling.value;
+
+                    let actualValue = parseInt(initialValue);
+
+                    actualValue = isNaN(actualValue) ? 0 : actualValue;
+
+                    if(actualValue < 10){
+
+                        actualValue++;
+
+                        incrementBtn.nextElementSibling.value = actualValue;
+                    }
                 }
-              }));
-            }
+            });
 
-            getValueAfterRefresh(currentValue);
+            // }
+            // function decreaseProductQty(product, id){
+            //     if(product.previousElementSibling.value != 1){
+            //       product.previousElementSibling.value--;
+            //       let productPrice = subtotalPrice(product);
+            //       console.log(product.previousElementSibling.value);
+            //       let newPrice = Number.parseInt(productPrice);
+            //       let subTotal = localStorage.getItem('subtotal');
+            //       let newSubtotal =  Number.parseInt(subTotal) - newPrice;
+            //       localStorage.setItem('subtotal', newSubtotal);
+            //       document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem('subtotal')}`;
+            //       storeQuantityValue2(id, product);
+            //       getQuantityValue2(id, product);
+            //   }
+            const decrementBtns = document.querySelectorAll('.quantity-decrement');
 
-            function increaseProductQty(product, id){
-              if(product.nextElementSibling.value != 10){
-                product.nextElementSibling.value++;
-                  let productPrice = subtotalPrice(product);
-                  console.log(product.nextElementSibling.value);
-                  let newPrice = Number.parseInt(product.nextElementSibling.value) * Number.parseInt(productPrice);
-                  let subTotal = document.querySelector('.subtotal-price').innerText.replace('$', '');
-                  let newSubtotal = newPrice + Number.parseInt(subTotal) - (productPrice * (Number.parseInt(product.nextElementSibling.value) - 1));
-                  localStorage.setItem('subtotal', newSubtotal);
-                    console.log(localStorage.getItem('subtotal'));
-                document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem('subtotal')}`;
-                storeQuantityValue1(id, product);
-                getQuantityValue1(id, product);
-              }
-            }
-            function decreaseProductQty(product, id){
-                if(product.previousElementSibling.value != 1){
-                  product.previousElementSibling.value--;
-                  let productPrice = subtotalPrice(product);
-                  console.log(product.previousElementSibling.value);
-                  let newPrice = Number.parseInt(productPrice);
-                  let subTotal = localStorage.getItem('subtotal');
-                  let newSubtotal =  Number.parseInt(subTotal) - newPrice;
-                  localStorage.setItem('subtotal', newSubtotal);
-                  document.querySelector('.subtotal-price').innerText =`$ ${localStorage.getItem('subtotal')}`;
-                  storeQuantityValue2(id, product);
-                  getQuantityValue2(id, product);
-              }
-            }
-            function subtotalPrice(price){
-              let currentPrice = price.parentElement.parentElement.parentElement.querySelector('.product-price').innerText.replace('$', '');
-              console.log(currentPrice);
-              return currentPrice;
-            }
-            function changeProductQty(product, id){
-              if(product.value > 1 && !localStorage.getItem(id)){
-                product.value = 1;
-              } else{
-                product.value = localStorage.getItem(id);
-              }
-          }
-            function storeQuantityValue1(productId, plus){
-              console.log(productId);
-              localStorage.setItem(productId, plus.nextElementSibling.value);
-            }
-            function getQuantityValue1(productId, plus){
-              console.log(productId);
-              if(!localStorage.getItem(productId)){
-                plus.nextElementSibling.value = 1
-              } else {
-                plus.nextElementSibling.value = localStorage.getItem(productId);
-              }
-            }
-            function storeQuantityValue2(productId, minus){
-              console.log(productId);
-              localStorage.setItem(productId, minus.previousElementSibling.value);
-            }
-            function getQuantityValue2(productId, minus){
-              console.log(productId);
-              if(!localStorage.getItem(productId)){
-                minus.previousElementSibling.value = 1;
-              } else {
-                minus.previousElementSibling.value = localStorage.getItem(productId);
-              }
-            }
+            decrementBtns.forEach((decrementBtn) => {
 
-        function modifySubtotal(id, price){
+                decrementBtn.onclick = (e) => {
+
+                    e.preventDefault();
+
+                    let initialValue = decrementBtn.previousElementSibling.value;
+
+                    let actualValue = parseInt(initialValue);
+
+                    actualValue = isNaN(actualValue) ? 0 : actualValue;
+
+                    if(actualValue > 1){
+
+                        actualValue--;
+
+                        decrementBtn.previousElementSibling.value = actualValue;
+                    }
+                }
+            });
+            // }
+        //     function subtotalPrice(price){
+        //       let currentPrice = price.parentElement.parentElement.parentElement.querySelector('.product-price').innerText.replace('$', '');
+        //       console.log(currentPrice);
+        //       return currentPrice;
+        //     }
+        //     function changeProductQty(product, id){
+        //       if(product.value > 1 && !localStorage.getItem(id)){
+        //         product.value = 1;
+        //       } else{
+        //         product.value = localStorage.getItem(id);
+        //       }
+        //   }
+            // function storeQuantityValue1(productId, plus){
+            //   console.log(productId);
+            //   localStorage.setItem(productId, plus.nextElementSibling.value);
+            // }
+            // function getQuantityValue1(productId, plus){
+            //   console.log(productId);
+            //   if(!localStorage.getItem(productId)){
+            //     plus.nextElementSibling.value = 1
+            //   } else {
+            //     plus.nextElementSibling.value = localStorage.getItem(productId);
+            //   }
+            // }
+            // function storeQuantityValue2(productId, minus){
+            //   console.log(productId);
+            //   localStorage.setItem(productId, minus.previousElementSibling.value);
+            // }
+            // function getQuantityValue2(productId, minus){
+            //   console.log(productId);
+            //   if(!localStorage.getItem(productId)){
+            //     minus.previousElementSibling.value = 1;
+            //   } else {
+            //     minus.previousElementSibling.value = localStorage.getItem(productId);
+            //   }
+            // }
+
+        // function modifySubtotal(id, price){
                 // let subTotal = localStorage.getItem('subtotal');
-                localStorage.clear();
+                // localStorage.clear();
                 // localStorage.removeItem('subtotal');
                 // let productPrice, productQty;
                 // if(localStorage.getItem(id)){
@@ -429,7 +475,7 @@
                 //     localStorage.removeItem('subtotal');
                 // }
                 // localStorage.removeItem(id);
-            }
+            // }
           </script>
           <div class="cart-total border-2 h-52 sm:h-56 lg:h-64 xl:h-56 w-full md:w-3/5 lg:w-1/3 my-2">
             <h2
