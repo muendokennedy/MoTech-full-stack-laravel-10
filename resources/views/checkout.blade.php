@@ -83,15 +83,15 @@
 </div>
 <div class="payment-box h-auto w-full mx-auto border-2 p-6 rounded-xl mt-4 shadow-[5px_5px_15px_8px_rgba(56,72,87,0.2)]">
     <h2 class="title text-base sm:text-2xl font-semibold text-center py-4 border-b-2 text-[#384857]">Payment method</h2>
-    <div class="payment-methods-container flex p-4 gap-4">
+    <div class="payment-methods-container flex flex-wrap md:flex-nowrap p-4 gap-4">
         <div class="mpesa basis-1/3 h-28 cursor-pointer border-2 hover:border-green-600 rounded-md flex justify-center items-center">
           <img class="w-1/2 h-3/4" src="{{asset('/images/mpesa payment method card.png')}}" alt="mpesa payment method card">
         </div>
-        <div class="stripe basis-1/3 h-28 cursor-pointer border-2 rounded-md flex justify-center items-center">
-            <img class="w-1/2 h-3/4" src="{{asset('/images/bank card payment methods.png')}}" alt="mpesa payment method card">
+        <div class="stripe basis-1/3 h-28 cursor-pointer border-2 hover:border-purple-600 rounded-md flex justify-center items-center">
+            <img class="w-1/2 h-3/4" src="{{asset('/images/bank card payment methods.png')}}" alt="card payment method card">
         </div>
-        <div class="paypal basis-1/3 h-28 cursor-pointer border-2 rounded-md flex justify-center items-center">
-            <img class="w-1/2 h-3/4" src="{{asset('/images/paypal payment method.png')}}" alt="mpesa payment method card">
+        <div class="paypal basis-1/3 h-28 cursor-pointer border-2 hover:border-blue-600 rounded-md flex justify-center items-center">
+            <img class="w-1/2 h-3/4" src="{{asset('/images/paypal payment method.png')}}" alt="paypal payment method card">
         </div>
     </div>
 </div>
