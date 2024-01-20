@@ -59,7 +59,7 @@
                 </div>
               </div>
             </div>
-            <div class="signup-box h-[400px] lg:h-auto w-full sm:w-11/12 md:w-1/2 mx-auto border-2 p-6 rounded-xl mt-10 sm:mt-16 shadow-[5px_5px_15px_8px_rgba(56,72,87,0.2)]">
+            <div class="signup-box h-[450px] lg:h-auto w-full sm:w-11/12 md:w-1/2 mx-auto border-2 p-6 rounded-xl mt-10 sm:mt-16 shadow-[5px_5px_15px_8px_rgba(56,72,87,0.2)]">
                 <h2 class="title text-base sm:text-2xl font-semibold text-center py-4 border-b-2 text-[#384857]">Order Details</h2>
                 <table class="border-2 my-4 w-full">
                     <thead>
@@ -69,6 +69,13 @@
                       <th class="border-2 py-2 text-xs sm:text-base">Price</th>
                   </tr>
                 </thead>
+                @php
+
+                $grandTotal = 0;
+
+                $totalItems = 0;
+
+                @endphp
                 <tbody>
                 @foreach ($cartItems as $item)
                 <tr>
@@ -76,21 +83,38 @@
                     <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm">{{ $item->productQuantity}}</td>
                     <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm">${{ number_format($item->product->discountPrice)}}</td>
                 </tr>
+                @php
+
+                $grandTotal += $item->product->discountPrice  * ($item->productQuantity);
+
+                $totalItems += $item->productQuantity;
+
+                @endphp
+
                 @endforeach
+                <tr>
+                    <th class="border-2 py-2 px-2 text-xs sm:text-sm">Total</th>
+                    <th class="border-2 py-2 px-2 text-xs sm:text-sm">{{ number_format($totalItems)}}</th>
+                    <th class="border-2 py-2 px-2 text-xs sm:text-sm">${{ number_format($grandTotal)}}</th>
+                </tr>
             </tbody>
         </table>
+        <div class="grandtotal flex justify-between mt-3">
+            <p class="font-semibold text-lg">Grand Total:</p>
+            <p class="font-semibold text-lg">${{ number_format($grandTotal)}}</p>
+        </div>
     </div>
 </div>
 <div class="payment-box h-auto w-full mx-auto border-2 p-6 rounded-xl mt-4 shadow-[5px_5px_15px_8px_rgba(56,72,87,0.2)]">
     <h2 class="title text-base sm:text-2xl font-semibold text-center py-4 border-b-2 text-[#384857]">Payment method</h2>
     <div class="payment-methods-container flex flex-wrap md:flex-nowrap p-4 gap-4">
-        <div class="mpesa basis-1/3 h-28 cursor-pointer border-2 hover:border-green-600 rounded-md flex justify-center items-center">
+        <div class="mpesa w-full sm:basis-1/3 h-28 cursor-pointer border-2 hover:border-green-600 rounded-md flex justify-center items-center">
           <img class="w-1/2 h-3/4" src="{{asset('/images/mpesa payment method card.png')}}" alt="mpesa payment method card">
         </div>
-        <div class="stripe basis-1/3 h-28 cursor-pointer border-2 hover:border-purple-600 rounded-md flex justify-center items-center">
+        <div class="stripe w-full sm:basis-1/3 h-28 cursor-pointer border-2 hover:border-purple-600 rounded-md flex justify-center items-center">
             <img class="w-1/2 h-3/4" src="{{asset('/images/bank card payment methods.png')}}" alt="card payment method card">
         </div>
-        <div class="paypal basis-1/3 h-28 cursor-pointer border-2 hover:border-blue-600 rounded-md flex justify-center items-center">
+        <div class="paypal w-full sm:basis-1/3 h-28 cursor-pointer border-2 hover:border-blue-600 rounded-md flex justify-center items-center">
             <img class="w-1/2 h-3/4" src="{{asset('/images/paypal payment method.png')}}" alt="paypal payment method card">
         </div>
     </div>
