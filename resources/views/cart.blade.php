@@ -304,7 +304,7 @@
                 </div>
                 <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
                   <i class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
-                  <input type="text" name="" id="" value="1" data-content="{{$cart->product->id}}" class="product-qty-input p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
+                  <input type="text" name="" id="" value="{{$cart->productQuantity}}" data-content="{{$cart->product->id}}" class="product-qty-input p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
                   <i class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
                 </div>
               </div>
@@ -374,13 +374,55 @@
 
                     actualValue = isNaN(actualValue) ? 0 : actualValue;
 
-                    if(actualValue < 10){
+                    let product_id = incrementBtn.nextElementSibling.getAttribute('data-content');
 
-                        actualValue++;
+                        if(actualValue < 10){
 
-                        incrementBtn.nextElementSibling.value = actualValue;
-                    }
-                }
+                            actualValue++;
+                            // Get the data
+                            const productQty = {
+                                productQty: actualValue,
+                                id: product_id
+                            };
+
+                            // Create an AJAX Request
+                            const xhrHttp = new XMLHttpRequest();
+                            let targetUrl = "{{ route('cart.changeqty') }}";
+
+                            xhrHttp.open('POST', targetUrl, true);
+                            xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                            xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                            xhrHttp.onreadystatechange = function () {
+                                if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                                    let response = JSON.parse(xhrHttp.responseText);
+                                    if(response.status === 'login to continue'){
+                                        location.href = '/login/customer';
+                                    }
+                                } else if(xhrHttp.readyState === 4){
+                                    console.log('There was an error in making the request');
+                                }
+                            };
+
+                            xhrHttp.send(JSON.stringify(productQty));
+
+                            incrementBtn.nextElementSibling.value = actualValue;
+
+                            let  subtotal = document.querySelector('.subtotal-holder');
+                            let actualSubtotal = document.querySelector('.subtotal-price');
+                            // if(subtotal.innerText && !localStorage.getItem('subtotal')){
+                            //   localStorage.setItem('subtotal', subtotal.textContent);
+                            //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+                            // }else if(localStorage.getItem('subtotal')){
+                            //     //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+                            //     //   localStorage.setItem('subtotal', subtotal.textContent);
+                            //   localStorage.setItem('subtotal', subtotal.innerText);
+                            //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+                            // }
+                            actualSubtotal.textContent = `${document.querySelector('.subtotal-price').innerText}`;
+
+                                }
+                        }
             });
 
             // }
@@ -411,11 +453,54 @@
 
                     actualValue = isNaN(actualValue) ? 0 : actualValue;
 
+                    let product_id = decrementBtn.previousElementSibling.getAttribute('data-content');
+
                     if(actualValue > 1){
 
                         actualValue--;
 
-                        decrementBtn.previousElementSibling.value = actualValue;
+                        // Get the data
+                        const productQty = {
+                            productQty: actualValue,
+                            id: product_id
+                        };
+
+                            // Create an AJAX Request
+                            const xhrHttp = new XMLHttpRequest();
+                            let targetUrl = "{{ route('cart.changeqty') }}";
+
+                            xhrHttp.open('POST', targetUrl, true);
+                            xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                            xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                            xhrHttp.onreadystatechange = function () {
+                                if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                                    let response = JSON.parse(xhrHttp.responseText);
+                                    if(response.status === 'login to continue'){
+                                        location.href = '/login/customer';
+                                    }
+                                } else if(xhrHttp.readyState === 4){
+                                    console.log('There was an error in making the request');
+                                }
+                            };
+
+                            xhrHttp.send(JSON.stringify(productQty));
+
+                            decrementBtn.previousElementSibling.value = actualValue;
+
+                            let  subtotal = document.querySelector('.subtotal-holder');
+                            let actualSubtotal = document.querySelector('.subtotal-price');
+                            let newSubtotal = document.querySelector('.subtotal-price').innerText;
+                            // if(subtotal.innerText && !localStorage.getItem('subtotal')){
+                            //   localStorage.setItem('subtotal', subtotal.textContent);
+                            //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+                            // }else if(localStorage.getItem('subtotal')){
+                            //     //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+                            //     //   localStorage.setItem('subtotal', subtotal.textContent);
+                            //   localStorage.setItem('subtotal', subtotal.innerText);
+                            //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+                            // }
+                            actualSubtotal.textContent = `${document.querySelector('.subtotal-price').innerText}`;
                     }
                 }
             });
@@ -492,17 +577,17 @@
                 @php
                   $subtotal = collect([]);
                   foreach($carts as $cart){
-                    $subtotal->push($cart->product->discountPrice);
+                    $subtotal->push($cart->product->discountPrice * $cart->productQuantity);
                   }
                 @endphp
                 <div class="subtotal-holder hidden">
                 {{ $subtotal->sum() }}
                 </div>
                 <div class="subtotal-price price px-2 text-[#FF412C] text-sm sm:text-base font-semibold">
-
+                    ${{ number_format($subtotal->sum()) }}
                 </div>
               </div>
-              <a  href="{{route('customer.login')}}"
+              <a  href="{{route('checkout')}}"
                 class="text-sm self-end px-4 py-2 bg-[#ffcf10] rounded-md text-center"
               >
                 Proceed to checkout
@@ -512,17 +597,18 @@
         </div>
       </section>
       <script>
-            let  subtotal = document.querySelector('.subtotal-holder');
-            let actualSubtotal = document.querySelector('.subtotal-price');
-            if(subtotal.innerText && !localStorage.getItem('subtotal')){
-              localStorage.setItem('subtotal', subtotal.textContent);
-              actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-            }else if(localStorage.getItem('subtotal')){
-                //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-                //   localStorage.setItem('subtotal', subtotal.textContent);
-              localStorage.setItem('subtotal', subtotal.innerText);
-              actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-            }
+            // let  subtotal = document.querySelector('.subtotal-holder');
+            // let actualSubtotal = document.querySelector('.subtotal-price');
+            // // if(subtotal.innerText && !localStorage.getItem('subtotal')){
+            // //   localStorage.setItem('subtotal', subtotal.textContent);
+            // //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+            // // }else if(localStorage.getItem('subtotal')){
+            // //     //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+            // //     //   localStorage.setItem('subtotal', subtotal.textContent);
+            // //   localStorage.setItem('subtotal', subtotal.innerText);
+            // //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
+            // // }
+            // actualSubtotal.innerHTML = actualSubtotal.innerHTML;
       </script>
       <section class="shopping-cart mx-auto px-[4%] lg:max-w-[1500px]">
         <div

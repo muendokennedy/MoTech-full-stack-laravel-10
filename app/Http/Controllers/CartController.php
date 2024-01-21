@@ -31,7 +31,8 @@ class CartController extends Controller
 
                     $cart = Cart::create([
                         'user_id' => auth()->user()->id,
-                        'product_id' => $product['id']
+                        'product_id' => $product['id'],
+                        'productQuantity' => 1
                     ]);
 
                     return response()->json(['status' => 'The product has been added to cart successfully!']);
@@ -40,7 +41,8 @@ class CartController extends Controller
 
                     $cart = Cart::create([
                         'user_id' => auth()->user()->id,
-                        'product_id' => $product['id']
+                        'product_id' => $product['id'],
+                        'productQuantity' => 1
                     ]);
 
                     return response()->json(['status' => 'The product has been added to cart successfully!']);
@@ -112,5 +114,29 @@ class CartController extends Controller
 
 
         return view('cart', compact('carts', 'wishlists', 'likedProducts'));
+    }
+
+    public function changecartitemQuantity(Request $request)
+    {
+        $jsonData = $request->getContent();
+
+        $product = json_decode($jsonData, true);
+
+        if(auth('web')->user()){
+
+            $cart = Cart::where('product_id', $product['id']);
+
+            $cart->update([
+                'productQuantity' => $product['productQty']
+            ]);
+
+            return response()->json([
+                'status' => 'The product quantity has been changed successfully!',
+                'id' => $product['id']
+            ]);
+
+        } else {
+            return response()->json(['status' => 'login to continue']);
+        }
     }
 }

@@ -531,10 +531,6 @@
                     }
                 };
                 xhrHttp.send(JSON.stringify(productId));
-
-                setTimeout(() => {
-                    location.reload();
-                }, 5000);
               }
             </script>
 </x-app-layout>
