@@ -132,7 +132,8 @@ class CartController extends Controller
 
             return response()->json([
                 'status' => 'The product quantity has been changed successfully!',
-                'id' => $product['id']
+                'id' => $product['id'],
+                'price' => $product['price'],
             ]);
 
         } else {

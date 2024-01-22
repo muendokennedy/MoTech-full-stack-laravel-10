@@ -304,7 +304,7 @@
                 </div>
                 <div class="quantity-box mt-4 sm:mt-0 flex gap-4 items-center">
                   <i class="quantity-increment fa-solid fa-plus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
-                  <input type="text" name="" id="" value="{{$cart->productQuantity}}" data-content="{{$cart->product->id}}" class="product-qty-input p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
+                  <input type="text" name="" id="" value="{{$cart->productQuantity}}" data-content="{{$cart->product->id}}" data-price="{{$cart->product->discountPrice}}" class="product-qty-input p-1 md:p-2 border-2 rounded-md outline-none w-14 md:w-16 text-center"/>
                   <i class="quantity-decrement fa-solid fa-minus font-bold text-sm md:text-xl p-0 md:p-1 cursor-pointer hover:text-[#68a4fe] transition-all duration-300 ease-in-out"></i>
                 </div>
               </div>
@@ -326,6 +326,12 @@
             <p class="my-8 text-base sm:text-lg">There are no products in the cart!</p>
             @endforelse
           </div>
+          @php
+            $subtotal = collect([]);
+            foreach($carts as $cart){
+            $subtotal->push($cart->product->discountPrice * $cart->productQuantity);
+            }
+         @endphp
           <!-- A script to increase and decrease the quantiy -->
           <script>
             //   const productCartAlertMoodle = document.querySelector('.product-removecart-confirm');
@@ -360,6 +366,7 @@
             //     getQuantityValue1(id, product);
             //   }
 
+            // Changing the product quantity through the increment button
             const incrementBtns = document.querySelectorAll('.quantity-increment');
 
             incrementBtns.forEach((incrementBtn) => {
@@ -375,6 +382,7 @@
                     actualValue = isNaN(actualValue) ? 0 : actualValue;
 
                     let product_id = incrementBtn.nextElementSibling.getAttribute('data-content');
+                    let product_price = incrementBtn.nextElementSibling.getAttribute('data-price');
 
                         if(actualValue < 10){
 
@@ -382,7 +390,8 @@
                             // Get the data
                             const productQty = {
                                 productQty: actualValue,
-                                id: product_id
+                                id: product_id,
+                                price: product_price
                             };
 
                             // Create an AJAX Request
@@ -408,20 +417,69 @@
 
                             incrementBtn.nextElementSibling.value = actualValue;
 
-                            let  subtotal = document.querySelector('.subtotal-holder');
-                            let actualSubtotal = document.querySelector('.subtotal-price');
-                            // if(subtotal.innerText && !localStorage.getItem('subtotal')){
-                            //   localStorage.setItem('subtotal', subtotal.textContent);
-                            //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-                            // }else if(localStorage.getItem('subtotal')){
-                            //     //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-                            //     //   localStorage.setItem('subtotal', subtotal.textContent);
-                            //   localStorage.setItem('subtotal', subtotal.innerText);
-                            //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-                            // }
-                            actualSubtotal.textContent = `${document.querySelector('.subtotal-price').innerText}`;
+                            setTimeout(() => {
+                                location.reload();
+                            }, 5000);
 
+                            }
+                        }
+            })
+
+            // Changing the quantity of the product by typing directly into the input field
+            incrementBtns.forEach((incrementBtn) => {
+
+                incrementBtn.nextElementSibling.onchange = (e) => {
+
+                    console.log('This input field was changed');
+
+                    e.preventDefault();
+
+                    let initialValue = incrementBtn.nextElementSibling.value;
+
+                    let actualValue = parseInt(initialValue);
+
+                    actualValue = isNaN(actualValue) ? 0 : actualValue;
+
+                    let product_id = incrementBtn.nextElementSibling.getAttribute('data-content');
+                    let product_price = incrementBtn.nextElementSibling.getAttribute('data-price');
+
+                        if(actualValue < 10){
+
+                            // Get the data
+                            const productQty = {
+                                productQty: actualValue,
+                                id: product_id,
+                                price: product_price
+                            };
+
+                            // Create an AJAX Request
+                            const xhrHttp = new XMLHttpRequest();
+                            let targetUrl = "{{ route('cart.changeqty') }}";
+
+                            xhrHttp.open('POST', targetUrl, true);
+                            xhrHttp.setRequestHeader('Content-Type', 'application/json');
+                            xhrHttp.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+
+                            xhrHttp.onreadystatechange = function () {
+                                if(xhrHttp.readyState === 4 && xhrHttp.status === 200){
+                                    let response = JSON.parse(xhrHttp.responseText);
+                                    if(response.status === 'login to continue'){
+                                        location.href = '/login/customer';
+                                    }
+                                } else if(xhrHttp.readyState === 4){
+                                    console.log('There was an error in making the request');
                                 }
+                            };
+
+                            xhrHttp.send(JSON.stringify(productQty));
+
+                            incrementBtn.nextElementSibling.value = actualValue;
+
+                            setTimeout(() => {
+                                location.reload();
+                            }, 5000);
+
+                            }
                         }
             });
 
@@ -439,6 +497,9 @@
             //       storeQuantityValue2(id, product);
             //       getQuantityValue2(id, product);
             //   }
+
+            // Changing the product quantity through the decrement button
+
             const decrementBtns = document.querySelectorAll('.quantity-decrement');
 
             decrementBtns.forEach((decrementBtn) => {
@@ -454,6 +515,8 @@
                     actualValue = isNaN(actualValue) ? 0 : actualValue;
 
                     let product_id = decrementBtn.previousElementSibling.getAttribute('data-content');
+                    let product_price = decrementBtn.previousElementSibling.getAttribute('data-price');
+
 
                     if(actualValue > 1){
 
@@ -462,7 +525,8 @@
                         // Get the data
                         const productQty = {
                             productQty: actualValue,
-                            id: product_id
+                            id: product_id,
+                            price: product_price
                         };
 
                             // Create an AJAX Request
@@ -488,19 +552,9 @@
 
                             decrementBtn.previousElementSibling.value = actualValue;
 
-                            let  subtotal = document.querySelector('.subtotal-holder');
-                            let actualSubtotal = document.querySelector('.subtotal-price');
-                            let newSubtotal = document.querySelector('.subtotal-price').innerText;
-                            // if(subtotal.innerText && !localStorage.getItem('subtotal')){
-                            //   localStorage.setItem('subtotal', subtotal.textContent);
-                            //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-                            // }else if(localStorage.getItem('subtotal')){
-                            //     //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-                            //     //   localStorage.setItem('subtotal', subtotal.textContent);
-                            //   localStorage.setItem('subtotal', subtotal.innerText);
-                            //   actualSubtotal.textContent = `$ ${localStorage.getItem('subtotal')}`;
-                            // }
-                            actualSubtotal.textContent = `${document.querySelector('.subtotal-price').innerText}`;
+                            setTimeout(() => {
+                                location.reload();
+                            }, 5000);
                     }
                 }
             });
@@ -574,12 +628,6 @@
                 <h2 class="p-2 text-sm sm:text-base capitalize text-[#384857] font-semibold">
                   subtotal({{ ($carts->count() === 1) ? "{$carts->count()} item" : "{$carts->count()} items" }}):
                 </h2>
-                @php
-                  $subtotal = collect([]);
-                  foreach($carts as $cart){
-                    $subtotal->push($cart->product->discountPrice * $cart->productQuantity);
-                  }
-                @endphp
                 <div class="subtotal-holder hidden">
                 {{ $subtotal->sum() }}
                 </div>
