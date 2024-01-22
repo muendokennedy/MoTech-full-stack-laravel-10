@@ -5,7 +5,7 @@
       >
         Checkout<span class="text-[#68A4FE] px-2"> here</span>
       </div>
-      <form action="{{route('customer.store')}}" method="POST" autocomplete="off">
+      <form action="{{route('order.place')}}" method="POST" autocomplete="off">
       <div class="checkout-container flex flex-col md:flex-row w-full gap-2 md:gap-4">
           <div class="signup-box h-auto w-full sm:w-11/12 md:w-1/2 mx-auto border-2 p-6 rounded-xl mt-10 sm:mt-16 shadow-[5px_5px_15px_8px_rgba(56,72,87,0.2)]">
           @csrf

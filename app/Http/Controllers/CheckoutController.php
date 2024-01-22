@@ -14,4 +14,9 @@ class CheckoutController extends Controller
 
         return view('checkout', compact('cartItems'));
     }
+
+    public function placeOrder(Request $request)
+    {
+        
+    }
 }

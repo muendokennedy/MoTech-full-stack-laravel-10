@@ -56,4 +56,5 @@ Route::post('/cart/change/quantity', [CartController::class, 'changecartitemQuan
 Route::middleware('auth')->group(function(){
     Route::get('/cart', [CartController::class, 'showCartItems'])->name('cart');
     Route::get('/checkout', [CheckoutController::class, 'getCartItems'])->name('checkout');
+    Route::post('/order/place', [CheckoutController::class, 'placeOrder'])->name('order.place');
 });
