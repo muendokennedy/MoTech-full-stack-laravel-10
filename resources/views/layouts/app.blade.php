@@ -53,12 +53,15 @@ if(auth('web')->user()){
         >
         <a
           href="{{route('cart')}}"
-          class="cart-link  flex items-center text-white capitalize ease-in-ou gap-8 px-6 mt-4"
-          >cart<span class="cart-btn"
-            ><i class="fa-solid fa-cart-shopping"></i
-            ><span class="count">0</span></span
-          ></a
-        >
+          class="cart-link  flex items-center text-white capitalize ease-in-out gap-8 px-6 mt-4"
+          >cart<span class="cart-btn"><i class="fa-solid fa-cart-shopping"></i>
+          @if(auth('web')->user())
+          <span class="count">{{(\App\Models\Cart::where('user_id', auth('web')->user()->id)->get())->count() ?? 0}}</span>
+          @else         
+          <span class="count">0</span>
+          @endif
+          </span>
+        </a>
         @if (Auth::guard('web')->user())
           <form action="{{route('logout')}}" method="POST">
           @csrf
@@ -94,17 +97,18 @@ if(auth('web')->user()){
             >logout</button>
         </form>
         @endif
-          <a
-            href="{{route('cart')}}"
-            class="cart-link flex items-center px-3 text-white capitalize ease-in-out"
-            >cart<span class="cart-btn"
-              ><i class="fa-solid fa-cart-shopping"></i
-              ><span class="count">0</span></span
-            ></a
-          >
+          <a href="{{route('cart')}}" class="cart-link flex items-center px-3 text-white capitalize ease-in-out">cart
+          <span class="cart-btn"><i class="fa-solid fa-cart-shopping"></i>
+                    @if(auth('web')->user())
+                    <span class="count">{{(\App\Models\Cart::where('user_id', auth('web')->user()->id)->get())->count() ?? 0}}</span>
+                    @else
+                    <span class="count">0</span>
+                    @endif
+          </span>
+          </a>
         </nav>
       </section>
-    </header>
+    </header>       
     <main  class="scroll-pt-32 menu-toggle">
       <!-- The landing page home page section -->
       {{ $slot }}
