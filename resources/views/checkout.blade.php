@@ -13,14 +13,14 @@
               <div class="input-row flex flex-col lg:flex-row w-full justify-between">
                 <div class="input-box my-4 w-full sm:basis-[48%]">
                   <label for="fname" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter first name:</label>
-                  <input type="text" name="fname" id="fname" placeholder="John"  value="{{old('fname')}}" class="@error('fname') border-red-600 @enderror sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+                  <input type="text" name="fname" id="fname" placeholder="John"  value="{{old('fname') ?? auth('web')->user()->firstName}}" class="@error('fname') border-red-600 @enderror sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
                   @error('fname')
                   <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
                 </div>
                 <div class="input-box my-4 w-full md:basis-[48%]">
                   <label for="lname" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter last name:</label>
-                  <input type="text" name="lname" id="lname" placeholder="Doe" value="{{old('lname')}}" class="@error('lname') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+                  <input type="text" name="lname" id="lname" placeholder="Doe" value="{{old('lname') ?? auth('web')->user()->lastName}}" class="@error('lname') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
                   @error('lname')
                   <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
@@ -29,14 +29,14 @@
             <div class="input-row flex flex-col lg:flex-row w-full justify-between">
                 <div class="input-box my-4 w-full md:basis-[48%]">
                   <label for="email" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter email:</label>
-                  <input type="tel" name="email" id="email" placeholder="johndoe@example.com" value="{{old('email')}}" class="@error('email') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+                  <input type="tel" name="email" id="email" placeholder="johndoe@example.com" value="{{old('email') ?? auth('web')->user()->email}}" class="@error('email') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
                   @error('email')
                   <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
                 </div>
                 <div class="input-box my-4 w-full md:basis-[48%]">
                   <label for="phone" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter Phone:</label>
-                  <input type="text" name="phone" id="phone" placeholder="0700453001" value="{{old('phone')}}" class="@error('phone') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+                  <input type="text" name="phone" id="phone" placeholder="0700453001" value="{{old('phone') ?? auth('web')->user()->phone}}" class="@error('phone') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
                   @error('phone')
                   <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
@@ -45,14 +45,14 @@
               <div class="input-row flex flex-col lg:flex-row w-full justify-between">
                 <div class="input-box my-4 w-full md:basis-[48%]">
                   <label for="address1" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter address 1:</label>
-                  <input type="text" name="address1" id="address1" placeholder="P.O BOX 45-5766, NAIROBI" value="{{old('address1')}}" class="@error('address1') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+                  <input type="text" name="address1" id="address1" placeholder="P.O BOX 45-5766, NAIROBI" value="{{old('address1') ?? auth('web')->user()->address1}}" class="@error('address1') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
                   @error('address1')
                   <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
                 </div>
                 <div class="input-box my-4 w-full md:basis-[48%]">
                   <label for="address2" class="block pb-3 text-[#384857] text-sm md:text-base capitalize">Enter address 2:</label>
-                  <input type="text" name="address2" id="address2" placeholder="P.O BOX 45-5766, NAIROBI" value="{{old('address2')}}" class="@error('address2') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
+                  <input type="text" name="address2" id="address2" placeholder="P.O BOX 45-5766, NAIROBI" value="{{old('address2') ?? auth('web')->user()->address2}}" class="@error('address2') border-red-600 @enderror text-sm sm:text-base px-4 py-2 w-full border-2 outline-none rounded-md focus:border-[#68A4FE] transition-all duration-300 ease-in-out">
                   @error('address2')
                   <p class="text-red-600 text-sm sm:text-base py-2 w-full">{{$message}}</p>
                   @enderror
