@@ -635,11 +635,19 @@
                     ${{ number_format($subtotal->sum()) }}
                 </div>
               </div>
+              @if($carts->count() !== 0)
               <a  href="{{route('checkout')}}"
                 class="text-sm self-end px-4 py-2 bg-[#ffcf10] rounded-md text-center"
               >
                 Proceed to checkout
               </a>
+              @elseif ($carts->count() === 0)
+              <a  href="{{route('products')}}"
+                class="text-sm self-end px-4 py-2 bg-[#ffcf10] rounded-md text-center"
+              >
+                Proceed to shopping
+              </a>
+              @endif
             </div>
           </div>
         </div>

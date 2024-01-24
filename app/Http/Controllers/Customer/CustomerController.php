@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -66,6 +67,10 @@ class CustomerController extends Controller
 
     public function showMyOrders()
     {
+        $orders = Order::where('user_id', auth('web')->user()->id)->get();
 
+        // dd($orders);
+
+        return view('orders', compact('orders'));
     }
 }

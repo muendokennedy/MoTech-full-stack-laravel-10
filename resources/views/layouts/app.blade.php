@@ -57,7 +57,7 @@ if(auth('web')->user()){
           >cart<span class="cart-btn"><i class="fa-solid fa-cart-shopping"></i>
           @if(auth('web')->user())
           <span class="count">{{(\App\Models\Cart::where('user_id', auth('web')->user()->id)->get())->count() ?? 0}}</span>
-          @else         
+          @else
           <span class="count">0</span>
           @endif
           </span>
@@ -108,7 +108,7 @@ if(auth('web')->user()){
           </a>
         </nav>
       </section>
-    </header>       
+    </header>
     <main  class="scroll-pt-32 menu-toggle">
       <!-- The landing page home page section -->
       {{ $slot }}
@@ -248,7 +248,7 @@ if(auth('web')->user()){
       </div>
     </footer>
     <!-- <script src="js/script.js"></script> -->
-    <!-- <script>
+    <script>
         // Working of the home slider container
 
             const homeSlides = document.querySelectorAll('.slide');
@@ -272,6 +272,6 @@ if(auth('web')->user()){
 
             // call the next function after 6 seconds
             setInterval(next, 5000);
-    </script> -->
+    </script>
     </body>
 </html>
