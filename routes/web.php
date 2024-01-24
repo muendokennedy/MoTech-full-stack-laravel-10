@@ -58,4 +58,5 @@ Route::middleware('auth')->group(function(){
     Route::get('/checkout', [CheckoutController::class, 'getCartItems'])->name('checkout');
     Route::post('/order/place', [CheckoutController::class, 'placeOrder'])->name('order.place');
     Route::get('/myorders/get', [CustomerController::class, 'showMyOrders'])->name('myorders.show');
+    Route::get('/order/view/{order}', [CustomerController::class, 'showOrder'])->name('order.view');
 });

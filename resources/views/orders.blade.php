@@ -7,47 +7,28 @@
       </div>
       <div class="checkout-container flex flex-col md:flex-row w-full gap-2 md:gap-4">
             <div class="signup-box h-[450px] lg:h-auto w-full mx-auto">
-                @foreach ($orders as $orderItem)
-                <h2 class="title text-base sm:text-lg font-semibold text-center py-4 border-b-2 text-[#384857]">Order Details</h2>
-                <table class="border-2 my-4 w-full p-6 rounded-xl mt-10 sm:mt-16">
+                <table class="border-2 my-4 w-full p-6 rounded-xl mt-6 sm:mt-10">
                     <thead>
                         <tr>
-                            <th class="border-2 py-2 text-xs sm:text-base">Name</th>
-                            <th class="border-2 py-2 text-xs sm:text-base">Quantity</th>
-                            <th class="border-2 py-2 text-xs sm:text-base">Price</th>
+                            <th class="border-2 py-2 text-xs sm:text-base">Order Date</th>
+                            <th class="border-2 py-2 text-xs sm:text-base">Tracking Number</th>
+                            <th class="border-2 py-2 text-xs sm:text-base">Total price</th>
+                            <th class="border-2 py-2 text-xs sm:text-base">Status</th>
+                            <th class="border-2 py-2 text-xs sm:text-base">Action</th>
                         </tr>
                     </thead>
-                <tbody>
-                @php
-
-                $grandTotal = 0;
-
-                $totalItems = 0;
-
-                @endphp
-                @foreach ($orderItem->orderitems as $item)
-                  <tr>
-                    <td class="border-2 py-2 px-2 text-xs sm:text-sm">{{ $item->product->productName}}</td>
-                    <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm">{{ $item->Quantity}}</td>
-                    <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm">${{ number_format($item->product->discountPrice)}}</td>
-                  </tr>
-                  @php
-
-                    $grandTotal += $item->product->discountPrice  * ($item->Quantity);
-
-                    $totalItems += $item->Quantity;
-
-                    @endphp
-
-                    @endforeach
-                    <tr>
-                        <th class="border-2 py-2 px-2 text-xs sm:text-sm">Total</th>
-                        <th class="border-2 py-2 px-2 text-xs sm:text-sm">{{ number_format($totalItems)}}</th>
-                        <th class="border-2 py-2 px-2 text-xs sm:text-sm">${{ number_format($grandTotal)}}</th>
-                    </tr>
+                    <tbody>
+                        @foreach ($orders as $orderItem)
+                        <tr>
+                          <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm">{{ $orderItem->created_at}}</td>
+                          <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm">{{ $orderItem->trackingNumber}}</td>
+                          <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm">$ {{ number_format($orderItem->totalPrice) }}</td>
+                          <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm">{{ $orderItem->status == '0' ? 'Pending' : 'Delivered'}}</td>
+                          <td class="border-2 py-2 text-center px-2 text-xs sm:text-sm"><a href="{{route('order.view', $orderItem)}}" class="text-center px-4 py-1 text-sm md:text-base rounded-md text-white bg-[#68a4fe] hover:bg-[#384857] transition-all duration-300 ease-in-out">View order</a></td>
+                        </tr>
+                        @endforeach
                     </tbody>
                     </table>
-                @endforeach
     </div>
 </div>
 

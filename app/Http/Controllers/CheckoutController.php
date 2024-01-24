@@ -32,6 +32,7 @@ class CheckoutController extends Controller
          $order->phone = $orderData['phone'];
          $order->address1 = $orderData['address1'];
          $order->address2 = $orderData['address2'];
+         $order->totalPrice = $orderData['totalPrice'];
          $order->trackingNumber = 'motech' . rand(1111, 9999);
 
          $order->save();

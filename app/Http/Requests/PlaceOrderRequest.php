@@ -29,6 +29,7 @@ class PlaceOrderRequest extends FormRequest
             'phone' => 'required | numeric',
             'address1' => 'required | string',
             'address2' => 'required | string',
+            'totalPrice' => 'required | numeric',
         ];
     }
 }

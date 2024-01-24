@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address1');
             $table->string('address2');
+            $table->integer('totalPrice');
             $table->tinyInteger('status')->default('0');
             $table->string('message')->nullable();
             $table->string('trackingNumber');

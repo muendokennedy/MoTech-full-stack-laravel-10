@@ -73,4 +73,12 @@ class CustomerController extends Controller
 
         return view('orders', compact('orders'));
     }
+
+    public function showOrder(Order $order)
+    {
+
+        // dd($order);
+
+        return view('order', compact('order'));
+    }
 }
