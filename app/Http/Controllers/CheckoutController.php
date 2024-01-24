@@ -66,6 +66,10 @@ class CheckoutController extends Controller
             $user->update();
          }
 
+         $cartItems = Cart::where('user_id', auth('web')->user()->id)->get();
+
+         Cart::destroy($cartItems);
+
          return redirect()->route('home')->with('message', 'The order has been place succesfully');
 
     }

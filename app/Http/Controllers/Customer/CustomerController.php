@@ -63,4 +63,9 @@ class CustomerController extends Controller
 
         return view('productpage', compact('product', 'relatedProducts'));
     }
+
+    public function showMyOrders()
+    {
+
+    }
 }
