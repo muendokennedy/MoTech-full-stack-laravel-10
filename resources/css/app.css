@@ -221,6 +221,9 @@
   border-radius: 25px;
   background: #7d2ae8;
 } */
+.mpesa-checkbox:checked ~ .mpesa{
+    border: .2rem solid #16a34a;
+}
 @media only screen and (max-width: 768px){
   #prev, #next{
     top: 30%;

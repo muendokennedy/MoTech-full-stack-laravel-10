@@ -30,6 +30,7 @@ class PlaceOrderRequest extends FormRequest
             'address1' => 'required | string',
             'address2' => 'required | string',
             'totalPrice' => 'required | numeric',
+            'mpesaPayment' => 'required'
         ];
     }
 }
