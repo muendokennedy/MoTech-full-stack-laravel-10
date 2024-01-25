@@ -89,13 +89,6 @@ if(auth('web')->user()){
             class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
             >contact</a
           >
-            @if(auth('web')->user() && (\App\Models\Order::where('user_id', auth('web')->user()->id)->get())->count() !== 0)
-          <a  href="{{route('myorders.show')}}"
-                class="py-4 px-3 text-white capitalize hover:bg-[#384857] transition-all duration-300 ease-in-out"
-              >
-              orders
-              </a>
-              @endif
           @if (Auth::guard('web')->user())
           <form action="{{route('logout')}}" method="POST">
           @csrf
