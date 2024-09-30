@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('category');
-            $table->string('name');
+            $table->string('productName');
             $table->decimal('initialPrice', 8, 0);
             $table->decimal('discountPrice', 8, 0);
             $table->string('firstImage');
